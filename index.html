@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Granat Group Coins</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- TOP NAV -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <nav class="nav">
+        <a class="nav__link" href="#home">Главная</a>
+        <a class="nav__link" href="#rules">Условия</a>
+        <a class="nav__link" href="#marathon">Марафон</a>
+      </nav>
+
+      <a class="brand" href="#home" aria-label="Granat Group Coins">
+        <img class="brand__logo" src="./assets/logo.png" alt="Granat Group" />
+        <span class="brand__text">Granat Group Coins</span>
+      </a>
+
+      <nav class="nav">
+        <a class="nav__link" href="#rating">Рейтинг</a>
+        <a class="nav__link" href="#shop">Магазин</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobilemenu" id="mobilemenu">
+      <a href="#home">Главная</a>
+      <a href="#rules">Условия</a>
+      <a href="#marathon">Марафон</a>
+      <a href="#rating">Рейтинг</a>
+      <a href="#shop">Магазин</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <video class="hero__video" autoplay muted playsinline loop poster="./assets/hero-poster.jpg">
+      <source src="./assets/hero.webm" type="video/webm" />
+      <source src="./assets/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay"></div>
+
+    <div class="container hero__content">
+      <div class="hero__left">
+        <h1>Granat Group Coins</h1>
+        <p class="hero__subtitle">
+          Играй. Зарабатывай. Развивайся с Granat Group!
+        </p>
+      </div>
+
+      <div class="hero__right">
+        <a class="hero__cta" href="https://t.me/chai5130" target="_blank" rel="noreferrer">
+          Если возникают вопросы по Gg Coins — напиши нам →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section">
+    <div class="container">
+      <h2>Что такое Granat Coins?</h2>
+      <p class="lead">
+        Это виртуальная валюта, которая используется для поощрения сотрудников за значимые достижения
+        и участие в мероприятиях и внутренних проектах компании.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW TO GET -->
+  <section class="section section--dark" id="howto">
+    <div class="container">
+      <h2>Как получить Granat Coin?</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Пассивный способ накопления</h3>
+
+          <div class="tablelike">
+            <div class="tablelike__row tablelike__head">
+              <div>К памятному событию</div><div>GC</div>
+            </div>
+            <div class="tablelike__row"><div>День рождения</div><div>20</div></div>
+            <div class="tablelike__row"><div>Свадьба</div><div>50</div></div>
+            <div class="tablelike__row"><div>8 марта (для девушек)</div><div>15</div></div>
+            <div class="tablelike__row"><div>23 февраля (для парней)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День Матери (последняя неделя ноября)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День Отца (третья воскресенье октября)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День студента (25 января)</div><div>15</div></div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="tablelike">
+            <div class="tablelike__row tablelike__head">
+              <div>Стаж (ежемесячно)</div><div>GC</div>
+            </div>
+            <div class="tablelike__row"><div>Успешно пройденная стажировка</div><div>50</div></div>
+            <div class="tablelike__row"><div>1–3 месяца</div><div>10</div></div>
+            <div class="tablelike__row"><div>3–6 месяцев</div><div>15</div></div>
+            <div class="tablelike__row"><div>6–9 месяцев</div><div>20</div></div>
+            <div class="tablelike__row"><div>9–12 месяцев</div><div>25</div></div>
+            <div class="tablelike__row"><div>1 год</div><div>30</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Активный способ накопления</h3>
+
+          <div class="tablelike">
+            <div class="tablelike__row tablelike__head">
+              <div>Активность</div><div>GC</div>
+            </div>
+            <div class="tablelike__row"><div>Лайки в Instagram под постом</div><div>5</div></div>
+            <div class="tablelike__row"><div>Комментарий под постом</div><div>10</div></div>
+            <div class="tablelike__row"><div>Приведение друга (отработал 1 мес)</div><div>50</div></div>
+            <div class="tablelike__row"><div>Конкурсы и викторины HR</div><div>3–50</div></div>
+            <div class="tablelike__row"><div>Участие в марафоне (за задание)</div><div>до 1000</div></div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="note">
+            <b>Дополнительно для операторов:</b>
+            <ul>
+              <li>Поздравление коллеги с ДР в чате “Праздники” — 1 GC</li>
+              <li>Проектные конкурсы — 50–100 GC</li>
+              <li>Звездочка проекта — 20 GC</li>
+              <li>Достижения по проектам — 10–30 GC</li>
+            </ul>
+
+            <b>Дополнительно для менеджеров:</b>
+            <ul>
+              <li>Поздравление на доске поздравлений — 5 GC</li>
+              <li>Результативность месяца 95%+ — 30 GC</li>
+              <li>Успешная защита грейдирования — 30 GC</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES (PDF ONLY) -->
+  <section class="section" id="rules">
+    <div class="container">
+      <h2>Условия</h2>
+      <p class="lead">
+        Условия получения и правила использования доступны в PDF.
+      </p>
+      <a class="btn" href="./assets/GranatCoins_Rules.pdf" download>Скачать условия получения (PDF)</a>
+
+      <p class="muted mt">
+        Информация по суммам за отчетный месяц актуализируется ежемесячно, до 5 числа.
+      </p>
+    </div>
+  </section>
+
+  <!-- MARATHON -->
+  <section class="section section--dark" id="marathon">
+    <div class="container">
+      <h2>Марафон</h2>
+      <div class="card">
+        <p class="lead">Вкладка будет заполнена, когда появится новый марафон.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATING -->
+  <section class="section" id="rating">
+    <div class="container">
+      <h2>Рейтинг</h2>
+
+      <div class="controls">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-scope="all">Все</button>
+          <button class="tab" data-scope="operators">Операторы</button>
+          <button class="tab" data-scope="aup">АУП</button>
+        </div>
+
+        <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
+        <button id="refresh" class="btn btn--ghost" type="button">Обновить</button>
+      </div>
+
+      <div class="status" id="status">Загрузка данных…</div>
+
+      <div class="top3" id="top3" hidden></div>
+
+      <div class="tablewrap">
+        <table class="rating" id="ratingTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Сотрудник</th>
+              <th class="num">Начислено</th>
+              <th class="num">Потрачено</th>
+              <th class="num">Остаток</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <p class="muted mt">
+        Данные обновляются автоматически (источник: Excel в Bitrix/Yandex). При вопросах — <a href="https://t.me/chai5130" target="_blank" rel="noreferrer">@chai5130</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="section section--dark" id="shop">
+    <div class="container">
+      <h2>Магазин</h2>
+      <h3 class="sub">Как можно монетизировать и потратить Granat Coins?</h3>
+
+      <div class="cards">
+        <a class="gift" href="#" aria-label="Ozon">
+          <div class="gift__bg"></div>
+          <div class="gift__label">OZON</div>
+        </a>
+        <a class="gift" href="#" aria-label="Wildberries">
+          <div class="gift__bg"></div>
+          <div class="gift__label">WILDBERRIES</div>
+        </a>
+        <a class="gift" href="#" aria-label="Telegram Premium">
+          <div class="gift__bg"></div>
+          <div class="gift__label">TG PREMIUM</div>
+        </a>
+        <a class="gift" href="#" aria-label="Surprise">
+          <div class="gift__bg"></div>
+          <div class="gift__label">SURPRISE</div>
+        </a>
+        <a class="gift" href="#" aria-label="Корп. подарки">
+          <div class="gift__bg"></div>
+          <div class="gift__label">КОРП. ПОДАРКИ</div>
+        </a>
+      </div>
+
+      <p class="muted mt">
+        При выборе подарка передайте HR специалисту информацию по выбранному подарку.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© Granat Group</span>
+      <span class="muted">Granat Coins</span>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
+
