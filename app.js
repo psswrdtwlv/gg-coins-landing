@@ -1,11 +1,11 @@
 // ====== CONFIG ======
-const API_BASE = "https://YOUR-API-DOMAIN.example.com"; // <-- поменяем в понедельник
-const RATING_ENDPOINT = "/api/rating"; // ожидаемый endpoint
-const USE_MOCK = false; // можно временно true, если хочешь демо-данные
+const API_BASE = "https://YOUR-API-DOMAIN.example.com"; // поменяем в понедельник
+const RATING_ENDPOINT = "/api/rating";
+const USE_MOCK = false;
 
 // ====== STATE ======
 let state = {
-  scope: "all", // all | operators | aup
+  scope: "all",
   query: "",
   data: { all: [], operators: [], aup: [] },
   loadedAt: null,
@@ -26,7 +26,7 @@ const $mobilemenu = document.getElementById("mobilemenu");
 // ====== UI ======
 function setStatus(text, isError = false) {
   $status.textContent = text;
-  $status.style.color = isError ? "#ffb3b3" : "";
+  $status.style.color = isError ? "#b11226" : "";
 }
 
 function setLoading(isLoading) {
@@ -106,18 +106,17 @@ function applyFilters(rows) {
   return out;
 }
 
-function renderSkeleton(rows = 8) {
+function renderSkeleton(rows = 9) {
   const sk = (w = "100%") => `<div class="skeletonCell" style="width:${w}"></div>`;
-  const html = Array.from({ length: rows }).map((_, idx) => `
+  $tbody.innerHTML = Array.from({ length: rows }).map((_, idx) => `
     <tr>
       <td>${idx + 1}</td>
-      <td>${sk("70%")}</td>
-      <td class="num">${sk("60%")}</td>
-      <td class="num">${sk("55%")}</td>
-      <td class="num">${sk("50%")}</td>
+      <td>${sk("72%")}</td>
+      <td class="num">${sk("56%")}</td>
+      <td class="num">${sk("52%")}</td>
+      <td class="num">${sk("46%")}</td>
     </tr>
   `).join("");
-  $tbody.innerHTML = html;
 }
 
 function render() {
@@ -158,7 +157,6 @@ async function loadRating() {
           { name: "Чайкова Ольга", earned: 1214, spent: 1000, balance: 214 },
           { name: "Мелкозёрова Екатерина", earned: 977, spent: 800, balance: 177 },
           { name: "Суслина Алина", earned: 927, spent: 800, balance: 127 },
-          { name: "Бондаренко Оксана", earned: 715, spent: 600, balance: 115 },
         ],
         aup: [
           { name: "Ковальчук Анжелика", earned: 748, spent: 698, balance: 50 },
@@ -233,7 +231,7 @@ $search?.addEventListener("input", (e) => {
 
 $refresh?.addEventListener("click", () => loadRating());
 
-// ====== REVEAL ANIMATIONS (subtle, modern) ======
+// ====== REVEAL ======
 function initReveal() {
   const els = Array.from(document.querySelectorAll(".reveal"));
   if (!("IntersectionObserver" in window) || els.length === 0) {
@@ -247,12 +245,10 @@ function initReveal() {
         io.unobserve(en.target);
       }
     });
-  }, { root: null, threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
   els.forEach(el => io.observe(el));
 }
 
 initReveal();
-
-// start
 loadRating();
