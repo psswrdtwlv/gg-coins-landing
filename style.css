@@ -10,16 +10,13 @@
 
   --accent:#b12338;
   --accent2:#8c1b2b;
-  --accentSoft:rgba(177,35,56,.12);
 
   --topbar:#333333;
   --topbarText:#f6f6f6;
   --topbarMuted:rgba(255,255,255,.78);
 
-  --shadow: 0 18px 45px rgba(17,19,23,.10);
   --shadow2: 0 10px 26px rgba(17,19,23,.08);
 
-  --radius:18px;
   --radius2:22px;
   --container:1100px;
 
@@ -42,7 +39,6 @@ body{
 a{color:inherit}
 img{max-width:100%; display:block}
 
-/* Layout */
 .container{
   width:100%;
   max-width:var(--container);
@@ -168,8 +164,8 @@ img{max-width:100%; display:block}
   position:absolute;
   inset:0;
   background:
-    radial-gradient(900px 520px at 12% 30%, rgba(177,35,56,.18), transparent 60%),
-    linear-gradient(90deg, rgba(246,243,241,.94) 0%, rgba(246,243,241,.88) 42%, rgba(246,243,241,.78) 100%);
+    radial-gradient(900px 520px at 12% 30%, rgba(177,35,56,.14), transparent 60%),
+    linear-gradient(90deg, rgba(246,243,241,.86) 0%, rgba(246,243,241,.78) 42%, rgba(246,243,241,.68) 100%);
   backdrop-filter: blur(1px);
 }
 .hero__content{
@@ -199,7 +195,7 @@ img{max-width:100%; display:block}
   padding:8px 12px;
   border-radius:999px;
   background:rgba(255,255,255,.75);
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   box-shadow: 0 10px 26px rgba(17,19,23,.06);
   color:#2f2f2f;
   font-weight:700;
@@ -216,7 +212,7 @@ img{max-width:100%; display:block}
   gap:8px;
   padding:12px 16px;
   border-radius:999px;
-  border:1px solid var(--stroke);
+  border:1px solid rgba(17,19,23,.10);
   text-decoration:none;
   font-weight:800;
   font-size:14px;
@@ -280,7 +276,7 @@ h2{
 }
 .card{
   background:rgba(255,255,255,.82);
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   border-radius:var(--radius2);
   padding:18px 18px 16px;
   box-shadow: var(--shadow2);
@@ -301,7 +297,7 @@ h2{
 .tab{
   padding:10px 14px;
   border-radius:999px;
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   background:rgba(255,255,255,.75);
   font-weight:800;
   cursor:pointer;
@@ -312,7 +308,7 @@ h2{
   min-width:260px;
   padding:12px 14px;
   border-radius:999px;
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   background:rgba(255,255,255,.82);
   outline:none;
 }
@@ -323,7 +319,7 @@ h2{
 .tablewrap{
   margin-top:12px;
   background:rgba(255,255,255,.82);
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   border-radius:var(--radius2);
   overflow:hidden;
   box-shadow: var(--shadow2);
@@ -336,7 +332,7 @@ h2{
 }
 .rating th,.rating td{
   padding:12px 18px;
-  border-bottom:1px solid var(--stroke2);
+  border-bottom:1px solid rgba(17,19,23,.06);
   font-size:14px;
 }
 .rating th{background:rgba(255,255,255,.60); font-weight:800}
@@ -356,9 +352,9 @@ h2{
   overflow:hidden;
   min-height:140px;
   background:
-    radial-gradient(260px 180px at 10% 20%, rgba(177,35,56,.26), transparent 60%),
+    radial-gradient(260px 180px at 10% 20%, rgba(177,35,56,.18), transparent 60%),
     linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,255,255,.92));
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   box-shadow: var(--shadow2);
 }
 .gift__label{
@@ -368,7 +364,7 @@ h2{
   padding:10px 12px;
   border-radius:999px;
   background:rgba(255,255,255,.85);
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   font-weight:900;
   letter-spacing:.6px;
   font-size:12px;
@@ -406,7 +402,7 @@ h2{
   .hero__video{transform:none}
 }
 
-/* Compatibility for existing markup (grid-2, tablelike) */
+/* Two columns + tablelike */
 .grid-2{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -415,7 +411,7 @@ h2{
 }
 .tablelike{
   background:rgba(255,255,255,.82);
-  border:1px solid var(--stroke2);
+  border:1px solid rgba(17,19,23,.06);
   border-radius:16px;
   overflow:hidden;
 }
@@ -424,7 +420,7 @@ h2{
   grid-template-columns: 1fr 110px;
   gap:10px;
   padding:12px 16px;
-  border-bottom:1px solid var(--stroke2);
+  border-bottom:1px solid rgba(17,19,23,.06);
   font-size:14px;
 }
 .tablelike__row > div:last-child{
