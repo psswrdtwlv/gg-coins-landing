@@ -3,38 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#2b2b2b" />
   <title>Granat Group Coins</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <!-- Header: left menu / centered brand / right menu (like ggcall) -->
-  <header class="topbar" id="topbar">
-    <div class="container topbar__grid">
-      <nav class="nav nav--left" aria-label="Навигация слева">
+  <!-- TOP NAV -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <nav class="nav" aria-label="Основная навигация слева">
         <a class="nav__link" href="#home">Главная</a>
         <a class="nav__link" href="#rules">Условия</a>
         <a class="nav__link" href="#marathon">Марафон</a>
       </nav>
 
       <a class="brand" href="#home" aria-label="Granat Group Coins">
-        <img class="brand__logo" src="./assets/logo.png" alt="Granat Group"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
-        <span class="brand__logoFallback" aria-hidden="true">GG</span>
+        <img class="brand__logo" src="./assets/granat-logo.png" alt="Granat Group" />
         <span class="brand__text">Granat Group Coins</span>
       </a>
 
-      <nav class="nav nav--right" aria-label="Навигация справа">
+      <nav class="nav" aria-label="Основная навигация справа">
         <a class="nav__link" href="#rating">Рейтинг</a>
         <a class="nav__link" href="#shop">Магазин</a>
       </nav>
 
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+      <button class="burger" id="burger" aria-label="Меню">
         <span></span><span></span><span></span>
       </button>
     </div>
 
-    <div class="mobilemenu" id="mobilemenu" aria-hidden="true">
+    <div class="mobilemenu" id="mobilemenu">
       <a href="#home">Главная</a>
       <a href="#rules">Условия</a>
       <a href="#marathon">Марафон</a>
@@ -43,180 +40,176 @@
     </div>
   </header>
 
-  <!-- HERO: light / modern / corporate -->
+  <!-- HERO (VIDEO BG) -->
   <section id="home" class="hero">
-    <div class="hero__media" aria-hidden="true"></div>
+    <video class="hero__video" autoplay muted playsinline loop poster="./assets/hero-poster.jpg">
+      <source src="./assets/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay"></div>
+
     <div class="container hero__content">
-      <div class="hero__left reveal">
-        <div class="eyebrow">Играй. Зарабатывай. Развивайся с Granat Group!</div>
+      <div class="hero__left">
+        <div class="hero__kicker">Играй. Зарабатывай. Развивайся с Granat Group!</div>
         <h1>Granat Group Coins</h1>
         <p class="hero__subtitle">
-          Внутренняя валюта Granat Group: получай Coins за результаты, инициативу и участие — и обменивай на подарки.
+          Внутренняя валюта Granat Group: получай Coins за результат, инициативу и участие —
+          и обменивай на подарки.
         </p>
 
         <div class="hero__actions">
           <a class="btn btn--primary" href="#rating">Смотреть рейтинг</a>
-          <a class="btn btn--outline" href="#shop">Перейти в магазин</a>
+          <a class="btn btn--light" href="#shop">Перейти в магазин</a>
         </div>
       </div>
 
-      <div class="hero__right reveal">
+      <div class="hero__right">
         <a class="hero__cta" href="https://t.me/chai5130" target="_blank" rel="noreferrer">
           Вопросы по GG Coins? Напиши нам в Telegram →
         </a>
-        <div class="hero__hint">
-          Ответим в рабочее время. По условиям и начислениям — <a href="https://t.me/chai5130" target="_blank" rel="noreferrer">@chai5130</a>.
+        <div class="hero__note">
+          Ответим в рабочее время. По условиям и начислениям —
+          <a href="https://t.me/chai5130" target="_blank" rel="noreferrer">@chai5130</a>.
         </div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="section" id="about">
+  <section class="section reveal">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Что такое Granat Coins?</h2>
-        <p class="lead">
-          Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения и участие во внутренних проектах компании.
-        </p>
-      </div>
+      <h2>Что такое Granat Coins?</h2>
+      <p class="lead">
+        Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения
+        и участие во внутренних проектах компании.
+      </p>
 
-      <div class="featureGrid">
-        <div class="featureCard reveal">
-          <div class="featureIcon">🎯</div>
-          <div class="featureTitle">За результат</div>
-          <div class="featureText">Начисления за достижения, вклад в качество и сильные показатели.</div>
+      <div class="grid3">
+        <div class="card">
+          <div aria-hidden="true">🎯</div>
+          <h3>За результат</h3>
+          <p>Начисления за достижения, вклад в качество и сильные показатели.</p>
         </div>
-        <div class="featureCard reveal">
-          <div class="featureIcon">🚀</div>
-          <div class="featureTitle">За инициативу</div>
-          <div class="featureText">Идеи, участие в активностях, поддержка команды и внутренние проекты.</div>
+        <div class="card">
+          <div aria-hidden="true">🚀</div>
+          <h3>За инициативу</h3>
+          <p>Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
         </div>
-        <div class="featureCard reveal">
-          <div class="featureIcon">🎁</div>
-          <div class="featureTitle">За участие</div>
-          <div class="featureText">Марафоны, конкурсы, HR-активности — всё фиксируется и идёт в рейтинг.</div>
+        <div class="card">
+          <div aria-hidden="true">🎁</div>
+          <h3>За участие</h3>
+          <p>Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HOW TO GET -->
-  <section class="section" id="howto">
+  <section class="section section--dark reveal" id="howto">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Способы накопления Granat Coins</h2>
-        <p class="lead">Два сценария: пассивные начисления и активность. Всё прозрачно и отображается в рейтинге.</p>
-      </div>
+      <h2>Способы накопления Granat Coins</h2>
+      <p class="lead">Два сценария: пассивные начисления и активности. Всё прозрачно и отражается в рейтинге.</p>
 
       <div class="grid-2">
-        <div class="card reveal">
+        <div class="card">
           <h3>Пассивный способ накопления</h3>
 
           <div class="tablelike">
             <div class="tablelike__row tablelike__head">
-              <div>К памятному событию</div><div class="num">GC</div>
+              <div>К памятному событию</div><div>GC</div>
             </div>
-            <div class="tablelike__row"><div>День рождения</div><div class="num">20</div></div>
-            <div class="tablelike__row"><div>Свадьба</div><div class="num">50</div></div>
-            <div class="tablelike__row"><div>8 марта (для девушек)</div><div class="num">15</div></div>
-            <div class="tablelike__row"><div>23 февраля (для парней)</div><div class="num">15</div></div>
-            <div class="tablelike__row"><div>День Матери (последняя неделя ноября)</div><div class="num">15</div></div>
-            <div class="tablelike__row"><div>День Отца (третье воскресенье октября)</div><div class="num">15</div></div>
-            <div class="tablelike__row"><div>День студента (25 января)</div><div class="num">15</div></div>
+            <div class="tablelike__row"><div>День рождения</div><div>20</div></div>
+            <div class="tablelike__row"><div>Свадьба</div><div>50</div></div>
+            <div class="tablelike__row"><div>8 марта (для девушек)</div><div>15</div></div>
+            <div class="tablelike__row"><div>23 февраля (для парней)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День Матери (последняя неделя ноября)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День Отца (третье воскресенье октября)</div><div>15</div></div>
+            <div class="tablelike__row"><div>День студента (25 января)</div><div>15</div></div>
           </div>
 
           <div class="spacer"></div>
 
           <div class="tablelike">
             <div class="tablelike__row tablelike__head">
-              <div>Стаж (ежемесячно)</div><div class="num">GC</div>
+              <div>Стаж (ежемесячно)</div><div>GC</div>
             </div>
-            <div class="tablelike__row"><div>Успешно пройденная стажировка</div><div class="num">50</div></div>
-            <div class="tablelike__row"><div>1–3 месяца</div><div class="num">10</div></div>
-            <div class="tablelike__row"><div>3–6 месяцев</div><div class="num">15</div></div>
-            <div class="tablelike__row"><div>6–9 месяцев</div><div class="num">20</div></div>
-            <div class="tablelike__row"><div>9–12 месяцев</div><div class="num">25</div></div>
-            <div class="tablelike__row"><div>1 год</div><div class="num">30</div></div>
+            <div class="tablelike__row"><div>Успешно пройденная стажировка</div><div>50</div></div>
+            <div class="tablelike__row"><div>1–3 месяца</div><div>10</div></div>
+            <div class="tablelike__row"><div>3–6 месяцев</div><div>15</div></div>
+            <div class="tablelike__row"><div>6–9 месяцев</div><div>20</div></div>
+            <div class="tablelike__row"><div>9–12 месяцев</div><div>25</div></div>
+            <div class="tablelike__row"><div>1 год</div><div>30</div></div>
           </div>
         </div>
 
-        <div class="card reveal">
+        <div class="card">
           <h3>Активный способ накопления</h3>
 
           <div class="tablelike">
             <div class="tablelike__row tablelike__head">
-              <div>Активность</div><div class="num">GC</div>
+              <div>Активность</div><div>GC</div>
             </div>
-            <div class="tablelike__row"><div>Лайки в Instagram под постом</div><div class="num">5</div></div>
-            <div class="tablelike__row"><div>Комментарий под постом</div><div class="num">10</div></div>
-            <div class="tablelike__row"><div>Приведение друга (отработал 1 мес)</div><div class="num">50</div></div>
-            <div class="tablelike__row"><div>Конкурсы и викторины HR</div><div class="num">3–50</div></div>
-            <div class="tablelike__row"><div>Участие в марафоне (за задание)</div><div class="num">до 1000</div></div>
+            <div class="tablelike__row"><div>Лайки в Instagram под постом</div><div>5</div></div>
+            <div class="tablelike__row"><div>Комментарий под постом</div><div>10</div></div>
+            <div class="tablelike__row"><div>Приведение друга (отработал 1 мес)</div><div>50</div></div>
+            <div class="tablelike__row"><div>Конкурсы и викторины HR</div><div>3–50</div></div>
+            <div class="tablelike__row"><div>Участие в марафоне (за задание)</div><div>до 1000</div></div>
           </div>
 
           <div class="spacer"></div>
 
-          <div class="note">
-            <b>Дополнительно для операторов:</b>
-            <ul>
-              <li>Поздравление коллеги с ДР в чате “Праздники” — 1 GC</li>
-              <li>Проектные конкурсы — 50–100 GC</li>
-              <li>Звездочка проекта — 20 GC</li>
-              <li>Достижения по проектам — 10–30 GC</li>
-            </ul>
+          <p class="muted"><b>Дополнительно для операторов:</b></p>
+          <ul class="muted">
+            <li>Поздравление коллеги с ДР в чате “Праздники” — 1 GC</li>
+            <li>Проектные конкурсы — 50–100 GC</li>
+            <li>Звёздочка проекта — 20 GC</li>
+            <li>Достижения по проектам — 10–30 GC</li>
+          </ul>
 
-            <b>Дополнительно для менеджеров:</b>
-            <ul>
-              <li>Поздравление на доске поздравлений — 5 GC</li>
-              <li>Результативность месяца 95%+ — 30 GC</li>
-              <li>Успешная защита грейдирования — 30 GC</li>
-            </ul>
-          </div>
+          <p class="muted"><b>Дополнительно для менеджеров:</b></p>
+          <ul class="muted">
+            <li>Поздравление на доске поздравлений — 5 GC</li>
+            <li>Результативность месяца 95%+ — 30 GC</li>
+            <li>Успешная защита грейдирования — 30 GC</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RULES -->
-  <section class="section" id="rules">
+  <section class="section reveal" id="rules">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Условия</h2>
-        <p class="lead">Подробные условия получения и правила использования доступны в PDF.</p>
-      </div>
+      <h2>Условия</h2>
+      <p class="lead">Правила получения и использования доступны в PDF.</p>
 
-      <div class="rulesRow reveal">
-        <a class="btn btn--primary" href="./assets/GranatCoins_Rules.pdf" download>Скачать условия (PDF)</a>
-        <div class="muted">
-          Информация по суммам за отчётный месяц актуализируется ежемесячно, до 5 числа.
-        </div>
-      </div>
+      <a class="btn btn--primary" href="./assets/gg-coins-rules.pdf" target="_blank" rel="noreferrer">
+        Скачать условия получения (PDF)
+      </a>
+
+      <p class="muted mt">
+        Информация по суммам за отчётный месяц актуализируется ежемесячно, до 5 числа.
+      </p>
     </div>
   </section>
 
   <!-- MARATHON -->
-  <section class="section" id="marathon">
+  <section class="section section--dark reveal" id="marathon">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Марафон</h2>
-        <p class="lead">Вкладка будет заполнена, когда появится новый марафон.</p>
-      </div>
-      <div class="card card--disabled reveal">
-        <p class="lead">⏳ Пока нет активного марафона.</p>
+      <h2>Марафон</h2>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          Вкладка будет заполнена, когда появится новый марафон.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- RATING -->
-  <section class="section" id="rating">
+  <section class="section reveal" id="rating">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Рейтинг</h2>
-        <p class="lead">Сортировка по убыванию “Остаток”. Данные подтягиваются автоматически из таблицы.</p>
-      </div>
+      <h2>Рейтинг</h2>
 
-      <div class="controls reveal">
+      <div class="controls">
         <div class="tabs" role="tablist">
           <button class="tab active" data-scope="all">Все</button>
           <button class="tab" data-scope="operators">Операторы</button>
@@ -224,81 +217,57 @@
         </div>
 
         <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
-        <button id="refresh" class="btn btn--outline" type="button">
-          <span class="btn__text">Обновить</span>
-          <span class="btn__spinner" aria-hidden="true"></span>
-        </button>
+        <button id="refresh" class="btn btn--ghost" type="button">Обновить</button>
       </div>
 
-      <div class="statusRow reveal">
-        <div class="status" id="status">Загрузка данных…</div>
-        <div class="badge">Обновляется автоматически</div>
-      </div>
+      <div class="status" id="status">Загрузка данных…</div>
 
-      <div class="top3 reveal" id="top3" hidden></div>
+      <div class="top3" id="top3" hidden></div>
 
-      <div class="tablewrap reveal">
+      <div class="tablewrap">
         <table class="rating" id="ratingTable">
           <thead>
             <tr>
-              <th class="col-rank">#</th>
+              <th>#</th>
               <th>Сотрудник</th>
-              <th class="num col-num">Начислено</th>
-              <th class="num col-num">Потрачено</th>
-              <th class="num col-num">Остаток</th>
+              <th class="num">Начислено</th>
+              <th class="num">Потрачено</th>
+              <th class="num">Остаток</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
 
-      <p class="muted mt reveal">
-        Источник: Excel в Bitrix/Yandex. По вопросам — <a href="https://t.me/chai5130" target="_blank" rel="noreferrer">@chai5130</a>.
+      <p class="muted mt">
+        Данные обновляются автоматически (источник: Excel в Bitrix/Yandex). При вопросах — <a href="https://t.me/chai5130" target="_blank" rel="noreferrer">@chai5130</a>.
       </p>
     </div>
   </section>
 
   <!-- SHOP -->
-  <section class="section" id="shop">
+  <section class="section section--dark reveal" id="shop">
     <div class="container">
-      <div class="sectionHead reveal">
-        <h2>Магазин</h2>
-        <h3 class="sub">Как можно монетизировать и потратить Granat Coins?</h3>
+      <h2>Магазин</h2>
+      <p class="lead">Как можно монетизировать и потратить Granat Coins?</p>
+
+      <div class="shopgrid">
+        <div class="gift"><div class="gift__label">OZON</div></div>
+        <div class="gift"><div class="gift__label">WILDBERRIES</div></div>
+        <div class="gift"><div class="gift__label">TG PREMIUM</div></div>
+        <div class="gift"><div class="gift__label">SURPRISE</div></div>
+        <div class="gift"><div class="gift__label">КОРП. ПОДАРКИ</div></div>
       </div>
 
-      <div class="cards">
-        <a class="gift reveal" href="#" aria-label="Ozon">
-          <div class="gift__bg"></div>
-          <div class="gift__label">OZON</div>
-        </a>
-        <a class="gift reveal" href="#" aria-label="Wildberries">
-          <div class="gift__bg"></div>
-          <div class="gift__label">WILDBERRIES</div>
-        </a>
-        <a class="gift reveal" href="#" aria-label="Telegram Premium">
-          <div class="gift__bg"></div>
-          <div class="gift__label">TG PREMIUM</div>
-        </a>
-        <a class="gift reveal" href="#" aria-label="Surprise">
-          <div class="gift__bg"></div>
-          <div class="gift__label">SURPRISE</div>
-        </a>
-        <a class="gift reveal" href="#" aria-label="Корп. подарки">
-          <div class="gift__bg"></div>
-          <div class="gift__label">КОРП. ПОДАРКИ</div>
-        </a>
-      </div>
-
-      <p class="muted mt reveal">
-        При выборе подарка передайте HR специалисту информацию по выбранному подарку.
-      </p>
+      <p class="muted mt">При выборе подарка передайте HR специалисту информацию по выбранному подарку.</p>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer__inner">
-      <span>© Granat Group</span>
-      <span class="muted">Granat Coins</span>
+      <div>© Granat Group</div>
+      <div>Granat Coins</div>
     </div>
   </footer>
 
