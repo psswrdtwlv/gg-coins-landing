@@ -4,12 +4,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // CORS (чтобы GH Pages спокойно ходил)
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     };
+
     if (request.method === "OPTIONS") {
       return new Response("", { headers: corsHeaders });
     }
@@ -21,10 +21,7 @@ export default {
     try {
       const xlsxUrl = env.XLSX_URL;
       if (!xlsxUrl) {
-        return new Response(JSON.stringify({ error: "XLSX_URL is not set" }), {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "XLSX_URL is not set" }, 500, corsHeaders);
       }
 
       const xRes = await fetch(xlsxUrl, {
@@ -35,32 +32,30 @@ export default {
       const arrayBuffer = await xRes.arrayBuffer();
       const wb = XLSX.read(arrayBuffer, { type: "array" });
 
-      // ВАЖНО: в понедельник решим: 2 листа (Operators/AUP) или один общий.
-      // Пока поддержим обе схемы:
       const parsed = parseWorkbook(wb);
+      const all = [...(parsed.operators || []), ...(parsed.aup || [])];
 
-      const body = JSON.stringify({
+      return json({
         updatedAt: new Date().toISOString(),
         operators: parsed.operators,
         aup: parsed.aup,
-        all: [],
-      });
-
-      return new Response(body, {
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-          "Cache-Control": "public, max-age=60", // 1 мин кэш
-        },
+        all,
+      }, 200, {
+        ...corsHeaders,
+        "Cache-Control": "public, max-age=60",
       });
     } catch (e) {
-      return new Response(JSON.stringify({ error: e.message }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: e.message }, 500, corsHeaders);
     }
   },
 };
+
+function json(obj, status, headers = {}) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { ...headers, "Content-Type": "application/json" },
+  });
+}
 
 function normalizeNumber(v) {
   if (v === null || v === undefined) return 0;
@@ -76,13 +71,12 @@ function getText(v) {
 
 /**
  * Поддерживаем 2 схемы:
- * A) Есть листы с названиями вроде "Оператор", "Operators", "АУП", "AUP"
- * B) Один лист, где таблица идет блоками (как у тебя в примере: слева операторы, справа АУП)
+ * A) Отдельные листы (Оператор/Operators) и (АУП/AUP)
+ * B) Один лист с двумя таблицами рядом
  */
 function parseWorkbook(wb) {
   const sheetNames = wb.SheetNames;
 
-  // 1) Пытаемся найти отдельные листы
   const opName = sheetNames.find(n => /оператор|operators/i.test(n));
   const aupName = sheetNames.find(n => /ауп|aup/i.test(n));
 
@@ -93,16 +87,13 @@ function parseWorkbook(wb) {
     };
   }
 
-  // 2) Иначе парсим первый лист как "две таблицы рядом"
   const first = wb.Sheets[sheetNames[0]];
   return parseSideBySideTables(first);
 }
 
 function parseSimpleTable(sheet) {
-  // ожидаем заголовки: Сотрудник | Начислено | Потрачено | Остаток
   const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-  // допускаем разные названия колонок
   return rows
     .map(r => ({
       name: getText(r["Сотрудник"] ?? r["Employee"] ?? r["Name"] ?? r["ФИО"]),
@@ -114,11 +105,8 @@ function parseSimpleTable(sheet) {
 }
 
 function parseSideBySideTables(sheet) {
-  // Берем матрицу значений
   const matrix = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
 
-  // Идея: ищем строку заголовков, где есть "Сотрудник" и "Остаток"
-  // и определяем 2 блока: левый и правый (обычно правый начинается после пустой колонки)
   let headerRowIdx = -1;
   for (let i = 0; i < matrix.length; i++) {
     const row = matrix[i].map(x => String(x).toLowerCase());
@@ -131,15 +119,12 @@ function parseSideBySideTables(sheet) {
 
   const header = matrix[headerRowIdx].map(v => String(v).trim());
 
-  // Находим границу: первое пустое значение после левого блока
   let split = header.findIndex((v, idx) => idx > 0 && v === "");
   if (split === -1) {
-    // если нет пустой — пробуем по повтору "Сотрудник"
     const secondEmployee = header.findIndex((v, idx) => idx > 0 && /Сотрудник/i.test(v));
     split = secondEmployee !== -1 ? secondEmployee : Math.floor(header.length / 2);
   }
 
-  // Левый блок колонки 0..split-1, правый split..end
   const leftCols = header.slice(0, split);
   const rightCols = header.slice(split);
 
@@ -180,4 +165,3 @@ function parseSideBySideTables(sheet) {
 
   return { operators, aup };
 }
-
