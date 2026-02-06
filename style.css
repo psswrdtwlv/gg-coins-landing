@@ -94,20 +94,18 @@ img{max-width:100%; display:block}
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
+  text-decoration:none;
+  justify-self:center;
+  white-space:nowrap;
 }
-
 .brand__logo{
-  width:48px;
-  height:48px;
+  width:34px;
+  height:34px;
   object-fit:contain;
-  filter: drop-shadow(0 10px 22px rgba(0,0,0,.28));
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.25));
 }
-.brand__text{
-  font-weight:800;
-  font-size:18px;
-  letter-spacing:.3px;
-}
+.brand__text{font-weight:800; font-size:16px; letter-spacing:.2px}
 
 .burger{
   display:none;
