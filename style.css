@@ -309,3 +309,206 @@ h3{margin:0 0 12px; font-size:18px}
 
 .btn__spinner{
   width:16px; height:16px;
+  border-radius:999px;
+  border:2px solid rgba(255,255,255,.25);
+  border-top-color: rgba(255,255,255,.95);
+  display:none;
+  animation: spin .7s linear infinite;
+}
+.btn.is-loading .btn__spinner{display:inline-block}
+.btn.is-loading .btn__text{opacity:.75}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RULES */
+.rulesRow{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+/* RATING */
+.controls{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:16px 0 10px;
+}
+.tabs{display:flex; gap:8px}
+.tab{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.03);
+  color:rgba(255,255,255,.74);
+  padding:10px 12px;
+  border-radius:16px;
+  font-weight:950;
+  cursor:pointer;
+  transition: background .25s var(--ease), transform .25s var(--ease), color .25s var(--ease);
+}
+.tab:hover{transform: translateY(-1px)}
+.tab.active{
+  background: linear-gradient(180deg, rgba(177,18,38,.95), rgba(138,18,33,.95));
+  color:var(--text);
+  border-color:rgba(255,255,255,.12);
+  box-shadow: 0 14px 30px rgba(0,0,0,.25);
+}
+.search{
+  flex:1;
+  min-width:220px;
+  padding:12px 12px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.02);
+  color:var(--text);
+  outline:none;
+}
+.search::placeholder{color:rgba(185,186,192,.75)}
+.statusRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.status{color:var(--muted); margin:6px 0 10px}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.03);
+  color:rgba(255,255,255,.78);
+  font-weight:850;
+  font-size:12px;
+}
+
+.tablewrap{
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:var(--radius);
+  overflow:auto;
+  background:rgba(255,255,255,.03);
+  backdrop-filter: blur(10px);
+}
+table.rating{width:100%; border-collapse:collapse; min-width:640px}
+.rating th,.rating td{padding:12px 12px; border-bottom:1px solid rgba(255,255,255,.08)}
+.rating thead th{
+  position:sticky; top:0;
+  background: rgba(26,26,26,.95);
+  text-align:left; font-size:13px; color:rgba(255,255,255,.75)
+}
+.rating td.num,.rating th.num{text-align:right; font-variant-numeric: tabular-nums}
+.rating tbody tr:hover{background:rgba(255,255,255,.03)}
+.rating tbody tr:last-child td{border-bottom:none}
+
+.top3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:12px;
+  margin:12px 0 14px;
+}
+.top3 .winner{
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.03);
+  padding:14px;
+  transition: transform .25s var(--ease), border-color .25s var(--ease);
+}
+.top3 .winner:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.14)}
+.winner__place{font-weight:950; color:rgba(255,255,255,.72); font-size:12px}
+.winner__name{font-weight:1000; font-size:16px; margin-top:6px}
+.winner__coins{margin-top:6px; color:var(--muted); font-weight:900}
+
+/* Skeleton rows */
+.skeletonCell{
+  height:12px;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.12), rgba(255,255,255,.06));
+  background-size: 220% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+@keyframes shimmer{to{background-position: -220% 0}}
+
+/* SHOP */
+.cards{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:12px;
+}
+.gift{
+  position:relative;
+  height:150px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  text-decoration:none;
+  box-shadow:0 14px 34px rgba(0,0,0,.26);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), filter .25s var(--ease);
+}
+.gift__bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(220px 130px at 22% 28%, rgba(177,18,38,.32), transparent 60%),
+    radial-gradient(220px 130px at 80% 70%, rgba(208,43,58,.12), transparent 60%),
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  filter:saturate(1.05);
+}
+.gift__label{
+  position:absolute; left:14px; bottom:14px;
+  font-weight:1000;
+  letter-spacing:.4px;
+  font-size:15px;
+  text-shadow:0 10px 30px rgba(0,0,0,.55);
+  padding:10px 12px;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+}
+.gift:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.16);
+  filter: brightness(1.03);
+}
+
+/* FOOTER */
+.footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:18px 0;
+  background: #0f0f10;
+}
+.footer__inner{display:flex; justify-content:space-between; gap:12px; color:rgba(255,255,255,.74); font-weight:850}
+
+/* Reveal animations (modern, not flashy) */
+.reveal{
+  opacity:0;
+  transform: translateY(14px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1; transform:none; transition:none}
+  .btn, .gift, .tab, .featureCard, .top3 .winner{transition:none}
+  .btn__spinner{animation:none}
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .grid-2{grid-template-columns:1fr}
+  .featureGrid{grid-template-columns:1fr}
+  .cards{grid-template-columns: repeat(2, 1fr)}
+  .hero__content{flex-direction:column; align-items:flex-start}
+  .hero h1{font-size:44px}
+}
+@media (max-width: 760px){
+  .nav{display:none}
+  .burger{display:flex}
+  .top3{grid-template-columns:1fr}
+}
