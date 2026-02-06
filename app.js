@@ -1,15 +1,12 @@
 // ====== CONFIG ======
-const API_BASE = "https://YOUR-API-DOMAIN.example.com"; // поменяем в понедельник
-const RATING_ENDPOINT = "/api/rating";
-const USE_MOCK = false;
+const API_BASE = "https://YOUR-API-DOMAIN.example.com"; // <-- поменяем в понедельник
+const RATING_ENDPOINT = "/api/rating"; // ожидаемый endpoint
 
 // ====== STATE ======
 let state = {
-  scope: "all",
+  scope: "all", // all | operators | aup
   query: "",
   data: { all: [], operators: [], aup: [] },
-  loadedAt: null,
-  loading: false,
 };
 
 // ====== DOM ======
@@ -18,237 +15,162 @@ const $tbody = document.querySelector("#ratingTable tbody");
 const $search = document.getElementById("search");
 const $refresh = document.getElementById("refresh");
 const $top3 = document.getElementById("top3");
-
-const $tabs = Array.from(document.querySelectorAll(".tab"));
 const $burger = document.getElementById("burger");
 const $mobilemenu = document.getElementById("mobilemenu");
 
-// ====== UI ======
-function setStatus(text, isError = false) {
+// ====== HELPERS ======
+const fmt = (n) => {
+  if (n === null || n === undefined || n === "") return "";
+  const x = Number(String(n).replace(",", "."));
+  if (Number.isNaN(x)) return String(n);
+  const isInt = Math.abs(x - Math.round(x)) < 1e-9;
+  return isInt ? String(Math.round(x)) : String(x).replace(".", ",");
+};
+
+const normalizeName = (s) => String(s || "").trim().toLowerCase();
+
+const compareByBalanceDesc = (a, b) => {
+  const aa = Number(String(a.balance ?? 0).replace(",", "."));
+  const bb = Number(String(b.balance ?? 0).replace(",", "."));
+  return bb - aa;
+};
+
+const renderStatus = (text) => {
   $status.textContent = text;
-  $status.style.color = isError ? "#b11226" : "";
-}
+};
 
-function setLoading(isLoading) {
-  state.loading = isLoading;
-  if (!$refresh) return;
-  $refresh.classList.toggle("is-loading", isLoading);
-  $refresh.disabled = isLoading;
-  $refresh.setAttribute("aria-busy", isLoading ? "true" : "false");
-}
+const renderRows = () => {
+  const list = (state.data[state.scope] || []).filter((row) => {
+    if (!state.query) return true;
+    return normalizeName(row.name).includes(normalizeName(state.query));
+  });
 
-function normalizeNumber(v) {
-  if (v === null || v === undefined) return 0;
-  if (typeof v === "number") return v;
-  const s = String(v).trim().replace(/\s+/g, "").replace(",", ".");
-  const n = Number(s);
-  return Number.isFinite(n) ? n : 0;
-}
+  $tbody.innerHTML = "";
 
-function safeText(v) {
-  return (v ?? "").toString().trim();
-}
-
-function formatNumber(n) {
-  const isInt = Math.abs(n - Math.round(n)) < 1e-9;
-  const v = isInt ? Math.round(n).toString() : n.toFixed(1);
-  return v.replace(".", ",");
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function renderTop3(rows) {
-  if (!rows || rows.length < 1) {
+  if (!list.length) {
+    $tbody.innerHTML = `<tr><td colspan="5" style="color:#6b6f78;">Нет данных</td></tr>`;
     $top3.hidden = true;
-    $top3.innerHTML = "";
     return;
   }
-  const top = rows.slice(0, 3);
+
+  // TOP 3 (optional)
+  const top = [...list].sort(compareByBalanceDesc).slice(0, 3);
   $top3.hidden = false;
-  $top3.innerHTML = top.map((r, idx) => {
-    const place = idx + 1;
-    return `
-      <div class="winner">
-        <div class="winner__place">TOP ${place}</div>
-        <div class="winner__name">${escapeHtml(r.name)}</div>
-        <div class="winner__coins">Остаток: <b>${formatNumber(r.balance)}</b> GC</div>
-      </div>
-    `;
-  }).join("");
-}
-
-function buildRow(rank, row) {
-  return `
-    <tr>
-      <td>${rank}</td>
-      <td>${escapeHtml(row.name)}</td>
-      <td class="num">${formatNumber(row.earned)}</td>
-      <td class="num">${formatNumber(row.spent)}</td>
-      <td class="num"><b>${formatNumber(row.balance)}</b></td>
-    </tr>
+  $top3.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 0;">
+      ${top
+        .map(
+          (t, i) => `
+        <div style="background:rgba(255,255,255,.82);border:1px solid rgba(17,19,23,.06);border-radius:18px;padding:14px 14px 12px;box-shadow:0 10px 26px rgba(17,19,23,.08);backdrop-filter:blur(8px)">
+          <div style="font-weight:900;color:#b12338;">#${i + 1}</div>
+          <div style="font-weight:900;margin-top:4px">${t.name}</div>
+          <div style="color:#5f636b;font-size:13px;margin-top:6px">Остаток: <b style="color:#131417">${fmt(t.balance)}</b></div>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
   `;
-}
 
-function applyFilters(rows) {
-  let out = rows.slice();
-  if (state.query) {
-    const q = state.query.toLowerCase();
-    out = out.filter(r => r.name.toLowerCase().includes(q));
-  }
-  out.sort((a, b) => b.balance - a.balance);
-  return out;
-}
-
-function renderSkeleton(rows = 9) {
-  const sk = (w = "100%") => `<div class="skeletonCell" style="width:${w}"></div>`;
-  $tbody.innerHTML = Array.from({ length: rows }).map((_, idx) => `
-    <tr>
+  list.sort(compareByBalanceDesc).forEach((row, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
       <td>${idx + 1}</td>
-      <td>${sk("72%")}</td>
-      <td class="num">${sk("56%")}</td>
-      <td class="num">${sk("52%")}</td>
-      <td class="num">${sk("46%")}</td>
-    </tr>
-  `).join("");
-}
+      <td>${row.name}</td>
+      <td class="num">${fmt(row.earned)}</td>
+      <td class="num">${fmt(row.spent)}</td>
+      <td class="num"><b>${fmt(row.balance)}</b></td>
+    `;
+    $tbody.appendChild(tr);
+  });
+};
 
-function render() {
-  const rows = applyFilters(state.data[state.scope] || []);
-  renderTop3(rows);
-
-  const html = rows.map((r, idx) => buildRow(idx + 1, r)).join("");
-  $tbody.innerHTML = html || `<tr><td colspan="5" class="muted">Нет данных</td></tr>`;
-
-  if (state.loadedAt) {
-    const d = new Date(state.loadedAt);
-    setStatus(`Обновлено: ${d.toLocaleString("ru-RU")}`);
-  } else {
-    setStatus("Данные временно недоступны");
+const parseApiResponse = (json) => {
+  // Ожидаем:
+  // { all: [{name, earned, spent, balance}], operators: [...], aup: [...] }
+  // или просто массив для all
+  if (Array.isArray(json)) {
+    return { all: json, operators: [], aup: [] };
   }
-}
-
-// ====== DATA LOAD ======
-function mapRow(r) {
   return {
-    name: safeText(r.name || r.employee || r["Сотрудник"]),
-    earned: normalizeNumber(r.earned ?? r.accrued ?? r["Начислено"]),
-    spent: normalizeNumber(r.spent ?? r["Потрачено"]),
-    balance: normalizeNumber(r.balance ?? r["Остаток"]),
+    all: Array.isArray(json.all) ? json.all : [],
+    operators: Array.isArray(json.operators) ? json.operators : [],
+    aup: Array.isArray(json.aup) ? json.aup : [],
   };
-}
+};
 
-async function loadRating() {
-  setLoading(true);
-  setStatus("Загрузка данных…");
-  renderSkeleton(9);
-
+const loadData = async () => {
+  renderStatus("Загрузка данных…");
   try {
-    if (USE_MOCK) {
-      const json = {
-        updatedAt: new Date().toISOString(),
-        operators: [
-          { name: "Чайкова Ольга", earned: 1214, spent: 1000, balance: 214 },
-          { name: "Мелкозёрова Екатерина", earned: 977, spent: 800, balance: 177 },
-          { name: "Суслина Алина", earned: 927, spent: 800, balance: 127 },
-        ],
-        aup: [
-          { name: "Ковальчук Анжелика", earned: 748, spent: 698, balance: 50 },
-          { name: "Никитина Валерия", earned: 509, spent: 469, balance: 40 },
-        ],
-      };
-      state.data.operators = (json.operators || []).map(mapRow);
-      state.data.aup = (json.aup || []).map(mapRow);
-      state.data.all = [...state.data.operators, ...state.data.aup];
-      state.loadedAt = json.updatedAt;
-      render();
-      return;
-    }
-
-    const url = `${API_BASE}${RATING_ENDPOINT}`;
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(`${API_BASE}${RATING_ENDPOINT}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
+    state.data = parseApiResponse(json);
 
-    state.data.operators = (json.operators || []).map(mapRow);
-    state.data.aup = (json.aup || []).map(mapRow);
-    state.data.all = (json.all && json.all.length)
-      ? json.all.map(mapRow)
-      : [...state.data.operators, ...state.data.aup];
-
-    state.loadedAt = json.updatedAt || Date.now();
-    render();
+    renderStatus("Данные загружены.");
+    renderRows();
   } catch (e) {
     console.error(e);
-    setStatus("Данные не загружены. Проверь API.", true);
+    renderStatus("Данные не загружены");
+    $tbody.innerHTML = `<tr><td colspan="5" style="color:#6b6f78;">Нет данных</td></tr>`;
     $top3.hidden = true;
-    $tbody.innerHTML = `<tr><td colspan="5" class="muted">Нет данных</td></tr>`;
-  } finally {
-    setLoading(false);
   }
-}
+};
 
-// ====== NAV / MOBILE ======
-function closeMobileMenu() {
-  if (!$mobilemenu) return;
-  $mobilemenu.style.display = "none";
-  $mobilemenu.setAttribute("aria-hidden", "true");
-  $burger?.setAttribute("aria-expanded", "false");
-}
-
-$burger?.addEventListener("click", () => {
-  const isOpen = $mobilemenu.style.display === "block";
-  $mobilemenu.style.display = isOpen ? "none" : "block";
-  $mobilemenu.setAttribute("aria-hidden", isOpen ? "true" : "false");
-  $burger.setAttribute("aria-expanded", isOpen ? "false" : "true");
-});
-
-$mobilemenu?.addEventListener("click", (e) => {
-  const a = e.target.closest("a");
-  if (a) closeMobileMenu();
-});
-
-// ====== TABS / SEARCH ======
-$tabs.forEach(btn => {
+// ====== EVENTS ======
+// Tabs
+document.querySelectorAll(".tab").forEach((btn) => {
   btn.addEventListener("click", () => {
-    $tabs.forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     state.scope = btn.dataset.scope;
-    render();
+    renderRows();
   });
 });
 
-$search?.addEventListener("input", (e) => {
-  state.query = e.target.value.trim();
-  render();
+// Search
+$search.addEventListener("input", (e) => {
+  state.query = e.target.value || "";
+  renderRows();
 });
 
-$refresh?.addEventListener("click", () => loadRating());
+// Refresh
+$refresh.addEventListener("click", () => loadData());
 
-// ====== REVEAL ======
-function initReveal() {
-  const els = Array.from(document.querySelectorAll(".reveal"));
-  if (!("IntersectionObserver" in window) || els.length === 0) {
-    els.forEach(el => el.classList.add("is-visible"));
+// Burger (mobile)
+$burger.addEventListener("click", () => {
+  const isOpen = $mobilemenu.style.display === "block";
+  $mobilemenu.style.display = isOpen ? "none" : "block";
+});
+
+// Close mobile on click
+$mobilemenu.querySelectorAll("a").forEach((a) => {
+  a.addEventListener("click", () => ($mobilemenu.style.display = "none"));
+});
+
+// Init
+loadData();
+
+
+// ====== REVEAL ON SCROLL (subtle, modern) ======
+(() => {
+  const items = document.querySelectorAll(".reveal");
+  if (!items.length) return;
+
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) {
+    items.forEach(el => el.classList.add("is-visible"));
     return;
   }
+
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (en.isIntersecting) {
-        en.target.classList.add("is-visible");
-        io.unobserve(en.target);
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-visible");
+        io.unobserve(e.target);
       }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    }
+  }, { threshold: 0.12 });
 
-  els.forEach(el => io.observe(el));
-}
-
-initReveal();
-loadRating();
+  items.forEach(el => io.observe(el));
+})();
