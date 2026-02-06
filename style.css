@@ -453,3 +453,89 @@ h2{
   .search{min-width:0; width:100%}
   .shopgrid{grid-template-columns:1fr}
 }
+/* =========================
+   HEADER: убрать подчёркивания
+========================= */
+header a,
+nav a {
+  text-decoration: none !important;
+}
+
+header a:hover,
+nav a:hover {
+  text-decoration: none !important;
+}
+
+/* =========================
+   ОБЩИЕ ЗАГОЛОВКИ СЕКЦИЙ — ПО ЦЕНТРУ
+   (аккуратно, без сдвига блоков)
+========================= */
+section > h2,
+.section-title,
+h2 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Подзаголовки под h2 */
+section > p,
+.section-subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+}
+
+/* =========================
+   HERO: центрируем только ТЕКСТ, не блок
+========================= */
+.hero-content h1,
+.hero-content p {
+  text-align: center;
+}
+
+/* Кнопки в hero — по центру */
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   ТЕКСТ ПОД КНОПКОЙ TELEGRAM — ПО ЦЕНТРУ
+========================= */
+.hero-telegram-note,
+.telegram-note,
+.hero-right small {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  opacity: 0.75;
+}
+
+/* =========================
+   СЕКЦИИ "Условия", "Марафон", "Рейтинг", "Магазин"
+========================= */
+#conditions h2,
+#marathon h2,
+#rating h2,
+#shop h2 {
+  text-align: center;
+}
+
+#conditions p,
+#marathon p,
+#rating p,
+#shop p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+}
+
+/* =========================
+   НЕ ТРОГАЕМ ТАБЛИЦЫ И КАРТОЧКИ
+   (специально оставлено пусто)
+========================= */
