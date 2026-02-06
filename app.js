@@ -1,6 +1,7 @@
 // ====== CONFIG ======
 const API_BASE = "https://YOUR-API-DOMAIN.example.com"; // <-- поменяем в понедельник
 const RATING_ENDPOINT = "/api/rating"; // ожидаемый endpoint
+const USE_MOCK = false; // можно временно true, если хочешь демо-данные
 
 // ====== STATE ======
 let state = {
@@ -8,6 +9,7 @@ let state = {
   query: "",
   data: { all: [], operators: [], aup: [] },
   loadedAt: null,
+  loading: false,
 };
 
 // ====== DOM ======
@@ -27,10 +29,17 @@ function setStatus(text, isError = false) {
   $status.style.color = isError ? "#ffb3b3" : "";
 }
 
+function setLoading(isLoading) {
+  state.loading = isLoading;
+  if (!$refresh) return;
+  $refresh.classList.toggle("is-loading", isLoading);
+  $refresh.disabled = isLoading;
+  $refresh.setAttribute("aria-busy", isLoading ? "true" : "false");
+}
+
 function normalizeNumber(v) {
   if (v === null || v === undefined) return 0;
   if (typeof v === "number") return v;
-  // "297,5" -> 297.5 ; "1 214" -> 1214
   const s = String(v).trim().replace(/\s+/g, "").replace(",", ".");
   const n = Number(s);
   return Number.isFinite(n) ? n : 0;
@@ -38,6 +47,21 @@ function normalizeNumber(v) {
 
 function safeText(v) {
   return (v ?? "").toString().trim();
+}
+
+function formatNumber(n) {
+  const isInt = Math.abs(n - Math.round(n)) < 1e-9;
+  const v = isInt ? Math.round(n).toString() : n.toFixed(1);
+  return v.replace(".", ",");
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function renderTop3(rows) {
@@ -60,22 +84,6 @@ function renderTop3(rows) {
   }).join("");
 }
 
-function formatNumber(n) {
-  // показываем 297.5 как 297,5
-  const isInt = Math.abs(n - Math.round(n)) < 1e-9;
-  const v = isInt ? Math.round(n).toString() : n.toFixed(1);
-  return v.replace(".", ",");
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
 function buildRow(rank, row) {
   return `
     <tr>
@@ -94,9 +102,22 @@ function applyFilters(rows) {
     const q = state.query.toLowerCase();
     out = out.filter(r => r.name.toLowerCase().includes(q));
   }
-  // сортировка по balance desc
   out.sort((a, b) => b.balance - a.balance);
   return out;
+}
+
+function renderSkeleton(rows = 8) {
+  const sk = (w = "100%") => `<div class="skeletonCell" style="width:${w}"></div>`;
+  const html = Array.from({ length: rows }).map((_, idx) => `
+    <tr>
+      <td>${idx + 1}</td>
+      <td>${sk("70%")}</td>
+      <td class="num">${sk("60%")}</td>
+      <td class="num">${sk("55%")}</td>
+      <td class="num">${sk("50%")}</td>
+    </tr>
+  `).join("");
+  $tbody.innerHTML = html;
 }
 
 function render() {
@@ -110,37 +131,11 @@ function render() {
     const d = new Date(state.loadedAt);
     setStatus(`Обновлено: ${d.toLocaleString("ru-RU")}`);
   } else {
-    setStatus("Данные не загружены");
+    setStatus("Данные временно недоступны");
   }
 }
 
 // ====== DATA LOAD ======
-async function loadRating() {
-  setStatus("Загрузка данных…");
-  try {
-    const url = `${API_BASE}${RATING_ENDPOINT}`;
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-
-    // ожидаем контракт:
-    // { updatedAt, operators:[{name,earned,spent,balance}], aup:[...], all:[...] }
-    state.data.operators = (json.operators || []).map(mapRow);
-    state.data.aup = (json.aup || []).map(mapRow);
-
-    // all можно отдать готовым, либо собрать сами:
-    state.data.all = (json.all && json.all.length)
-      ? json.all.map(mapRow)
-      : [...state.data.operators, ...state.data.aup];
-
-    state.loadedAt = json.updatedAt || Date.now();
-    render();
-  } catch (e) {
-    console.error(e);
-    setStatus("Ошибка загрузки рейтинга. Проверь API.", true);
-  }
-}
-
 function mapRow(r) {
   return {
     name: safeText(r.name || r.employee || r["Сотрудник"]),
@@ -150,7 +145,78 @@ function mapRow(r) {
   };
 }
 
-// ====== EVENTS ======
+async function loadRating() {
+  setLoading(true);
+  setStatus("Загрузка данных…");
+  renderSkeleton(9);
+
+  try {
+    if (USE_MOCK) {
+      const json = {
+        updatedAt: new Date().toISOString(),
+        operators: [
+          { name: "Чайкова Ольга", earned: 1214, spent: 1000, balance: 214 },
+          { name: "Мелкозёрова Екатерина", earned: 977, spent: 800, balance: 177 },
+          { name: "Суслина Алина", earned: 927, spent: 800, balance: 127 },
+          { name: "Бондаренко Оксана", earned: 715, spent: 600, balance: 115 },
+        ],
+        aup: [
+          { name: "Ковальчук Анжелика", earned: 748, spent: 698, balance: 50 },
+          { name: "Никитина Валерия", earned: 509, spent: 469, balance: 40 },
+        ],
+      };
+      state.data.operators = (json.operators || []).map(mapRow);
+      state.data.aup = (json.aup || []).map(mapRow);
+      state.data.all = [...state.data.operators, ...state.data.aup];
+      state.loadedAt = json.updatedAt;
+      render();
+      return;
+    }
+
+    const url = `${API_BASE}${RATING_ENDPOINT}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+
+    state.data.operators = (json.operators || []).map(mapRow);
+    state.data.aup = (json.aup || []).map(mapRow);
+    state.data.all = (json.all && json.all.length)
+      ? json.all.map(mapRow)
+      : [...state.data.operators, ...state.data.aup];
+
+    state.loadedAt = json.updatedAt || Date.now();
+    render();
+  } catch (e) {
+    console.error(e);
+    setStatus("Данные не загружены. Проверь API.", true);
+    $top3.hidden = true;
+    $tbody.innerHTML = `<tr><td colspan="5" class="muted">Нет данных</td></tr>`;
+  } finally {
+    setLoading(false);
+  }
+}
+
+// ====== NAV / MOBILE ======
+function closeMobileMenu() {
+  if (!$mobilemenu) return;
+  $mobilemenu.style.display = "none";
+  $mobilemenu.setAttribute("aria-hidden", "true");
+  $burger?.setAttribute("aria-expanded", "false");
+}
+
+$burger?.addEventListener("click", () => {
+  const isOpen = $mobilemenu.style.display === "block";
+  $mobilemenu.style.display = isOpen ? "none" : "block";
+  $mobilemenu.setAttribute("aria-hidden", isOpen ? "true" : "false");
+  $burger.setAttribute("aria-expanded", isOpen ? "false" : "true");
+});
+
+$mobilemenu?.addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (a) closeMobileMenu();
+});
+
+// ====== TABS / SEARCH ======
 $tabs.forEach(btn => {
   btn.addEventListener("click", () => {
     $tabs.forEach(x => x.classList.remove("active"));
@@ -160,18 +226,33 @@ $tabs.forEach(btn => {
   });
 });
 
-$search.addEventListener("input", (e) => {
+$search?.addEventListener("input", (e) => {
   state.query = e.target.value.trim();
   render();
 });
 
-$refresh.addEventListener("click", () => loadRating());
+$refresh?.addEventListener("click", () => loadRating());
 
-$burger.addEventListener("click", () => {
-  const isOpen = $mobilemenu.style.display === "block";
-  $mobilemenu.style.display = isOpen ? "none" : "block";
-});
+// ====== REVEAL ANIMATIONS (subtle, modern) ======
+function initReveal() {
+  const els = Array.from(document.querySelectorAll(".reveal"));
+  if (!("IntersectionObserver" in window) || els.length === 0) {
+    els.forEach(el => el.classList.add("is-visible"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        en.target.classList.add("is-visible");
+        io.unobserve(en.target);
+      }
+    });
+  }, { root: null, threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-// старт
+  els.forEach(el => io.observe(el));
+}
+
+initReveal();
+
+// start
 loadRating();
-
