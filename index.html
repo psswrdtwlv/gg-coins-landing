@@ -1,105 +1,156 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Granat Coins</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <header class="top">
+    <div class="top__inner">
+      <div class="brand">
+        <img class="brand__logo" src="granat-logo.png" alt="Granat Group" />
+      </div>
+
+      <nav class="nav">
+        <a class="nav__link" href="#about">О coins</a>
+        <a class="nav__link" href="#ways">Накопление</a>
+        <a class="nav__link" href="#shop">Магазин</a>
+        <a class="nav__link" href="#terms">Условия</a>
+      </nav>
+
+      <div class="top__actions">
+        <button id="btnRefresh" class="btn btn--ghost" type="button">Обновить</button>
+      </div>
+    </div>
+  </header>
+
   <main>
+    <section class="hero">
+      <video class="hero__video" autoplay muted loop playsinline>
+        <source src="hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Granat Coins</h1>
+        <p>Внутренняя валюта для поощрения сотрудников за результат, инициативу и участие.</p>
+      </div>
+    </section>
 
-    <!-- ABOUT -->
-    <section class="about" id="about">
+    <!-- WHAT IS -->
+    <section id="about" class="section">
       <div class="container">
-        <h2 class="h2">Что такое Granat Coins?</h2>
-        <p class="sub">
-          Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения и участие во внутренних проектах компании.
-        </p>
+        <h2 class="title">Что такое Granat Coins?</h2>
+        <p class="subtitle">Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения и участие во внутренних проектах компании.</p>
 
-        <div class="about-grid">
-          <div class="about-card">
-            <div class="about-icon">
-              <img src="images/cup.png" alt="За результат" />
+        <div class="cards">
+          <article class="card">
+            <div class="card__icon">
+              <img src="cup.png" alt="За результат" />
             </div>
             <h3>За результат</h3>
             <p>Начисления за достижения, вклад в качество и сильные показатели.</p>
-          </div>
+          </article>
 
-          <div class="about-card">
-            <div class="about-icon">
-              <img src="images/lamp.png" alt="За инициативу" />
+          <article class="card">
+            <div class="card__icon">
+              <img src="lamp.png" alt="За инициативу" />
             </div>
             <h3>За инициативу</h3>
             <p>Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
-          </div>
+          </article>
 
-          <div class="about-card">
-            <div class="about-icon">
-              <img src="images/people.png" alt="За участие" />
+          <article class="card">
+            <div class="card__icon">
+              <img src="people.png" alt="За участие" />
             </div>
             <h3>За участие</h3>
             <p>Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
-          </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAYS (тут оставил якорь, если у тебя дальше блоки) -->
+    <section id="ways" class="section section--soft">
+      <div class="container">
+        <h2 class="title">Способы накопления Granat Coins</h2>
+        <p class="subtitle">Два сценария: пассивные начисления и активности. Всё прозрачно и отражается в рейтинге.</p>
+
+        <!-- если у тебя уже есть таблицы — можешь вернуть их сюда,
+             этот блок сделан нейтральным, чтобы ничего не ломать -->
+        <div class="placeholder">
+          <p>Блок накопления оставлен как место под ваши таблицы/правила (чтобы не сломать текущую логику).</p>
         </div>
       </div>
     </section>
 
     <!-- SHOP -->
-    <section class="shop" id="shop">
+    <section id="shop" class="section">
       <div class="container">
-        <h2 class="h2">Магазин</h2>
-        <p class="sub">Как можно монетизировать и потратить Granat Coins?</p>
+        <h2 class="title">Магазин</h2>
+        <p class="subtitle">Как можно монетизировать и потратить Granat Coins?</p>
 
-        <div class="shop-grid">
-          <button class="shop-card" type="button" data-shop="ozon">
-            <img src="images/ozon.png" alt="Ozon" />
-            <span class="pill">OZON</span>
+        <div class="shop">
+          <button class="shop__item" type="button" data-shop="ozon">
+            <img src="ozon.png" alt="OZON" />
+            <span>OZON</span>
           </button>
 
-          <button class="shop-card" type="button" data-shop="wb">
-            <img src="images/wb.png" alt="Wildberries" />
-            <span class="pill">WILDBERRIES</span>
+          <button class="shop__item" type="button" data-shop="wb">
+            <img src="wb.png" alt="WILDBERRIES" />
+            <span>WILDBERRIES</span>
           </button>
 
-          <button class="shop-card" type="button" data-shop="tgpremium">
-            <img src="images/tgpremium.png" alt="TG Premium" />
-            <span class="pill">TG PREMIUM</span>
+          <button class="shop__item" type="button" data-shop="tg">
+            <img src="tgpremium.png" alt="TG PREMIUM" />
+            <span>TG PREMIUM</span>
           </button>
 
-          <button class="shop-card" type="button" data-shop="surprice">
-            <img src="images/surprice.png" alt="Surprise" />
-            <span class="pill">SURPRISE</span>
+          <button class="shop__item" type="button" data-shop="surprise">
+            <img src="surprice.png" alt="SURPRISE" />
+            <span>SURPRISE</span>
           </button>
 
-          <button class="shop-card" type="button" data-shop="gggift">
-            <img src="images/gggift.png" alt="Корпоративные подарки" />
-            <span class="pill">КОРП. ПОДАРКИ</span>
+          <button class="shop__item" type="button" data-shop="corp">
+            <img src="gggift.png" alt="КОРП. ПОДАРКИ" />
+            <span>КОРП. ПОДАРКИ</span>
           </button>
         </div>
 
-        <p class="shop-note">
-          При выборе подарка передайте HR специалисту информацию по выбранному подарку.
-        </p>
+        <p class="hint">При выборе подарка передайте HR специалисту информацию по выбранному подарку.</p>
+      </div>
+    </section>
+
+    <!-- TERMS -->
+    <section id="terms" class="section section--soft">
+      <div class="container">
+        <h2 class="title">Условия</h2>
+
+        <div class="terms">
+          <p>Правила получения и использования доступны в PDF.</p>
+          <a class="btn" href="#" onclick="alert('Подставь ссылку на PDF условий'); return false;">Скачать условия получения (PDF)</a>
+          <p class="muted">Информация по суммам за отчётный месяц актуализируется ежемесячно, до 5 числа.</p>
+        </div>
+
+        <div class="marathon">
+          <h3>Марафон</h3>
+          <div class="marathon__bar">
+            <p>Вкладка будет заполнена, когда появится новый марафон.</p>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Simple modal (optional) -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal__overlay" data-close="1"></div>
-    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal__top">
-        <div class="modal__title" id="modalTitle">Выбор подарка</div>
-        <button class="modal__close" type="button" data-close="1">✕</button>
-      </div>
-      <div class="modal__body" id="modalBody"></div>
-      <div class="modal__bottom">
-        <button class="btn" type="button" data-close="1">Ок</button>
-      </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="muted">© Granat Group</p>
     </div>
-  </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>
