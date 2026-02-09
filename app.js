@@ -1,33 +1,121 @@
-// Ничего "красным навсегда" не фиксируем. Просто простые обработчики.
+const API = "./api/rating";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btnRefresh = document.getElementById("btnRefresh");
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-  if (btnRefresh) {
-    btnRefresh.addEventListener("click", () => {
-      // если у тебя раньше тут была логика обновления данных — вставь её сюда
-      // сейчас делаем безопасно: просто перезагрузка страницы
-      window.location.reload();
-    });
+const $tabs = $$("#tabs .tab");
+const $search = $("#search");
+const $refresh = $("#refresh");
+const $status = $("#status");
+const $tbody = $("#tbody");
+
+let RAW = [];
+let scope = "all";
+let q = "";
+
+function setStatus(text) {
+  if ($status) $status.textContent = text;
+}
+
+function setActiveTab(nextScope) {
+  scope = nextScope;
+  $tabs.forEach((b) => b.classList.toggle("active", b.dataset.scope === scope));
+  render();
+}
+
+function norm(s) {
+  return String(s || "").trim();
+}
+
+function toNum(v) {
+  const n = Number(String(v || "").replace(",", "."));
+  return Number.isFinite(n) ? n : 0;
+}
+
+function matchScope(row) {
+  const type = (row.type || "").toLowerCase();
+  if (scope === "all") return true;
+  if (scope === "operators") return type === "operator" || type === "оператор";
+  if (scope === "aup") return type === "aup" || type === "ауп";
+  return true;
+}
+
+function matchQuery(row) {
+  if (!q) return true;
+  const name = (row.name || "").toLowerCase();
+  return name.includes(q);
+}
+
+function render() {
+  if (!$tbody) return;
+
+  const rows = RAW
+    .filter(matchScope)
+    .filter(matchQuery)
+    .sort((a, b) => (b.balance ?? 0) - (a.balance ?? 0));
+
+  if (!rows.length) {
+    $tbody.innerHTML = `
+      <tr>
+        <td colspan="5" class="muted">Нет данных</td>
+      </tr>
+    `;
+    return;
   }
 
-  // Нажатия по "магазину" — сейчас просто подсветка/алерт, чтобы кнопки были кликабельны
-  document.querySelectorAll(".shop__item").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const key = btn.getAttribute("data-shop");
-      // Тут можешь заменить на открытие модалки / переход / копирование инфо для HR
-      alert(`Выбрано: ${key}`);
-    });
-  });
+  $tbody.innerHTML = rows
+    .map((r, i) => {
+      const earned = toNum(r.earned);
+      const spent = toNum(r.spent);
+      const balance = toNum(r.balance);
 
-  // Плавный скролл по якорям
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href");
-      const el = document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
+      return `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${norm(r.name)}</td>
+          <td><b>${earned}</b></td>
+          <td><b>${spent}</b></td>
+          <td><b>${balance}</b></td>
+        </tr>
+      `;
+    })
+    .join("");
+}
+
+async function load() {
+  try {
+    setStatus("Загружаю данные…");
+    const res = await fetch(API, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    RAW = Array.isArray(data) ? data : Array.isArray(data?.rows) ? data.rows : [];
+    setStatus(RAW.length ? `Загружено: ${RAW.length}` : "Данные не загружены");
+    render();
+  } catch (e) {
+    console.error(e);
+    RAW = [];
+    setStatus("Ошибка загрузки данных");
+    render();
+  }
+}
+
+/* EVENTS */
+$tabs.forEach((btn) => {
+  btn.addEventListener("click", () => setActiveTab(btn.dataset.scope));
 });
+
+if ($search) {
+  $search.addEventListener("input", (e) => {
+    q = String(e.target.value || "").trim().toLowerCase();
+    render();
+  });
+}
+
+if ($refresh) {
+  $refresh.addEventListener("click", () => load());
+}
+
+/* INIT */
+setActiveTab("all");
+load();
