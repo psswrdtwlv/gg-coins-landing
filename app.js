@@ -1,41 +1,33 @@
-(() => {
-  const modal = document.getElementById("modal");
-  const modalBody = document.getElementById("modalBody");
+// Ничего "красным навсегда" не фиксируем. Просто простые обработчики.
 
-  const texts = {
-    ozon: "Подарок: OZON. Сообщи HR, что хочешь сертификат OZON и свой контакт.",
-    wb: "Подарок: WILDBERRIES. Сообщи HR, что хочешь сертификат Wildberries и свой контакт.",
-    tgpremium: "Подарок: TG Premium. Сообщи HR, что хочешь подписку TG Premium и свой контакт.",
-    surprice: "Подарок: SURPRISE. Сообщи HR, что выбираешь «Сюрприз».",
-    gggift: "Подарок: КОРП. ПОДАРКИ. Сообщи HR, что выбираешь корпоративный подарок."
-  };
+document.addEventListener("DOMContentLoaded", () => {
+  const btnRefresh = document.getElementById("btnRefresh");
 
-  function openModal(text) {
-    modalBody.textContent = text;
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
+  if (btnRefresh) {
+    btnRefresh.addEventListener("click", () => {
+      // если у тебя раньше тут была логика обновления данных — вставь её сюда
+      // сейчас делаем безопасно: просто перезагрузка страницы
+      window.location.reload();
+    });
   }
 
-  function closeModal() {
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-  }
-
-  document.addEventListener("click", (e) => {
-    const close = e.target.closest("[data-close]");
-    if (close) {
-      closeModal();
-      return;
-    }
-
-    const card = e.target.closest(".shop-card");
-    if (card) {
-      const key = card.getAttribute("data-shop");
-      openModal(texts[key] || "Выбран подарок. Сообщи HR выбранный вариант.");
-    }
+  // Нажатия по "магазину" — сейчас просто подсветка/алерт, чтобы кнопки были кликабельны
+  document.querySelectorAll(".shop__item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.getAttribute("data-shop");
+      // Тут можешь заменить на открытие модалки / переход / копирование инфо для HR
+      alert(`Выбрано: ${key}`);
+    });
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
+  // Плавный скролл по якорям
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   });
-})();
+});
