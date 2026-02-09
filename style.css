@@ -588,3 +588,26 @@ button, input{ font:inherit; }
   .gifts{ grid-template-columns: repeat(2, 1fr); }
   .gift{ height: 140px; }
 }
+
+/* ===== FIX: CARDS ICONS (НЕ ЛОМАЕТ НИЧЕГО) ===== */
+
+.card__icon{
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(158,31,43,.08);
+  border: 1px solid rgba(158,31,43,.14);
+}
+
+.card__iconimg{
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(17,19,21,.18));
+}
+
