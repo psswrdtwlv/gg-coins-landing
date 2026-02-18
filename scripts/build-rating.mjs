@@ -1,142 +1,111 @@
-// scripts/build-rating.mjs
 import fs from "node:fs";
-import path from "node:path";
 import XLSX from "xlsx";
 
-const XLSX_URL = process.env.BITRIX_XLSX_URL;
-if (!XLSX_URL) {
-  console.error("BITRIX_XLSX_URL is not set");
-  process.exit(1);
+const WEBHOOK_BASE = process.env.BITRIX_WEBHOOK_BASE; // https://.../rest/2773/<secret>/
+const FILE_ID = process.env.BITRIX_FILE_ID;           // 202937
+
+if (!WEBHOOK_BASE) throw new Error("BITRIX_WEBHOOK_BASE is not set");
+if (!FILE_ID) throw new Error("BITRIX_FILE_ID is not set");
+
+async function bitrixCall(method, params = {}) {
+  const base = WEBHOOK_BASE.endsWith("/") ? WEBHOOK_BASE : WEBHOOK_BASE + "/";
+  const url = new URL(base + method + ".json");
+
+  for (const [k, v] of Object.entries(params)) {
+    url.searchParams.set(k, String(v));
+  }
+
+  const res = await fetch(url.toString());
+  const data = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    throw new Error(`Bitrix HTTP ${res.status}: ${JSON.stringify(data).slice(0, 500)}`);
+  }
+  if (data.error) {
+    throw new Error(`Bitrix ${data.error}: ${data.error_description || ""}`);
+  }
+  return data.result;
 }
 
-function normalizeNumber(v) {
-  if (v === null || v === undefined) return 0;
-  if (typeof v === "number") return v;
-  const s = String(v).trim().replace(/\s+/g, "").replace(",", ".");
+function assertXlsx(buffer) {
+  // XLSX = ZIP -> PK\x03\x04
+  if (!(buffer[0] === 0x50 && buffer[1] === 0x4b && buffer[2] === 0x03 && buffer[3] === 0x04)) {
+    const head = buffer.subarray(0, 250).toString("utf8");
+    throw new Error(`Downloaded content is not XLSX (likely HTML). Head: ${head}`);
+  }
+}
+
+function toNumber(v) {
+  // поддержка "1 234,56" и "1234.56"
+  const s = String(v ?? "").trim().replace(/\s+/g, "").replace(",", ".");
   const n = Number(s);
   return Number.isFinite(n) ? n : 0;
 }
 
-function getText(v) {
-  return (v ?? "").toString().trim();
+function normalizeRow(row) {
+  const name =
+    row["Сотрудник"] ?? row["ФИО"] ?? row["Фамилия"] ?? row["Name"] ?? row["Employee"] ?? "";
+
+  const earned =
+    row["Начислено"] ?? row["Начисления"] ?? row["Earned"] ?? row["Accrued"] ?? 0;
+
+  const spent =
+    row["Потрачено"] ?? row["Списано"] ?? row["Spent"] ?? row["Debited"] ?? 0;
+
+  const balance =
+    row["Остаток"] ?? row["Баланс"] ?? row["Balance"] ?? row["Available"] ?? 0;
+
+  const tg = row["Telegram"] ?? row["TG"] ?? row["Телеграм"] ?? "";
+  const email = row["Email"] ?? row["Почта"] ?? "";
+
+  return {
+    name: String(name || "").trim(),
+    earned: toNumber(earned),
+    spent: toNumber(spent),
+    balance: toNumber(balance),
+    tg: String(tg || "").trim(),
+    email: String(email || "").trim(),
+  };
 }
 
-function parseSimpleTable(sheet, type) {
+function sheetToPeople(workbook, sheetName) {
+  const sheet = workbook.Sheets[sheetName];
+  if (!sheet) throw new Error(`Sheet "${sheetName}" not found in XLSX`);
   const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
   return rows
-    .map((r) => ({
-      type,
-      name: getText(r["Сотрудник"] ?? r["Employee"] ?? r["Name"] ?? r["ФИО"]),
-      earned: normalizeNumber(r["Начислено Granat Coin"] ?? r["Начислено"] ?? r["Granat Coin"]),
-      spent: normalizeNumber(r["Потрачено Granat Coin"] ?? r["Потрачено"]),
-      balance: normalizeNumber(r["Остаток Granat Coin"] ?? r["Остаток"] ?? r["Остаток Gc"]),
-    }))
-    .filter((x) => x.name.length > 0);
-}
-
-function parseSideBySideTables(sheet) {
-  const matrix = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
-
-  let headerRowIdx = -1;
-  for (let i = 0; i < matrix.length; i++) {
-    const row = matrix[i].map((x) => String(x).toLowerCase());
-    if (row.some((c) => c.includes("сотрудник")) && row.some((c) => c.includes("остаток"))) {
-      headerRowIdx = i;
-      break;
-    }
-  }
-  if (headerRowIdx === -1) return { operators: [], aup: [] };
-
-  const header = matrix[headerRowIdx].map((v) => String(v).trim());
-
-  let split = header.findIndex((v, idx) => idx > 0 && v === "");
-  if (split === -1) {
-    const secondEmployee = header.findIndex((v, idx) => idx > 0 && /Сотрудник/i.test(v));
-    split = secondEmployee !== -1 ? secondEmployee : Math.floor(header.length / 2);
-  }
-
-  const leftCols = header.slice(0, split);
-  const rightCols = header.slice(split);
-
-  function mapBlock(row, cols, offset) {
-    const obj = {};
-    cols.forEach((c, j) => (obj[c] = row[offset + j]));
-    return obj;
-  }
-
-  const operators = [];
-  const aup = [];
-
-  for (let i = headerRowIdx + 1; i < matrix.length; i++) {
-    const row = matrix[i];
-
-    const left = mapBlock(row, leftCols, 0);
-    const right = mapBlock(row, rightCols, split);
-
-    const leftName = getText(left["Оператор"] ?? left["Сотрудник"] ?? left["ФИО"] ?? leftCols[0]);
-    const rightName = getText(right["Сотрудник АУП"] ?? right["Сотрудник"] ?? right["ФИО"] ?? rightCols[0]);
-
-    if (leftName) {
-      operators.push({
-        type: "operator",
-        name: leftName,
-        earned: normalizeNumber(left["Начислено Granat Coin"] ?? left["Granat Coin"] ?? left["Начислено"]),
-        spent: normalizeNumber(left["Потрачено Granat Coin"] ?? left["Потрачено"]),
-        balance: normalizeNumber(left["Остаток Granat Coin"] ?? left["Остаток"] ?? left["Остаток Gc"]),
-      });
-    }
-    if (rightName) {
-      aup.push({
-        type: "aup",
-        name: rightName,
-        earned: normalizeNumber(right["Granat Coin"] ?? right["Начислено Granat Coin"] ?? right["Начислено"]),
-        spent: normalizeNumber(right["Потрачено Gc"] ?? right["Потрачено Granat Coin"] ?? right["Потрачено"]),
-        balance: normalizeNumber(right["Остаток Gc"] ?? right["Остаток Granat Coin"] ?? right["Остаток"]),
-      });
-    }
-  }
-
-  return { operators, aup };
-}
-
-function parseWorkbook(wb) {
-  const sheetNames = wb.SheetNames;
-
-  const opName = sheetNames.find((n) => /оператор|operators/i.test(n));
-  const aupName = sheetNames.find((n) => /ауп|aup/i.test(n));
-
-  if (opName || aupName) {
-    return {
-      operators: opName ? parseSimpleTable(wb.Sheets[opName], "operator") : [],
-      aup: aupName ? parseSimpleTable(wb.Sheets[aupName], "aup") : [],
-    };
-  }
-
-  const first = wb.Sheets[sheetNames[0]];
-  return parseSideBySideTables(first);
+    .map(normalizeRow)
+    .filter((r) => r.name);
 }
 
 async function main() {
-  const res = await fetch(XLSX_URL, { redirect: "follow" });
-  if (!res.ok) throw new Error(`Failed to fetch xlsx: HTTP ${res.status}`);
+  // 1) получаем DOWNLOAD_URL
+  const info = await bitrixCall("disk.file.get", { id: FILE_ID });
+  const downloadUrl = info?.DOWNLOAD_URL;
+  if (!downloadUrl) throw new Error("DOWNLOAD_URL is missing in disk.file.get result");
 
-  const buf = Buffer.from(await res.arrayBuffer());
-  const wb = XLSX.read(buf, { type: "buffer" });
+  // 2) скачиваем XLSX
+  const res = await fetch(downloadUrl);
+  if (!res.ok) throw new Error(`Download failed: HTTP ${res.status}`);
+  const buffer = Buffer.from(await res.arrayBuffer());
+  assertXlsx(buffer);
 
-  const parsed = parseWorkbook(wb);
-  const all = [...(parsed.operators || []), ...(parsed.aup || [])];
+  // 3) парсим XLSX
+  const workbook = XLSX.read(buffer, { type: "buffer" });
 
+  // листы должны называться РОВНО так
+  const operators = sheetToPeople(workbook, "Операторы");
+  const aup = sheetToPeople(workbook, "АУП");
+
+  // 4) итоговый json
   const out = {
     updatedAt: new Date().toISOString(),
-    all,
-    operators: parsed.operators,
-    aup: parsed.aup,
+    operators,
+    aup
   };
 
-  const outPath = path.resolve(process.cwd(), "rating.json");
-  fs.writeFileSync(outPath, JSON.stringify(out, null, 2), "utf-8");
-  console.log(`Wrote ${outPath} (${all.length} rows)`);
+  fs.writeFileSync("rating.json", JSON.stringify(out, null, 2), "utf8");
+  console.log(`OK: operators=${operators.length}, aup=${aup.length}`);
 }
 
 main().catch((e) => {
