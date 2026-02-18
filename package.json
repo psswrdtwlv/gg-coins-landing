@@ -1,0 +1,11 @@
+{
+  "name": "gg-coins-landing",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "build:rating": "node scripts/build-rating.mjs"
+  }
+}
