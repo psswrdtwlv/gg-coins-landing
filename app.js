@@ -23,6 +23,10 @@ let sortDir = "desc";      // asc | desc
 const PREV_RANKS_KEY = "ggcoins_prev_ranks_v1";
 let prevRankByName = new Map();
 
+// автообновление (можно менять)
+const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5 минут
+let autoTimer = null;
+
 function setStatus(text) {
   if ($status) $status.textContent = text;
 }
@@ -210,34 +214,26 @@ function render() {
       // кнопка Telegram
       const link = tgLink(r.tg || r.telegram || "");
       const tgBtn = link
-        ? `<a class="tg-btn" href="${link}" target="_blank" rel="noopener" aria-label="Написать в Telegram"></a>`
-        : `<span class="tg-btn disabled" title="Нет Telegram"></span>`;
+        ? `<a class="tg-btn" href="${link}" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="tg-ic"></span></a>`
+        : `<span class="tg-btn disabled" title="Нет Telegram"><span class="tg-ic"></span></span>`;
+
+      const topClass =
+        i === 0 ? "toprow top1" :
+        i === 1 ? "toprow top2" :
+        i === 2 ? "toprow top3" : "";
 
       return `
-        <tr class="${i < 3 ? "row-animated" : ""}">
+        <tr class="${topClass} ${i < 3 ? "row-animated" : ""}">
           <td><span class="rankcell">${rankHTML}${moveHTML}</span></td>
           <td>${name}</td>
           <td class="td-num">${coinHTML(earned)}</td>
           <td class="td-num">${coinHTML(spent)}</td>
           <td class="td-num ${balanceClass(balance)}">${coinHTML(balance)}</td>
-          <td style="text-align:right;">${tgBtn}<span class="tg-ic" style="display:none;"></span></td>
+          <td style="text-align:right;">${tgBtn}</td>
         </tr>
       `;
     })
     .join("");
-
-  // иконку внутрь кнопки (чтобы не городить лишнюю верстку в шаблоне)
-  $$("#tbody .tg-btn").forEach((btn) => {
-    if (!btn.classList.contains("disabled")) {
-      const ic = document.createElement("span");
-      ic.className = "tg-ic";
-      btn.appendChild(ic);
-    } else {
-      const ic = document.createElement("span");
-      ic.className = "tg-ic";
-      btn.appendChild(ic);
-    }
-  });
 
   // сохраняем ранги на будущее
   prevRankByName = nextRankByName;
@@ -279,14 +275,24 @@ async function load() {
     // чуть более информативный статус
     const opsCount = Array.isArray(data?.operators)
       ? data.operators.length
-      : RAW.filter((r) => getGroup(r) === "операторы" || getGroup(r) === "operator" || getGroup(r) === "operators").length;
+      : RAW.filter((r) => {
+          const g = getGroup(r);
+          return g === "операторы" || g === "operator" || g === "operators";
+        }).length;
 
     const aupCount = Array.isArray(data?.aup)
       ? data.aup.length
-      : RAW.filter((r) => getGroup(r) === "ауп" || getGroup(r) === "aup").length;
+      : RAW.filter((r) => {
+          const g = getGroup(r);
+          return g === "ауп" || g === "aup";
+        }).length;
 
     const updatedAt = data?.updatedAt ? ` · обновлено: ${data.updatedAt}` : "";
-    setStatus(RAW.length ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}` : "Данные не загружены");
+    setStatus(
+      RAW.length
+        ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}`
+        : "Данные не загружены"
+    );
 
     // подтягиваем прошлые ранги, чтобы показать стрелочки при первом рендере после обновления
     prevRankByName = loadPrevRanksFromSession();
@@ -299,6 +305,16 @@ async function load() {
     setStatus("Ошибка загрузки данных");
     render();
   }
+}
+
+function startAutoRefresh() {
+  if (autoTimer) clearInterval(autoTimer);
+
+  autoTimer = setInterval(() => {
+    // не дергаем сеть, если вкладка скрыта
+    if (document.visibilityState !== "visible") return;
+    load();
+  }, AUTO_REFRESH_MS);
 }
 
 /* EVENTS */
@@ -322,3 +338,4 @@ applySortIndicators();
 bindSortHandlers();
 setActiveTab("all");
 load();
+startAutoRefresh();
