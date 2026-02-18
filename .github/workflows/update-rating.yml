@@ -3,10 +3,7 @@ name: Update rating.json from Bitrix XLSX
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 5 * * *"   # каждый день 05:15 UTC (по МСК +3 = 08:15)
-  push:
-    branches: [ "main" ]
-
+    - cron: "*/10 * * * *"   # каждые 10 минут (GitHub может запускать с задержкой)
 permissions:
   contents: write
 
