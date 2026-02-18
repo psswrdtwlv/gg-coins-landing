@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T10:07:48.579Z",
+  "updatedAt": "2026-02-18T11:05:05.216Z",
   "operators": [
     {
       "group": "Операторы",
@@ -714,14 +714,6 @@
       "earned": 290,
       "spent": 190,
       "balance": 100
-    },
-    {
-      "group": "АУП",
-      "name": "Нахай Алексей",
-      "tg": "",
-      "earned": 216,
-      "spent": 176,
-      "balance": 40
     },
     {
       "group": "АУП",
@@ -1740,14 +1732,6 @@
       "earned": 290,
       "spent": 190,
       "balance": 100
-    },
-    {
-      "group": "АУП",
-      "name": "Нахай Алексей",
-      "tg": "",
-      "earned": 216,
-      "spent": 176,
-      "balance": 40
     },
     {
       "group": "АУП",
