@@ -1,17 +1,20 @@
+// app.js
+
 // ===== simple auth gate (internal use) =====
+const AUTH_KEY = "ggcoins_auth_v1";
+
 (() => {
-  // если мы на login.html — не трогаем
   const isLoginPage = /\/login\.html(\?|#|$)/.test(location.pathname);
   if (isLoginPage) return;
 
-  // проверяем флажок
-  const ok = sessionStorage.getItem("ggcoins_auth") === "1";
+  const ok = localStorage.getItem(AUTH_KEY) === "1";
   if (!ok) {
-    location.replace("./login.html");
+    const next = `${location.pathname}${location.search}${location.hash}`;
+    location.replace(`./login.html?next=${encodeURIComponent(next)}`);
   }
 })();
 
-// app.js
+// ===== data =====
 const API = "./rating.json"; // статический файл в репе
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -22,6 +25,16 @@ const $search = $("#search");
 const $refresh = $("#refresh");
 const $status = $("#status");
 const $tbody = $("#tbody");
+
+// logout (если кнопка есть)
+const $logout = $("#logout");
+if ($logout) {
+  $logout.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem(AUTH_KEY);
+    location.replace("./login.html");
+  });
+}
 
 let RAW = [];              // текущий список строк для фильтрации
 let PAYLOAD = null;        // весь json (на всякий)
@@ -35,10 +48,6 @@ let sortDir = "desc";      // asc | desc
 // для “анимации роста позиции” между обновлениями
 const PREV_RANKS_KEY = "ggcoins_prev_ranks_v1";
 let prevRankByName = new Map();
-
-// автообновление (можно менять)
-const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5 минут
-let autoTimer = null;
 
 function setStatus(text) {
   if ($status) $status.textContent = text;
@@ -195,7 +204,7 @@ function render() {
     return;
   }
 
-  // ранги для анимации позиции: сравниваем с прошлым состоянием (между “Обновить” / автозагрузкой)
+  // ранги для анимации позиции
   const nextRankByName = new Map();
   rows.forEach((r, idx) => nextRankByName.set(norm(r.name), idx + 1));
 
@@ -212,12 +221,12 @@ function render() {
       if (i === 1) rankHTML = `<span class="badge top2">2</span>`;
       if (i === 2) rankHTML = `<span class="badge top3">3</span>`;
 
-      // изменение позиции относительно прошлых рангов
+      // изменение позиции
       const prev = prevRankByName.get(name);
       const curr = i + 1;
       let moveHTML = "";
       if (prev && prev !== curr) {
-        const diff = prev - curr; // + => поднялся
+        const diff = prev - curr;
         if (diff > 0) moveHTML = `<span class="pos-move pos-up">+${diff}</span>`;
         if (diff < 0) moveHTML = `<span class="pos-move pos-down">${diff}</span>`;
       } else if (prev && prev === curr) {
@@ -230,44 +239,32 @@ function render() {
         ? `<a class="tg-btn" href="${link}" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="tg-ic"></span></a>`
         : `<span class="tg-btn disabled" title="Нет Telegram"><span class="tg-ic"></span></span>`;
 
-      const topClass =
-        i === 0 ? "toprow top1" :
-        i === 1 ? "toprow top2" :
-        i === 2 ? "toprow top3" : "";
-
       return `
-        <tr class="${topClass} ${i < 3 ? "row-animated" : ""}">
+        <tr class="${i < 3 ? "row-animated" : ""}">
           <td><span class="rankcell">${rankHTML}${moveHTML}</span></td>
           <td>${name}</td>
           <td class="td-num">${coinHTML(earned)}</td>
           <td class="td-num">${coinHTML(spent)}</td>
           <td class="td-num ${balanceClass(balance)}">${coinHTML(balance)}</td>
-          <td style="text-align:right;">${tgBtn}</td>
+          <td class="td-actions">${tgBtn}</td>
         </tr>
       `;
     })
     .join("");
 
-  // сохраняем ранги на будущее
   prevRankByName = nextRankByName;
   savePrevRanksToSession(prevRankByName);
 }
 
 function pickRows(data) {
-  // поддержка нескольких форматов
   if (Array.isArray(data)) return data;
-
-  // наш ожидаемый формат
   if (Array.isArray(data?.all)) return data.all;
 
-  // fallback: если вдруг all не записали
   const ops = Array.isArray(data?.operators) ? data.operators : [];
   const aup = Array.isArray(data?.aup) ? data.aup : [];
   if (ops.length || aup.length) return ops.concat(aup);
 
-  // старые форматы
   if (Array.isArray(data?.rows)) return data.rows;
-
   return [];
 }
 
@@ -275,41 +272,26 @@ async function load() {
   try {
     setStatus("Загружаю данные…");
 
-    // ts чтобы не было кеша Pages/браузера
     const url = `${API}?ts=${Date.now()}`;
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
     PAYLOAD = data;
-
     RAW = pickRows(data);
 
-    // чуть более информативный статус
     const opsCount = Array.isArray(data?.operators)
       ? data.operators.length
-      : RAW.filter((r) => {
-          const g = getGroup(r);
-          return g === "операторы" || g === "operator" || g === "operators";
-        }).length;
+      : RAW.filter((r) => getGroup(r) === "операторы" || getGroup(r) === "operator" || getGroup(r) === "operators").length;
 
     const aupCount = Array.isArray(data?.aup)
       ? data.aup.length
-      : RAW.filter((r) => {
-          const g = getGroup(r);
-          return g === "ауп" || g === "aup";
-        }).length;
+      : RAW.filter((r) => getGroup(r) === "ауп" || getGroup(r) === "aup").length;
 
     const updatedAt = data?.updatedAt ? ` · обновлено: ${data.updatedAt}` : "";
-    setStatus(
-      RAW.length
-        ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}`
-        : "Данные не загружены"
-    );
+    setStatus(RAW.length ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}` : "Данные не загружены");
 
-    // подтягиваем прошлые ранги, чтобы показать стрелочки при первом рендере после обновления
     prevRankByName = loadPrevRanksFromSession();
-
     render();
   } catch (e) {
     console.error(e);
@@ -318,16 +300,6 @@ async function load() {
     setStatus("Ошибка загрузки данных");
     render();
   }
-}
-
-function startAutoRefresh() {
-  if (autoTimer) clearInterval(autoTimer);
-
-  autoTimer = setInterval(() => {
-    // не дергаем сеть, если вкладка скрыта
-    if (document.visibilityState !== "visible") return;
-    load();
-  }, AUTO_REFRESH_MS);
 }
 
 /* EVENTS */
@@ -351,4 +323,3 @@ applySortIndicators();
 bindSortHandlers();
 setActiveTab("all");
 load();
-startAutoRefresh();
