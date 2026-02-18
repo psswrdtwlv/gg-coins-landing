@@ -1,5 +1,5 @@
 // app.js
-const API = "./rating.json"; // <-- статический файл в репе
+const API = "./rating.json"; // статический файл в репе
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -10,7 +10,8 @@ const $refresh = $("#refresh");
 const $status = $("#status");
 const $tbody = $("#tbody");
 
-let RAW = [];
+let RAW = [];              // текущий список строк для фильтрации
+let PAYLOAD = null;        // весь json (на всякий)
 let scope = "all";
 let q = "";
 
@@ -29,15 +30,35 @@ function norm(s) {
 }
 
 function toNum(v) {
-  const n = Number(String(v ?? "").replace(",", "."));
+  // поддержка "1 234,56", "1234.56", "", null
+  const s = String(v ?? "")
+    .trim()
+    .replace(/\s+/g, "")
+    .replace(",", ".");
+  const n = Number(s);
   return Number.isFinite(n) ? n : 0;
 }
 
+function getGroup(row) {
+  // в нашем JSON поле group = "Операторы" / "АУП"
+  const g = String(row.group || row.type || "").trim().toLowerCase();
+  return g;
+}
+
 function matchScope(row) {
-  const type = (row.type || "").toLowerCase();
   if (scope === "all") return true;
-  if (scope === "operators") return type === "operator" || type === "оператор";
-  if (scope === "aup") return type === "aup" || type === "ауп";
+
+  const g = getGroup(row);
+
+  if (scope === "operators") {
+    // поддержка разных вариантов
+    return g === "операторы" || g === "оператор" || g === "operator" || g === "operators";
+  }
+
+  if (scope === "aup") {
+    return g === "ауп" || g === "aup";
+  }
+
   return true;
 }
 
@@ -53,7 +74,7 @@ function render() {
   const rows = RAW
     .filter(matchScope)
     .filter(matchQuery)
-    .sort((a, b) => (toNum(b.balance) - toNum(a.balance)));
+    .sort((a, b) => toNum(b.balance) - toNum(a.balance));
 
   if (!rows.length) {
     $tbody.innerHTML = `
@@ -83,30 +104,55 @@ function render() {
     .join("");
 }
 
+function pickRows(data) {
+  // поддержка нескольких форматов
+  if (Array.isArray(data)) return data;
+
+  // наш ожидаемый формат
+  if (Array.isArray(data?.all)) return data.all;
+
+  // fallback: если вдруг all не записали
+  const ops = Array.isArray(data?.operators) ? data.operators : [];
+  const aup = Array.isArray(data?.aup) ? data.aup : [];
+  if (ops.length || aup.length) return ops.concat(aup);
+
+  // старые форматы
+  if (Array.isArray(data?.rows)) return data.rows;
+
+  return [];
+}
+
 async function load() {
   try {
     setStatus("Загружаю данные…");
-    const res = await fetch(API, { cache: "no-store" });
+
+    // ts чтобы не было кеша Pages/браузера
+    const url = `${API}?ts=${Date.now()}`;
+    const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    PAYLOAD = data;
 
-    // поддержка двух форматов:
-    // 1) [{...},{...}]
-    // 2) { all:[...], operators:[...], aup:[...] }
-    RAW = Array.isArray(data)
-      ? data
-      : Array.isArray(data?.all)
-        ? data.all
-        : Array.isArray(data?.rows)
-          ? data.rows
-          : [];
+    RAW = pickRows(data);
 
-    setStatus(RAW.length ? `Загружено: ${RAW.length}` : "Данные не загружены");
+    // чуть более информативный статус
+    const opsCount = Array.isArray(data?.operators)
+      ? data.operators.length
+      : RAW.filter((r) => getGroup(r) === "операторы" || getGroup(r) === "operator" || getGroup(r) === "operators").length;
+
+    const aupCount = Array.isArray(data?.aup)
+      ? data.aup.length
+      : RAW.filter((r) => getGroup(r) === "ауп" || getGroup(r) === "aup").length;
+
+    const updatedAt = data?.updatedAt ? ` · обновлено: ${data.updatedAt}` : "";
+    setStatus(RAW.length ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}` : "Данные не загружены");
+
     render();
   } catch (e) {
     console.error(e);
     RAW = [];
+    PAYLOAD = null;
     setStatus("Ошибка загрузки данных");
     render();
   }
