@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Вход — Granat Group Coins</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <main class="wrap">
+      <section class="card">
+        <div class="brand">
+          <img class="logo" src="./granat-logo.png" alt="Granat Group" />
+          <div class="brandtext">
+            <div class="brandtitle">Granat Group Coins</div>
+            <div class="brandsub">Внутренний доступ</div>
+          </div>
+        </div>
+
+        <h1 class="title">Вход</h1>
+        <p class="lead">
+          Введите логин и пароль, чтобы открыть портал.
+        </p>
+
+        <form id="loginForm" class="form" autocomplete="off">
+          <label class="field">
+            <span>Логин</span>
+            <input id="login" type="text" inputmode="text" placeholder="логин" required />
+          </label>
+
+          <label class="field">
+            <span>Пароль</span>
+            <input id="password" type="password" placeholder="пароль" required />
+          </label>
+
+          <button class="btn" type="submit">Войти</button>
+
+          <div id="error" class="error" role="alert" aria-live="polite"></div>
+        </form>
+
+        <div class="hint">
+          Если не получается — напиши HR / админу.
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // ⚠️ Это "шторка" для внутреннего использования, не банковская защита.
+      // В боевом варианте вынести на сервер / Cloudflare Access.
+
+      const CREDENTIALS = {
+        login: "gg",
+        password: "coins2026"
+      };
+
+      const form = document.getElementById("loginForm");
+      const elLogin = document.getElementById("login");
+      const elPass = document.getElementById("password");
+      const elErr = document.getElementById("error");
+
+      function setError(msg) {
+        elErr.textContent = msg || "";
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        setError("");
+
+        const l = (elLogin.value || "").trim();
+        const p = (elPass.value || "").trim();
+
+        if (l === CREDENTIALS.login && p === CREDENTIALS.password) {
+          // sessionStorage = слетит при закрытии браузера
+          sessionStorage.setItem("ggcoins_auth", "1");
+
+          // вернемся на главную
+          window.location.href = "./index.html";
+        } else {
+          setError("Неверный логин или пароль");
+        }
+      });
+    </script>
+  </body>
+</html>
