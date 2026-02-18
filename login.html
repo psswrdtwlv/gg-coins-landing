@@ -1,95 +1,115 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Вход — Granat Group Coins</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Вход — Granat Group Coins</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./login.css" />
-  </head>
+  <link rel="stylesheet" href="./login.css" />
+</head>
 
-  <body>
-    <div class="bg" aria-hidden="true"></div>
+<body>
+  <div class="bg" aria-hidden="true"></div>
 
-    <main class="wrap">
-      <section class="card">
-        <div class="brand">
-          <img class="logo" src="./granat-logo.png" alt="Granat Group" />
-          <div class="brandtext">
-            <div class="brandtitle">Granat Group Coins</div>
-            <div class="brandsub">Внутренний доступ</div>
-          </div>
+  <main class="wrap">
+    <section class="card">
+      <div class="brand">
+        <img class="logo" src="./granat-logo.png" alt="Granat Group" />
+        <div class="brandtext">
+          <div class="brandtitle">Granat Group Coins</div>
+          <div class="brandsub">Внутренний доступ</div>
         </div>
+      </div>
 
-        <h1 class="title">Вход</h1>
-        <p class="lead">
-          Введите логин и пароль, чтобы открыть портал.
-        </p>
+      <h1 class="title">Вход</h1>
+      <p class="lead">Введите общий логин и пароль, чтобы открыть портал.</p>
 
-        <form id="loginForm" class="form" autocomplete="off">
-          <label class="field">
-            <span>Логин</span>
-            <input id="login" type="text" inputmode="text" placeholder="логин" required />
-          </label>
+      <form id="loginForm" class="form" autocomplete="off">
+        <label class="field">
+          <span>Логин</span>
+          <input id="login" type="text" placeholder="логин" required />
+        </label>
 
-          <label class="field">
-            <span>Пароль</span>
+        <label class="field">
+          <span>Пароль</span>
+
+          <div class="pass">
             <input id="password" type="password" placeholder="пароль" required />
-          </label>
+            <button id="togglePass" class="eye" type="button" aria-label="Показать пароль" title="Показать пароль"></button>
+          </div>
+        </label>
 
-          <button class="btn" type="submit">Войти</button>
+        <button class="btn" type="submit">Войти</button>
 
-          <div id="error" class="error" role="alert" aria-live="polite"></div>
-        </form>
+        <div id="error" class="error" role="alert" aria-live="polite"></div>
 
         <div class="hint">
-          Если не получается — напиши HR / админу.
+          Выйти можно в любой момент — кнопка <b>“Выйти”</b> есть вверху сайта.
         </div>
-      </section>
-    </main>
+      </form>
+    </section>
+  </main>
 
-    <script>
-      // ⚠️ Это "шторка" для внутреннего использования, не банковская защита.
-      // В боевом варианте вынести на сервер / Cloudflare Access.
+  <script>
+    // ⚠️ Это "шторка" для внутреннего использования.
+    // Настоящая защита = сервер/Cloudflare Access/Basic Auth.
 
-      const CREDENTIALS = {
-        login: "gg",
-        password: "coins2026"
-      };
+    const AUTH_KEY = "ggcoins_auth_v1";
 
-      const form = document.getElementById("loginForm");
-      const elLogin = document.getElementById("login");
-      const elPass = document.getElementById("password");
-      const elErr = document.getElementById("error");
+    // ✅ Поменяй тут общий логин/пароль
+    const CREDENTIALS = {
+      login: "gg",
+      password: "coins2026"
+    };
 
-      function setError(msg) {
-        elErr.textContent = msg || "";
+    const form = document.getElementById("loginForm");
+    const elLogin = document.getElementById("login");
+    const elPass = document.getElementById("password");
+    const elErr = document.getElementById("error");
+    const toggle = document.getElementById("togglePass");
+
+    function setError(msg) {
+      elErr.textContent = msg || "";
+    }
+
+    function getNextUrl() {
+      try {
+        const u = new URL(location.href);
+        const next = u.searchParams.get("next");
+        if (!next) return "./index.html";
+        // защита от внешних переходов
+        if (next.startsWith("http://") || next.startsWith("https://")) return "./index.html";
+        if (!next.startsWith("./") && !next.startsWith("/")) return "./index.html";
+        return next;
+      } catch {
+        return "./index.html";
       }
+    }
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        setError("");
+    toggle.addEventListener("click", () => {
+      const isPass = elPass.type === "password";
+      elPass.type = isPass ? "text" : "password";
+      toggle.classList.toggle("on", isPass);
+    });
 
-        const l = (elLogin.value || "").trim();
-        const p = (elPass.value || "").trim();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      setError("");
 
-        if (l === CREDENTIALS.login && p === CREDENTIALS.password) {
-          // sessionStorage = слетит при закрытии браузера
-          sessionStorage.setItem("ggcoins_auth", "1");
+      const l = (elLogin.value || "").trim();
+      const p = (elPass.value || "").trim();
 
-          // вернемся на главную
-          window.location.href = "./index.html";
-        } else {
-          setError("Неверный логин или пароль");
-        }
-      });
-    </script>
-  </body>
+      if (l === CREDENTIALS.login && p === CREDENTIALS.password) {
+        localStorage.setItem(AUTH_KEY, "1");
+        window.location.href = getNextUrl();
+      } else {
+        setError("Неверный логин или пароль");
+      }
+    });
+  </script>
+</body>
 </html>
