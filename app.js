@@ -1,3 +1,16 @@
+// ===== simple auth gate (internal use) =====
+(() => {
+  // если мы на login.html — не трогаем
+  const isLoginPage = /\/login\.html(\?|#|$)/.test(location.pathname);
+  if (isLoginPage) return;
+
+  // проверяем флажок
+  const ok = sessionStorage.getItem("ggcoins_auth") === "1";
+  if (!ok) {
+    location.replace("./login.html");
+  }
+})();
+
 // app.js
 const API = "./rating.json"; // статический файл в репе
 
