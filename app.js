@@ -1,20 +1,4 @@
 // app.js
-
-// ===== simple auth gate (internal use) =====
-const AUTH_KEY = "ggcoins_auth_v1";
-
-(() => {
-  const isLoginPage = /\/login\.html(\?|#|$)/.test(location.pathname);
-  if (isLoginPage) return;
-
-  const ok = localStorage.getItem(AUTH_KEY) === "1";
-  if (!ok) {
-    const next = `${location.pathname}${location.search}${location.hash}`;
-    location.replace(`./login.html?next=${encodeURIComponent(next)}`);
-  }
-})();
-
-// ===== data =====
 const API = "./rating.json"; // статический файл в репе
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -25,16 +9,6 @@ const $search = $("#search");
 const $refresh = $("#refresh");
 const $status = $("#status");
 const $tbody = $("#tbody");
-
-// logout (если кнопка есть)
-const $logout = $("#logout");
-if ($logout) {
-  $logout.addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.removeItem(AUTH_KEY);
-    location.replace("./login.html");
-  });
-}
 
 let RAW = [];              // текущий список строк для фильтрации
 let PAYLOAD = null;        // весь json (на всякий)
@@ -204,7 +178,7 @@ function render() {
     return;
   }
 
-  // ранги для анимации позиции
+  // ранги для анимации позиции: сравниваем с прошлым состоянием (между “Обновить” / автозагрузкой)
   const nextRankByName = new Map();
   rows.forEach((r, idx) => nextRankByName.set(norm(r.name), idx + 1));
 
@@ -221,12 +195,12 @@ function render() {
       if (i === 1) rankHTML = `<span class="badge top2">2</span>`;
       if (i === 2) rankHTML = `<span class="badge top3">3</span>`;
 
-      // изменение позиции
+      // изменение позиции относительно прошлых рангов
       const prev = prevRankByName.get(name);
       const curr = i + 1;
       let moveHTML = "";
       if (prev && prev !== curr) {
-        const diff = prev - curr;
+        const diff = prev - curr; // + => поднялся
         if (diff > 0) moveHTML = `<span class="pos-move pos-up">+${diff}</span>`;
         if (diff < 0) moveHTML = `<span class="pos-move pos-down">${diff}</span>`;
       } else if (prev && prev === curr) {
@@ -236,8 +210,8 @@ function render() {
       // кнопка Telegram
       const link = tgLink(r.tg || r.telegram || "");
       const tgBtn = link
-        ? `<a class="tg-btn" href="${link}" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="tg-ic"></span></a>`
-        : `<span class="tg-btn disabled" title="Нет Telegram"><span class="tg-ic"></span></span>`;
+        ? `<a class="tg-btn" href="${link}" target="_blank" rel="noopener" aria-label="Написать в Telegram"></a>`
+        : `<span class="tg-btn disabled" title="Нет Telegram"></span>`;
 
       return `
         <tr class="${i < 3 ? "row-animated" : ""}">
@@ -246,12 +220,20 @@ function render() {
           <td class="td-num">${coinHTML(earned)}</td>
           <td class="td-num">${coinHTML(spent)}</td>
           <td class="td-num ${balanceClass(balance)}">${coinHTML(balance)}</td>
-          <td class="td-actions">${tgBtn}</td>
+          <td style="text-align:right;">${tgBtn}<span class="tg-ic" style="display:none;"></span></td>
         </tr>
       `;
     })
     .join("");
 
+  // иконку внутрь кнопки
+  $$("#tbody .tg-btn").forEach((btn) => {
+    const ic = document.createElement("span");
+    ic.className = "tg-ic";
+    btn.appendChild(ic);
+  });
+
+  // сохраняем ранги на будущее
   prevRankByName = nextRankByName;
   savePrevRanksToSession(prevRankByName);
 }
@@ -278,18 +260,29 @@ async function load() {
 
     const data = await res.json();
     PAYLOAD = data;
+
     RAW = pickRows(data);
 
     const opsCount = Array.isArray(data?.operators)
       ? data.operators.length
-      : RAW.filter((r) => getGroup(r) === "операторы" || getGroup(r) === "operator" || getGroup(r) === "operators").length;
+      : RAW.filter((r) => {
+          const g = getGroup(r);
+          return g === "операторы" || g === "operator" || g === "operators";
+        }).length;
 
     const aupCount = Array.isArray(data?.aup)
       ? data.aup.length
-      : RAW.filter((r) => getGroup(r) === "ауп" || getGroup(r) === "aup").length;
+      : RAW.filter((r) => {
+          const g = getGroup(r);
+          return g === "ауп" || g === "aup";
+        }).length;
 
     const updatedAt = data?.updatedAt ? ` · обновлено: ${data.updatedAt}` : "";
-    setStatus(RAW.length ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}` : "Данные не загружены");
+    setStatus(
+      RAW.length
+        ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}`
+        : "Данные не загружены"
+    );
 
     prevRankByName = loadPrevRanksFromSession();
     render();
