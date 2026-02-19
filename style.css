@@ -769,3 +769,16 @@ button, input{ font:inherit; }
 .row-animated{
   animation: pop .22s ease-in-out;
 }
+
+.nav__link--logout{
+  margin-left: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(158,31,43,.18);
+  background: rgba(158,31,43,.08);
+  color: #7f1821;
+  font-weight: 800;
+}
+.nav__link--logout:hover{
+  background: rgba(158,31,43,.12);
+}
