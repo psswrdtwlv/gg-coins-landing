@@ -4,229 +4,159 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Granat Group Coins</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body>
-    <header class="topbar">
-      <nav class="nav">
-        <div class="nav__left">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header__inner">
+        <nav class="nav">
           <a class="nav__link" href="#home">Главная</a>
           <a class="nav__link" href="#rules">Условия</a>
           <a class="nav__link" href="#marathon">Марафон</a>
-        </div>
+        </nav>
 
         <a class="brand" href="#home" aria-label="Granat Group Coins">
-          <img class="brand__logo" src="./granat-logo.png" alt="Granat Group" />
-          <span class="brand__text">Granat Group Coins</span>
+          <!-- только значок, крупнее -->
+          <img class="brand__logo" src="./gg-mark.png" alt="Granat Group" />
         </a>
 
-        <div class="nav__right">
+        <nav class="nav nav--right">
           <a class="nav__link" href="#rating">Рейтинг</a>
-          <a class="nav__link" href="#store">Магазин</a>
-        </div>
-      </nav>
+          <a class="nav__link" href="#shop">Магазин</a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-      <section class="hero" id="home">
-        <div class="container">
-          <div class="hero__wrap">
-            <div class="hero__content">
-              <h1 class="hero__title">Granat Group Coins</h1>
-              <p class="hero__subtitle">
-                Внутренняя валюта для поощрения сотрудников за достижения и участие в проектах.
-              </p>
-              <div class="hero__actions">
-                <a class="btn btn--primary" href="#rating">Открыть рейтинг</a>
-                <a class="btn btn--ghost" href="#rules">Условия</a>
-              </div>
-            </div>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero__media" aria-hidden="true">
+        <!-- вернул fullscreen фон -->
+        <video
+          class="hero__video"
+          src="./hero.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+        <div class="hero__overlay"></div>
+      </div>
 
-            <div class="hero__media">
-              <video class="hero__video" src="./hero.mp4" autoplay muted loop playsinline></video>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="about">
-        <div class="container">
-          <h2 class="section__title section__title--center">Что такое Granat Coins?</h2>
-
-          <p class="section__lead section__lead--center">
-            Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения и
-            участие во внутренних проектах компании.
+      <div class="container hero__content">
+        <div class="hero__card">
+          <h1 class="hero__title">Granat Group Coins</h1>
+          <p class="hero__subtitle">
+            Внутренняя валюта для поощрения сотрудников за достижения и участие в проектах.
           </p>
-
-          <div class="cards">
-            <article class="card card--image">
-              <div class="card__bg" aria-hidden="true">
-                <img class="card__bgimg" src="./cup.png" alt="" />
-              </div>
-              <div class="card__fg">
-                <h3 class="card__title card__title--center">За результат</h3>
-                <p class="card__text">
-                  Начисления за достижения, вклад в качество и сильные показатели.
-                </p>
-              </div>
-            </article>
-
-            <article class="card card--image">
-              <div class="card__bg" aria-hidden="true">
-                <img class="card__bgimg" src="./lamp.png" alt="" />
-              </div>
-              <div class="card__fg">
-                <h3 class="card__title card__title--center">За инициативу</h3>
-                <p class="card__text">
-                  Идеи, участие в активностях, поддержка команды и внутренние проекты.
-                </p>
-              </div>
-            </article>
-
-            <article class="card card--image">
-              <div class="card__bg" aria-hidden="true">
-                <img class="card__bgimg" src="./people.png" alt="" />
-              </div>
-              <div class="card__fg">
-                <h3 class="card__title card__title--center">За участие</h3>
-                <p class="card__text">
-                  Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.
-                </p>
-              </div>
-            </article>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#rating">Открыть рейтинг</a>
+            <a class="btn btn--ghost" href="#rules">Условия</a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="rules">
-        <div class="container">
-          <h2 class="section__title section__title--center">Условия</h2>
+    <!-- WHAT IS -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Что такое Granat Coins?</h2>
+        <p class="section__lead">
+          Granat Coins — это внутренняя валюта для поощрения сотрудников за значимые достижения и участие во внутренних проектах компании.
+        </p>
 
-          <div class="centerbox">
-            <p class="section__lead section__lead--center">
-              Правила получения и использования доступны в PDF.
-            </p>
+        <div class="cards">
+          <article class="card card--img" style="--card-img:url('./cup.png');">
+            <h3 class="card__title">За результат</h3>
+            <p class="card__text">Начисления за достижения, вклад в качество и сильные показатели.</p>
+          </article>
 
-            <a class="btn btn--primary btn--rules" href="./rules.pdf" download>
-              Скачать условия получения (PDF)
-            </a>
+          <article class="card card--img" style="--card-img:url('./lamp.png');">
+            <h3 class="card__title">За инициативу</h3>
+            <p class="card__text">Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
+          </article>
 
-            <p class="section__note section__note--center">
-              Информация по суммам за отчётный месяц актуализируется ежемесячно, до 5 числа.
-            </p>
-          </div>
+          <article class="card card--img" style="--card-img:url('./people.png');">
+            <h3 class="card__title">За участие</h3>
+            <p class="card__text">Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
+          </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="marathon">
-        <div class="container">
-          <h2 class="section__title section__title--center">Марафон</h2>
-          <p class="section__lead section__lead--center">
-            Активности, конкурсы и задания — всё учитывается в системе начислений.
-          </p>
-        </div>
-      </section>
+    <!-- RULES -->
+    <section id="rules" class="section section--tight">
+      <div class="container center">
+        <h2 class="section__title">Условия</h2>
+        <p class="section__lead">Правила получения и использования доступны в PDF.</p>
 
-      <section class="section" id="rating">
-        <div class="container">
-          <div class="rating__head">
-            <h2 class="section__title section__title--center">Рейтинг</h2>
+        <a class="btn btn--primary btn--pdf" href="./rules.pdf" download>
+          Скачать условия получения (PDF)
+        </a>
 
-            <div class="rating__controls">
-              <div class="tabs" id="tabs">
-                <button class="tab active" data-scope="all" type="button">Все</button>
-                <button class="tab" data-scope="operators" type="button">Операторы</button>
-                <button class="tab" data-scope="aup" type="button">АУП</button>
-              </div>
+        <p class="muted mt-16">
+          Информация по суммам за отчётный месяц актуализируется ежемесячно, до 5 числа.
+        </p>
+      </div>
+    </section>
 
-              <input
-                class="input"
-                id="search"
-                placeholder="Поиск сотрудника..."
-                autocomplete="off"
-              />
+    <!-- MARATHON (placeholder, не ломаем якорь) -->
+    <section id="marathon" class="section section--tight">
+      <div class="container">
+        <h2 class="section__title">Марафон</h2>
+        <p class="section__lead">Раздел в разработке / наполнение позже.</p>
+      </div>
+    </section>
 
-              <button class="btn btn--ghost" id="refresh" type="button">
-                Обновить
-              </button>
-            </div>
+    <!-- RATING -->
+    <section id="rating" class="section section--rating">
+      <div class="container">
+        <h2 class="section__title">Рейтинг</h2>
+
+        <div class="rating-toolbar">
+          <div id="tabs" class="tabs">
+            <button class="tab active" data-scope="all" type="button">Все</button>
+            <button class="tab" data-scope="operators" type="button">Операторы</button>
+            <button class="tab" data-scope="aup" type="button">АУП</button>
           </div>
 
-          <div class="status" id="status">Данные не загружены</div>
+          <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
 
-          <div class="tablewrap">
-            <table class="gridtable" id="table">
-              <thead>
-                <tr>
-                  <th class="th-rank" style="width: 70px;">#</th>
-
-                  <th data-sort="name" class="sortable th-name">
-                    Сотрудник <span class="sort-ind"></span>
-                  </th>
-
-                  <th data-sort="earned" class="sortable th-num" style="width: 160px;">
-                    Начислено <span class="sort-ind"></span>
-                  </th>
-
-                  <th data-sort="spent" class="sortable th-num" style="width: 160px;">
-                    Потрачено <span class="sort-ind"></span>
-                  </th>
-
-                  <th data-sort="balance" class="sortable th-num" style="width: 160px;">
-                    Остаток <span class="sort-ind"></span>
-                  </th>
-
-                  <th class="th-link" style="width: 90px;">Связь</th>
-                </tr>
-              </thead>
-
-              <tbody id="tbody">
-                <tr>
-                  <td colspan="6" class="muted">Нет данных</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <button id="refresh" class="btn btn--ghost btn--sm" type="button">Обновить</button>
         </div>
-      </section>
 
-      <section class="section" id="store">
-        <div class="container">
-          <h2 class="section__title section__title--center">Магазин</h2>
-          <p class="section__lead section__lead--center">
-            Скоро здесь появятся варианты обмена Granat Coins на подарки.
-          </p>
+        <div id="status" class="status muted">—</div>
 
-          <div class="storegrid">
-            <article class="storeitem">
-              <img class="storeitem__img" src="./ozon.png" alt="Ozon" />
-              <div class="storeitem__title">Ozon</div>
-            </article>
-            <article class="storeitem">
-              <img class="storeitem__img" src="./wb.png" alt="Wildberries" />
-              <div class="storeitem__title">Wildberries</div>
-            </article>
-            <article class="storeitem">
-              <img class="storeitem__img" src="./tgpremium.png" alt="Telegram Premium" />
-              <div class="storeitem__title">Telegram Premium</div>
-            </article>
-            <article class="storeitem">
-              <img class="storeitem__img" src="./surprice.png" alt="Подарок" />
-              <div class="storeitem__title">Сюрприз</div>
-            </article>
-          </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="th-num">#</th>
+                <th data-sort="name">Сотрудник</th>
+                <th class="th-num" data-sort="earned">Начислено</th>
+                <th class="th-num" data-sort="spent">Потрачено</th>
+                <th class="th-num" data-sort="balance">Остаток</th>
+                <th class="th-right">Связь</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <tr>
+                <td colspan="6" class="muted">Нет данных</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <!-- SHOP (placeholder) -->
+    <section id="shop" class="section section--tight">
+      <div class="container">
+        <h2 class="section__title">Магазин</h2>
+        <p class="section__lead">Раздел в разработке / наполнение позже.</p>
+      </div>
+    </section>
 
     <script src="./app.js" type="module"></script>
   </body>
