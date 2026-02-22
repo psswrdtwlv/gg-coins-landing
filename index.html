@@ -25,6 +25,9 @@
         <nav class="nav nav--right">
           <a class="nav__link" href="#rating">Рейтинг</a>
           <a class="nav__link" href="#shop">Магазин</a>
+
+          <!-- ✅ ВЫЙТИ — добавлено минимально, как обычная ссылка -->
+          <a class="nav__link nav__link--logout" href="#" id="logout">Выйти</a>
         </nav>
       </div>
     </header>
@@ -32,7 +35,7 @@
     <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero__media" aria-hidden="true">
-        <!-- вернул fullscreen фон -->
+        <!-- fullscreen фон как у тебя -->
         <video
           class="hero__video"
           src="./hero.mp4"
@@ -91,6 +94,7 @@
         <h2 class="section__title">Условия</h2>
         <p class="section__lead">Правила получения и использования доступны в PDF.</p>
 
+        <!-- ⚠️ rules.pdf должен лежать в корне рядом с index.html -->
         <a class="btn btn--primary btn--pdf" href="./rules.pdf" download>
           Скачать условия получения (PDF)
         </a>
@@ -101,7 +105,7 @@
       </div>
     </section>
 
-    <!-- MARATHON (placeholder, не ломаем якорь) -->
+    <!-- MARATHON -->
     <section id="marathon" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Марафон</h2>
@@ -150,7 +154,7 @@
       </div>
     </section>
 
-    <!-- SHOP (placeholder) -->
+    <!-- SHOP -->
     <section id="shop" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Магазин</h2>
@@ -159,5 +163,19 @@
     </section>
 
     <script src="./app.js" type="module"></script>
+
+    <!-- ✅ logout handler (минимально) -->
+    <script>
+      const logout = document.getElementById("logout");
+      if (logout) {
+        logout.addEventListener("click", (e) => {
+          e.preventDefault();
+          try {
+            localStorage.removeItem("ggcoins_auth_v1");
+          } catch {}
+          window.location.href = "./login.html";
+        });
+      }
+    </script>
   </body>
 </html>
