@@ -45,7 +45,8 @@
 
         <button class="btn" type="submit">Войти</button>
 
-        <div id="error" class="error" role="alert" aria-live‘="polite"></div>
+        <!-- ✅ фикс кавычек -->
+        <div id="error" class="error" role="alert" aria-live="polite"></div>
 
         <div class="hint">
           После входа доступ сохраняется, пока не нажмёшь <b>“Выйти”</b>.
@@ -55,10 +56,8 @@
   </main>
 
   <script>
-    // ⚠️ "Шторка" для внутреннего пользования. Не security-grade.
     const AUTH_KEY = "ggcoins_auth_v1";
 
-    // ✅ Поменяй общий логин/пароль тут
     const CREDENTIALS = {
       login: "gg",
       password: "coins2026"
