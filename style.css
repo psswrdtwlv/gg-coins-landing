@@ -21,6 +21,7 @@ a{color:inherit;text-decoration:none}
 .mt-16{margin-top:16px}
 .muted{color:var(--muted)}
 
+/* HEADER */
 .header{
   position:sticky;top:0;z-index:50;
   backdrop-filter: blur(10px);
@@ -41,42 +42,36 @@ a{color:inherit;text-decoration:none}
   font-size: 14px;
   padding: 10px 8px;
   border-radius: 12px;
+
+  /* важно: чтобы “Выйти” выглядел как обычный пункт меню */
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
 }
+a.nav__link{cursor:pointer}
 .nav__link:hover{background: rgba(255,255,255,.08)}
 .brand{display:flex;align-items:center;justify-content:center}
 .brand__logo{
-  height: 56px; /* крупнее */
+  height: 56px;
   width: auto;
   display:block;
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
 }
 
-/* ✅ logout — выглядит как обычная ссылка, не ломает шапку */
-.nav__link--logout{
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-}
-.nav__link--logout:hover{
-  background: rgba(255,255,255,.12);
-}
-
 /* HERO */
 .hero{position:relative;min-height: calc(100vh - 64px); display:flex;align-items:center}
-.hero__media{
-  position:absolute;inset:0;overflow:hidden;
-}
+.hero__media{position:absolute;inset:0;overflow:hidden}
 .hero__video{
   position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover; /* full screen background */
+  object-fit:cover;
+  object-position:center center;
 }
-
-/* ✅ ВИДЕО: меньше “молока” (чтобы не казалось растянутым/выцветшим) */
 .hero__overlay{
   position:absolute;inset:0;
-  background: radial-gradient(1200px 600px at 20% 30%, rgba(255,255,255,.18), rgba(0,0,0,.30));
+  background: radial-gradient(1200px 600px at 20% 30%, rgba(255,255,255,.35), rgba(0,0,0,.35));
 }
-
 .hero__content{position:relative;z-index:2; padding: 64px 0}
 .hero__card{
   max-width: 520px;
@@ -127,14 +122,9 @@ a{color:inherit;text-decoration:none}
   box-shadow: 0 14px 30px rgba(177,42,42,.22);
 }
 .btn--primary:hover{background: var(--red2)}
-.btn--ghost{
-  background: rgba(255,255,255,.9);
-}
+.btn--ghost{background: rgba(255,255,255,.9)}
 .btn--ghost:hover{background:#fff}
-.btn--pdf{
-  /* ровный паддинг сверху/снизу */
-  padding: 14px 22px;
-}
+.btn--pdf{padding: 14px 22px}
 
 /* CARDS WITH BIG PNG BACKGROUND */
 .cards{
@@ -153,27 +143,23 @@ a{color:inherit;text-decoration:none}
   overflow:hidden;
   min-height: 164px;
 }
-
-/* ✅ КАРТИНКИ: делаем заметнее (ярче), но не перебиваем текст */
 .card--img::before{
   content:"";
   position:absolute;inset:-10px;
   background-image: var(--card-img);
   background-repeat:no-repeat;
   background-position: 70% 55%;
-  background-size: 220px auto;
-  opacity:.42; /* было .26 */
-  filter: saturate(1.18) contrast(1.10);
+  background-size: var(--card-size, 200px) auto; /* одинаково, без раздутия лампы */
+  opacity: var(--card-op, .44);               /* ярче */
+  filter: saturate(1.15) contrast(1.12) brightness(1.05);
   pointer-events:none;
 }
-/* чуть меньше белой “пелены”, чтобы картинки читались */
 .card--img::after{
   content:"";
   position:absolute;inset:0;
-  background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.72) 65%, rgba(255,255,255,.55) 100%);
+  background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.78) 65%, rgba(255,255,255,.62) 100%);
   pointer-events:none;
 }
-
 .card__title, .card__text{position:relative;z-index:1}
 .card__title{margin:0 0 8px;font-size:22px}
 .card__text{margin:0;color:#555;line-height:1.45}
@@ -240,9 +226,8 @@ a{color:inherit;text-decoration:none}
   border-bottom: 1px solid rgba(0,0,0,.06);
   vertical-align: middle;
 }
-.th-num{width:76px}
+.th-num{width:92px}
 .th-right{width:96px;text-align:right}
-
 .table tbody td{
   padding: 16px 18px;
   border-bottom: 1px solid rgba(0,0,0,.05);
@@ -250,12 +235,6 @@ a{color:inherit;text-decoration:none}
 }
 .table tbody tr:last-child td{border-bottom:0}
 .table tbody td:nth-child(1){text-align:left}
-
-/* ✅ ВЫРАВНИВАНИЕ: заголовки числовых колонок тоже вправо (как значения) */
-.table thead th:nth-child(3),
-.table thead th:nth-child(4),
-.table thead th:nth-child(5){text-align:right}
-
 .table tbody td:nth-child(3),
 .table tbody td:nth-child(4),
 .table tbody td:nth-child(5){text-align:right}
@@ -274,15 +253,10 @@ th.asc::after{
   border-top:none;
   border-bottom:6px solid rgba(0,0,0,.45);
 }
-th.desc::after{
-  border-top:6px solid rgba(0,0,0,.45);
-}
+th.desc::after{border-top:6px solid rgba(0,0,0,.45)}
 
 /* coins */
-.coin{
-  display:inline-flex;align-items:center;gap:10px;
-  justify-content:flex-end;
-}
+.coin{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end}
 .coin-dot{
   width:14px;height:14px;border-radius:999px;
   background: var(--red);
