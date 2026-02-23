@@ -39,14 +39,25 @@
 
       <div class="container hero__content">
         <div class="hero__card">
-          <h1 class="hero__title">Granat Group Coins</h1>
+          <div class="hero__pill">Играй. Зарабатывай. Развивайся с Granat Group!</div>
+
+          <h1 class="hero__title">Granat Group<br />Coins</h1>
+
           <p class="hero__subtitle">
-            Внутренняя валюта для поощрения сотрудников за достижения и участие в проектах.
+            Внутренняя валюта Granat Group: получай Coins за результат, инициативу и участие — и
+            обменивай на подарки.
           </p>
+
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#rating">Открыть рейтинг</a>
-            <a class="btn btn--ghost" href="#rules">Условия</a>
+            <a class="btn btn--primary" href="#rating">Смотреть рейтинг</a>
+            <a class="btn btn--ghost" href="#shop">Перейти в магазин</a>
           </div>
+        </div>
+
+        <div class="hero__right">
+          <a class="btn btn--telegram" href="https://t.me/granatgroupfamily" target="_blank" rel="noopener">
+            Вопросы по GG Coins? Напиши нам в Telegram →
+          </a>
         </div>
       </div>
     </section>
@@ -60,17 +71,17 @@
         </p>
 
         <div class="cards">
-          <article class="card card--img" style="--card-img:url('./cup.png'); --card-size:200px; --card-op:.44;">
+          <article class="card card--img" style="--card-img:url('./cup.png'); --card-size:180px; --card-op:.60;">
             <h3 class="card__title">За результат</h3>
             <p class="card__text">Начисления за достижения, вклад в качество и сильные показатели.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./lamp.png'); --card-size:200px; --card-op:.44;">
+          <article class="card card--img" style="--card-img:url('./lamp.png'); --card-size:180px; --card-op:.60;">
             <h3 class="card__title">За инициативу</h3>
             <p class="card__text">Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./people.png'); --card-size:200px; --card-op:.44;">
+          <article class="card card--img" style="--card-img:url('./people.png'); --card-size:180px; --card-op:.60;">
             <h3 class="card__title">За участие</h3>
             <p class="card__text">Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
           </article>
@@ -84,14 +95,20 @@
               "lamp.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M64 10c-22 0-40 18-40 40 0 16 10 30 24 36v10c0 6 5 10 10 10h12c6 0 10-4 10-10V86c14-6 24-20 24-36 0-22-18-40-40-40z'/%3E%3Cpath fill='%23fff' opacity='.35' d='M46 54c0-12 9-22 22-22 6 0 11 2 15 6-4-8-12-14-23-14-13 0-24 11-24 24 0 4 1 8 3 11 4-1 7-3 7-5z'/%3E%3Cpath fill='%23000' opacity='.12' d='M50 112h28v6H50z'/%3E%3C/svg%3E",
               "people.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M44 62c10 0 18-8 18-18S54 26 44 26 26 34 26 44s8 18 18 18zm40 0c10 0 18-8 18-18S94 26 84 26 66 34 66 44s8 18 18 18z'/%3E%3Cpath fill='%23b12a2a' opacity='.9' d='M22 112c0-18 14-32 32-32s32 14 32 32H22zm44 0c0-18 14-32 32-32s32 14 32 32H66z'/%3E%3C/svg%3E",
             };
+            // если browser не может загрузить png, псевдоэлементы не дадут onerror.
+            // поэтому просто префетчим и при ошибке подменим CSS-переменные на svg.
             document.querySelectorAll('.card--img').forEach((el)=>{
+              const style = getComputedStyle(el);
               const v = (el.getAttribute('style')||"");
               const m = v.match(/--card-img:url\('\.\/([^']+)'\)/);
               if(!m) return;
               const file = m[1];
               const img = new Image();
+              img.onload = ()=>{};
               img.onerror = ()=>{
-                if (fallbacks[file]) el.style.setProperty('--card-img', `url('${fallbacks[file]}')`);
+                if (fallbacks[file]) {
+                  el.style.setProperty('--card-img', `url('${fallbacks[file]}')`);
+                }
               };
               img.src = './' + file;
             });
@@ -116,7 +133,7 @@
       </div>
     </section>
 
-    <!-- MARATHON -->
+    <!-- MARATHON (placeholder, не ломаем якорь) -->
     <section id="marathon" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Марафон</h2>
@@ -137,6 +154,7 @@
           </div>
 
           <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
+
           <button id="refresh" class="btn btn--ghost btn--sm" type="button">Обновить</button>
         </div>
 
@@ -164,7 +182,7 @@
       </div>
     </section>
 
-    <!-- SHOP -->
+    <!-- SHOP (placeholder) -->
     <section id="shop" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Магазин</h2>
