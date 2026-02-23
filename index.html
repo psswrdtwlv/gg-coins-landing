@@ -25,7 +25,7 @@
         <nav class="nav nav--right">
           <a class="nav__link" href="#rating">Рейтинг</a>
           <a class="nav__link" href="#shop">Магазин</a>
-          <button id="logoutBtn" class="nav__link" type="button" title="Выйти">Выйти</button>
+          <button id="logoutBtn" class="nav__link nav__link--btn" type="button" title="Выйти">Выйти</button>
         </nav>
       </div>
     </header>
@@ -44,8 +44,8 @@
           <h1 class="hero__title">Granat Group<br />Coins</h1>
 
           <p class="hero__subtitle">
-            Внутренняя валюта Granat Group: получай Coins за результат, инициативу и участие — и
-            обменивай на подарки.
+            Внутренняя валюта Granat Group: получай Coins за результат, инициативу и участие —
+            и обменивай на подарки.
           </p>
 
           <div class="hero__actions">
@@ -55,7 +55,12 @@
         </div>
 
         <div class="hero__right">
-          <a class="btn btn--telegram" href="https://t.me/granatgroupfamily" target="_blank" rel="noopener">
+          <a
+            class="btn btn--telegram"
+            href="https://t.me/granatgroupfamily"
+            target="_blank"
+            rel="noopener"
+          >
             Вопросы по GG Coins? Напиши нам в Telegram →
           </a>
         </div>
@@ -71,23 +76,23 @@
         </p>
 
         <div class="cards">
-          <article class="card card--img" style="--card-img:url('./cup.png'); --card-size:180px; --card-op:.60;">
+          <article class="card card--img" style="--card-img:url('./cup.png'); --card-size:180px; --card-op:.72;">
             <h3 class="card__title">За результат</h3>
             <p class="card__text">Начисления за достижения, вклад в качество и сильные показатели.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./lamp.png'); --card-size:180px; --card-op:.60;">
+          <article class="card card--img" style="--card-img:url('./lamp.png'); --card-size:170px; --card-op:.72;">
             <h3 class="card__title">За инициативу</h3>
             <p class="card__text">Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./people.png'); --card-size:180px; --card-op:.60;">
+          <article class="card card--img" style="--card-img:url('./people.png'); --card-size:180px; --card-op:.72;">
             <h3 class="card__title">За участие</h3>
             <p class="card__text">Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
           </article>
         </div>
 
-        <!-- мягкий fallback если какие-то png реально сломаны -->
+        <!-- мягкий fallback если png реально сломаны -->
         <script>
           (function(){
             const fallbacks = {
@@ -95,20 +100,14 @@
               "lamp.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M64 10c-22 0-40 18-40 40 0 16 10 30 24 36v10c0 6 5 10 10 10h12c6 0 10-4 10-10V86c14-6 24-20 24-36 0-22-18-40-40-40z'/%3E%3Cpath fill='%23fff' opacity='.35' d='M46 54c0-12 9-22 22-22 6 0 11 2 15 6-4-8-12-14-23-14-13 0-24 11-24 24 0 4 1 8 3 11 4-1 7-3 7-5z'/%3E%3Cpath fill='%23000' opacity='.12' d='M50 112h28v6H50z'/%3E%3C/svg%3E",
               "people.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M44 62c10 0 18-8 18-18S54 26 44 26 26 34 26 44s8 18 18 18zm40 0c10 0 18-8 18-18S94 26 84 26 66 34 66 44s8 18 18 18z'/%3E%3Cpath fill='%23b12a2a' opacity='.9' d='M22 112c0-18 14-32 32-32s32 14 32 32H22zm44 0c0-18 14-32 32-32s32 14 32 32H66z'/%3E%3C/svg%3E",
             };
-            // если browser не может загрузить png, псевдоэлементы не дадут onerror.
-            // поэтому просто префетчим и при ошибке подменим CSS-переменные на svg.
             document.querySelectorAll('.card--img').forEach((el)=>{
-              const style = getComputedStyle(el);
               const v = (el.getAttribute('style')||"");
               const m = v.match(/--card-img:url\('\.\/([^']+)'\)/);
               if(!m) return;
               const file = m[1];
               const img = new Image();
-              img.onload = ()=>{};
               img.onerror = ()=>{
-                if (fallbacks[file]) {
-                  el.style.setProperty('--card-img', `url('${fallbacks[file]}')`);
-                }
+                if (fallbacks[file]) el.style.setProperty('--card-img', `url('${fallbacks[file]}')`);
               };
               img.src = './' + file;
             });
@@ -123,6 +122,7 @@
         <h2 class="section__title">Условия</h2>
         <p class="section__lead">Правила получения и использования доступны в PDF.</p>
 
+        <!-- GitHub Pages иногда игнорит download, поэтому открываем в новой вкладке -->
         <a class="btn btn--primary btn--pdf" href="./rules.pdf" target="_blank" rel="noopener">
           Скачать условия получения (PDF)
         </a>
@@ -133,7 +133,7 @@
       </div>
     </section>
 
-    <!-- MARATHON (placeholder, не ломаем якорь) -->
+    <!-- MARATHON -->
     <section id="marathon" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Марафон</h2>
@@ -154,7 +154,6 @@
           </div>
 
           <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
-
           <button id="refresh" class="btn btn--ghost btn--sm" type="button">Обновить</button>
         </div>
 
@@ -182,11 +181,59 @@
       </div>
     </section>
 
-    <!-- SHOP (placeholder) -->
+    <!-- SHOP -->
     <section id="shop" class="section section--tight">
       <div class="container">
         <h2 class="section__title">Магазин</h2>
-        <p class="section__lead">Раздел в разработке / наполнение позже.</p>
+        <p class="section__lead">
+          Меняй Granat Coins на подарки. Выбирай площадку — дальше менеджер поможет с оформлением.
+        </p>
+
+        <div class="shop-grid">
+          <article class="shop-card">
+            <div class="shop-card__top">
+              <img class="shop-card__img" src="./ozon.png" alt="Ozon" />
+            </div>
+            <div class="shop-card__body">
+              <h3 class="shop-card__title">Ozon</h3>
+              <p class="shop-card__text">Сертификаты и товары</p>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card__top">
+              <img class="shop-card__img" src="./wildberries.png" alt="Wildberries" />
+            </div>
+            <div class="shop-card__body">
+              <h3 class="shop-card__title">Wildberries</h3>
+              <p class="shop-card__text">Сертификаты и товары</p>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card__top">
+              <img class="shop-card__img" src="./yandex-market.png" alt="Яндекс Маркет" />
+            </div>
+            <div class="shop-card__body">
+              <h3 class="shop-card__title">Яндекс Маркет</h3>
+              <p class="shop-card__text">Техника и подарки</p>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card__top">
+              <img class="shop-card__img" src="./goldapple.png" alt="Золотое Яблоко" />
+            </div>
+            <div class="shop-card__body">
+              <h3 class="shop-card__title">Золотое Яблоко</h3>
+              <p class="shop-card__text">Косметика и сертификаты</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="shop-note muted">
+          Если нужной площадки нет — напиши менеджеру, добавим.
+        </p>
       </div>
     </section>
 
