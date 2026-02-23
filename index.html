@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Granat Group Coins</title>
     <link rel="stylesheet" href="./style.css" />
+    <script src="./auth.js" defer></script>
   </head>
 
   <body>
@@ -18,16 +19,13 @@
         </nav>
 
         <a class="brand" href="#home" aria-label="Granat Group Coins">
-          <!-- только значок, крупнее -->
           <img class="brand__logo" src="./gg-mark.png" alt="Granat Group" />
         </a>
 
         <nav class="nav nav--right">
           <a class="nav__link" href="#rating">Рейтинг</a>
           <a class="nav__link" href="#shop">Магазин</a>
-
-          <!-- ✅ ВЫЙТИ — добавлено минимально, как обычная ссылка -->
-          <a class="nav__link nav__link--logout" href="#" id="logout">Выйти</a>
+          <button id="logoutBtn" class="nav__link" type="button" title="Выйти">Выйти</button>
         </nav>
       </div>
     </header>
@@ -35,15 +33,7 @@
     <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero__media" aria-hidden="true">
-        <!-- fullscreen фон как у тебя -->
-        <video
-          class="hero__video"
-          src="./hero.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
+        <video class="hero__video" src="./hero.mp4" autoplay muted loop playsinline></video>
         <div class="hero__overlay"></div>
       </div>
 
@@ -70,21 +60,43 @@
         </p>
 
         <div class="cards">
-          <article class="card card--img" style="--card-img:url('./cup.png');">
+          <article class="card card--img" style="--card-img:url('./cup.png'); --card-size:200px; --card-op:.44;">
             <h3 class="card__title">За результат</h3>
             <p class="card__text">Начисления за достижения, вклад в качество и сильные показатели.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./lamp.png');">
+          <article class="card card--img" style="--card-img:url('./lamp.png'); --card-size:200px; --card-op:.44;">
             <h3 class="card__title">За инициативу</h3>
             <p class="card__text">Идеи, участие в активностях, поддержка команды и внутренние проекты.</p>
           </article>
 
-          <article class="card card--img" style="--card-img:url('./people.png');">
+          <article class="card card--img" style="--card-img:url('./people.png'); --card-size:200px; --card-op:.44;">
             <h3 class="card__title">За участие</h3>
             <p class="card__text">Марафоны, конкурсы, HR-активности — всё фиксируется и отражается в рейтинге.</p>
           </article>
         </div>
+
+        <!-- мягкий fallback если какие-то png реально сломаны -->
+        <script>
+          (function(){
+            const fallbacks = {
+              "cup.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M36 20h56v18h10c10 0 18 8 18 18s-8 18-18 18h-2c-3 15-16 26-32 26h-8c-16 0-29-11-32-26h-2C16 74 8 66 8 56s8-18 18-18h10V20zm-10 34h-2c-1 0-2 1-2 2s1 2 2 2h2v-4zm78 0v4h2c1 0 2-1 2-2s-1-2-2-2h-2z'/%3E%3Cpath fill='%23000' opacity='.12' d='M44 104h40v10H44z'/%3E%3C/svg%3E",
+              "lamp.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M64 10c-22 0-40 18-40 40 0 16 10 30 24 36v10c0 6 5 10 10 10h12c6 0 10-4 10-10V86c14-6 24-20 24-36 0-22-18-40-40-40z'/%3E%3Cpath fill='%23fff' opacity='.35' d='M46 54c0-12 9-22 22-22 6 0 11 2 15 6-4-8-12-14-23-14-13 0-24 11-24 24 0 4 1 8 3 11 4-1 7-3 7-5z'/%3E%3Cpath fill='%23000' opacity='.12' d='M50 112h28v6H50z'/%3E%3C/svg%3E",
+              "people.png": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23b12a2a' d='M44 62c10 0 18-8 18-18S54 26 44 26 26 34 26 44s8 18 18 18zm40 0c10 0 18-8 18-18S94 26 84 26 66 34 66 44s8 18 18 18z'/%3E%3Cpath fill='%23b12a2a' opacity='.9' d='M22 112c0-18 14-32 32-32s32 14 32 32H22zm44 0c0-18 14-32 32-32s32 14 32 32H66z'/%3E%3C/svg%3E",
+            };
+            document.querySelectorAll('.card--img').forEach((el)=>{
+              const v = (el.getAttribute('style')||"");
+              const m = v.match(/--card-img:url\('\.\/([^']+)'\)/);
+              if(!m) return;
+              const file = m[1];
+              const img = new Image();
+              img.onerror = ()=>{
+                if (fallbacks[file]) el.style.setProperty('--card-img', `url('${fallbacks[file]}')`);
+              };
+              img.src = './' + file;
+            });
+          })();
+        </script>
       </div>
     </section>
 
@@ -94,8 +106,7 @@
         <h2 class="section__title">Условия</h2>
         <p class="section__lead">Правила получения и использования доступны в PDF.</p>
 
-        <!-- ⚠️ rules.pdf должен лежать в корне рядом с index.html -->
-        <a class="btn btn--primary btn--pdf" href="./rules.pdf" download>
+        <a class="btn btn--primary btn--pdf" href="./rules.pdf" target="_blank" rel="noopener">
           Скачать условия получения (PDF)
         </a>
 
@@ -126,7 +137,6 @@
           </div>
 
           <input id="search" class="search" type="search" placeholder="Поиск сотрудника..." />
-
           <button id="refresh" class="btn btn--ghost btn--sm" type="button">Обновить</button>
         </div>
 
@@ -163,19 +173,5 @@
     </section>
 
     <script src="./app.js" type="module"></script>
-
-    <!-- ✅ logout handler (минимально) -->
-    <script>
-      const logout = document.getElementById("logout");
-      if (logout) {
-        logout.addEventListener("click", (e) => {
-          e.preventDefault();
-          try {
-            localStorage.removeItem("ggcoins_auth_v1");
-          } catch {}
-          window.location.href = "./login.html";
-        });
-      }
-    </script>
   </body>
 </html>
