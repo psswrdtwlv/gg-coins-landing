@@ -45,7 +45,6 @@
 
         <button class="btn" type="submit">Войти</button>
 
-        <!-- ✅ фикс кавычек -->
         <div id="error" class="error" role="alert" aria-live="polite"></div>
 
         <div class="hint">
@@ -56,12 +55,19 @@
   </main>
 
   <script>
+    // ⚠️ "Шторка" для внутреннего пользования. Не security-grade.
     const AUTH_KEY = "ggcoins_auth_v1";
 
+    // ✅ Поменяй общий логин/пароль тут
     const CREDENTIALS = {
       login: "gg",
       password: "coins2026"
     };
+
+    // если уже залогинен — сразу на портал
+    if (localStorage.getItem(AUTH_KEY) === "1") {
+      window.location.href = "./index.html";
+    }
 
     const form = document.getElementById("loginForm");
     const elLogin = document.getElementById("login");
@@ -77,7 +83,7 @@
         const next = u.searchParams.get("next");
         if (!next) return "./index.html";
         if (next.startsWith("http://") || next.startsWith("https://")) return "./index.html";
-        return next;
+        return "./" + next.replace(/^\.\//, "").replace(/^\//, "");
       } catch {
         return "./index.html";
       }
