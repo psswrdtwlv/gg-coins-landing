@@ -42,18 +42,22 @@ a{color:inherit;text-decoration:none}
   font-size: 14px;
   padding: 10px 8px;
   border-radius: 12px;
-
-  /* важно: чтобы “Выйти” выглядел как обычный пункт меню */
   background: transparent;
   border: 0;
   font: inherit;
   cursor: pointer;
+
+  background: transparent;
+  border: 0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 a.nav__link{cursor:pointer}
 .nav__link:hover{background: rgba(255,255,255,.08)}
 .brand{display:flex;align-items:center;justify-content:center}
 .brand__logo{
-  height: 56px;
+  height: 56px; /* крупнее */
   width: auto;
   display:block;
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
@@ -70,20 +74,55 @@ a.nav__link{cursor:pointer}
 }
 .hero__overlay{
   position:absolute;inset:0;
-  background: radial-gradient(1200px 600px at 20% 30%, rgba(255,255,255,.35), rgba(0,0,0,.35));
+  /* как на референсе: светлая "дымка", но видео видно */
+  background:
+    radial-gradient(900px 520px at 22% 32%, rgba(246,241,238,.82), rgba(246,241,238,.30) 60%, rgba(246,241,238,.10) 100%),
+    linear-gradient(90deg, rgba(246,241,238,.70), rgba(246,241,238,.30) 55%, rgba(246,241,238,.18));
 }
-.hero__content{position:relative;z-index:2; padding: 64px 0}
+.hero__content{
+  position:relative;
+  z-index:2;
+  padding: 64px 0;
+  width:100%;
+  display:grid;
+  grid-template-columns: minmax(320px, 620px) 1fr;
+  align-items:center;
+  gap: 26px;
+}
 .hero__card{
-  max-width: 520px;
-  background: rgba(255,255,255,.88);
-  border: 1px solid rgba(255,255,255,.55);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 34px 34px;
+  max-width: 620px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
-.hero__title{font-size:46px;line-height:1.05;margin:0 0 10px}
-.hero__subtitle{margin:0 0 18px;color:#444;line-height:1.4}
+.hero__pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(0,0,0,.06);
+  color: rgba(17,19,21,.74);
+  font-weight: 700;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 14px;
+}
+.hero__title{font-size:72px;line-height:.95;letter-spacing:-0.035em;margin:0 0 14px}
+.hero__subtitle{margin:0 0 22px;color: rgba(17,19,21,.60);line-height:1.5;max-width: 560px}
 .hero__actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero__right{display:flex; justify-content:flex-end}
+.btn--telegram{
+  padding: 14px 22px;
+  background: linear-gradient(180deg, rgba(177,42,42,.96), rgba(143,31,31,.96));
+  color:#fff;
+  border: 0;
+  box-shadow: 0 18px 40px rgba(177,42,42,.22);
+  white-space: nowrap;
+}
+.btn--telegram:hover{filter: brightness(1.03)}
 
 /* SECTIONS */
 .section{padding: 78px 0}
@@ -150,14 +189,15 @@ a.nav__link{cursor:pointer}
   background-repeat:no-repeat;
   background-position: 70% 55%;
   background-size: var(--card-size, 200px) auto; /* одинаково, без раздутия лампы */
-  opacity: var(--card-op, .44);               /* ярче */
-  filter: saturate(1.15) contrast(1.12) brightness(1.05);
+  opacity: var(--card-op, .60);
+  filter: saturate(1.22) contrast(1.12) brightness(1.08);
   pointer-events:none;
 }
 .card--img::after{
   content:"";
   position:absolute;inset:0;
-  background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.78) 65%, rgba(255,255,255,.62) 100%);
+  /* меньше "молока" — картинки заметнее */
+  background: linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.62) 62%, rgba(255,255,255,.44) 100%);
   pointer-events:none;
 }
 .card__title, .card__text{position:relative;z-index:1}
@@ -226,7 +266,7 @@ a.nav__link{cursor:pointer}
   border-bottom: 1px solid rgba(0,0,0,.06);
   vertical-align: middle;
 }
-.th-num{width:92px}
+.th-num{width:92px}            /* чуть шире — ровнее цифры под заголовками */
 .th-right{width:96px;text-align:right}
 .table tbody td{
   padding: 16px 18px;
@@ -322,8 +362,11 @@ th.desc::after{border-top:6px solid rgba(0,0,0,.45)}
   .nav{justify-content:center; flex-wrap:wrap}
   .nav--right{justify-content:center}
   .brand{grid-column: 1 / -1}
+  .hero__content{grid-template-columns: 1fr; gap: 18px;}
+  .hero__right{justify-content:flex-start}
+  .btn--telegram{white-space: normal}
   .hero__card{max-width: 100%}
   .cards{grid-template-columns: 1fr}
   .section__title{font-size: 44px}
-  .hero__title{font-size: 40px}
+  .hero__title{font-size: 48px}
 }
