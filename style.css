@@ -404,3 +404,70 @@ th.desc::after{
   .section__title{font-size: 44px}
   .hero__title{font-size: 44px}
 }
+
+/* ===== FOOTER ===== */
+
+.footer{
+  margin-top: 90px;
+  background: #1f1f1f;
+  color: rgba(255,255,255,.75);
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.footer__left{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.footer__logo{
+  height:42px;
+  width:auto;
+  opacity:.9;
+}
+
+.footer__title{
+  font-weight:700;
+  font-size:16px;
+  color:#fff;
+}
+
+.footer__copy{
+  font-size:13px;
+  opacity:.55;
+  margin-top:4px;
+}
+
+.footer__right{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+}
+
+.footer__right a{
+  font-size:14px;
+  color:rgba(255,255,255,.7);
+  transition:.18s ease;
+}
+
+.footer__right a:hover{
+  color:#fff;
+  opacity:1;
+}
+
+@media (max-width: 768px){
+  .footer__inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:24px;
+  }
+}
