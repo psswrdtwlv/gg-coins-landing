@@ -515,3 +515,26 @@ th.desc::after{
 .table td{
   white-space: nowrap;
 }
+
+/* ===== HEADER tweaks (только то, что просил) ===== */
+
+/* 1) Эмблема по центру — делаем темно-бордовой */
+.brand__logo{
+  /* если gg-mark.png одноцветная/с альфой — этот фильтр даст бордовый тон */
+  filter: brightness(0) saturate(100%)
+          invert(17%) sepia(62%) saturate(3720%)
+          hue-rotate(343deg) brightness(90%) contrast(110%)
+          drop-shadow(0 6px 16px rgba(0,0,0,.35)) !important;
+}
+
+/* 2) Кнопки/ссылки в шапке — жирнее и чуть “строже” */
+.nav__link{
+  font-weight: 800 !important;
+  letter-spacing: .2px;
+  color: rgba(255,255,255,.92);
+}
+
+/* чтобы hover оставался аккуратным */
+.nav__link:hover{
+  background: rgba(255,255,255,.10);
+}
