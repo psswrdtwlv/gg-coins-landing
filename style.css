@@ -471,3 +471,47 @@ th.desc::after{
     gap:24px;
   }
 }
+
+/* ===== FIX TABLE HEADER ALIGNMENT (без переносов) ===== */
+
+/* таблица авто-ширины вместо жесткого fixed */
+.table{
+  table-layout: auto;
+}
+
+/* запрет переносов в шапке */
+.table thead th{
+  white-space: nowrap;
+}
+
+/* фикс ширины колонок */
+.table th:nth-child(1),
+.table td:nth-child(1){
+  width: 60px; /* # */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2){
+  width: auto; /* Сотрудник */
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3),
+.table th:nth-child(4),
+.table td:nth-child(4),
+.table th:nth-child(5),
+.table td:nth-child(5){
+  width: 130px; /* Начислено / Потрачено / Остаток */
+  text-align: right;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6){
+  width: 110px; /* Связь */
+  text-align: right;
+}
+
+/* цифры не переносятся */
+.table td{
+  white-space: nowrap;
+}
