@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-03T11:18:13.232Z",
+  "updatedAt": "2026-03-03T11:49:43.726Z",
   "operators": [
     {
       "group": "Операторы",
@@ -663,85 +663,93 @@
       "group": "АУП",
       "name": "Ковальчук Анжелика",
       "tg": "@angelika_ultra",
-      "earned": 1124,
-      "spent": 698,
-      "balance": 426
-    },
-    {
-      "group": "АУП",
-      "name": "Никитина Валерия",
-      "tg": "@valerianikitina11",
-      "earned": 509,
-      "spent": 469,
-      "balance": 40
-    },
-    {
-      "group": "АУП",
-      "name": "Рыбакова Виктория",
-      "tg": "@Vikki_Rybakova",
-      "earned": 433,
-      "spent": 408,
-      "balance": 25
+      "earned": 1188,
+      "spent": 998,
+      "balance": 190
     },
     {
       "group": "АУП",
       "name": "Меркулова Анна",
       "tg": "@anwssg",
-      "earned": 853,
-      "spent": 352,
-      "balance": 501
+      "earned": 469,
+      "spent": 469,
+      "balance": 0
     },
     {
       "group": "АУП",
       "name": "Жэпэлэу Инна",
       "tg": "@chai5130",
-      "earned": 530,
-      "spent": 234,
-      "balance": 296
+      "earned": 408,
+      "spent": 408,
+      "balance": 0
     },
     {
       "group": "АУП",
       "name": "Андреева Мария",
       "tg": "@mary_and1",
-      "earned": 325,
-      "spent": 210,
-      "balance": 115
+      "earned": 697,
+      "spent": 652,
+      "balance": 45
     },
     {
       "group": "АУП",
       "name": "Эртман Юлия",
       "tg": "",
-      "earned": 290,
-      "spent": 190,
-      "balance": 100
+      "earned": 522,
+      "spent": 434,
+      "balance": 88
     },
     {
       "group": "АУП",
       "name": "Курбатова Валерия",
       "tg": "",
-      "earned": 412,
-      "spent": 157,
-      "balance": 255
+      "earned": 225,
+      "spent": 210,
+      "balance": 15
     },
     {
       "group": "АУП",
       "name": "Ластовская Анастасия",
       "tg": "",
-      "earned": 302,
-      "spent": 0,
-      "balance": 302
+      "earned": 280,
+      "spent": 190,
+      "balance": 90
     },
     {
       "group": "АУП",
       "name": "Телышева Елена",
       "tg": "",
-      "earned": 241,
-      "spent": 0,
-      "balance": 241
+      "earned": 216,
+      "spent": 176,
+      "balance": 40
     },
     {
       "group": "АУП",
-      "name": "Иневатова Светлана",
+      "name": "Петецкая Валерия",
+      "tg": "@Stazeks",
+      "earned": 433,
+      "spent": 357,
+      "balance": 76
+    },
+    {
+      "group": "АУП",
+      "name": "Грибов Александр",
+      "tg": "",
+      "earned": 244,
+      "spent": 200,
+      "balance": 44
+    },
+    {
+      "group": "АУП",
+      "name": "Гаврюшина Елена",
+      "tg": "",
+      "earned": 298,
+      "spent": 200,
+      "balance": 98
+    },
+    {
+      "group": "АУП",
+      "name": "Горчакова Кристина",
       "tg": "",
       "earned": 150,
       "spent": 0,
@@ -749,7 +757,7 @@
     },
     {
       "group": "АУП",
-      "name": "Петецкая Валерия",
+      "name": "Дюдюкин Александр",
       "tg": "",
       "earned": 145,
       "spent": 0,
@@ -757,71 +765,55 @@
     },
     {
       "group": "АУП",
-      "name": "Грибов Александр",
-      "tg": "@Stazeks",
-      "earned": 160,
-      "spent": 80,
-      "balance": 80
-    },
-    {
-      "group": "АУП",
-      "name": "Гаврюшина Елена",
-      "tg": "",
-      "earned": 160,
-      "spent": 0,
-      "balance": 160
-    },
-    {
-      "group": "АУП",
-      "name": "Горчакова Кристина",
-      "tg": "",
-      "earned": 285,
-      "spent": 75,
-      "balance": 210
-    },
-    {
-      "group": "АУП",
-      "name": "Дюдюкин Александр",
-      "tg": "",
-      "earned": 172,
-      "spent": 0,
-      "balance": 172
-    },
-    {
-      "group": "АУП",
       "name": "Болотова Екатерина",
       "tg": "",
+      "earned": 210,
+      "spent": 80,
+      "balance": 130
+    },
+    {
+      "group": "АУП",
+      "name": "Никишева Елизавета",
+      "tg": "",
       "earned": 160,
       "spent": 0,
       "balance": 160
-    },
-    {
-      "group": "АУП",
-      "name": "Иванюк Елизавета",
-      "tg": "",
-      "earned": 91,
-      "spent": 0,
-      "balance": 91
-    },
-    {
-      "group": "АУП",
-      "name": "Шиманова Ольга",
-      "tg": "",
-      "earned": 70,
-      "spent": 0,
-      "balance": 70
-    },
-    {
-      "group": "АУП",
-      "name": "Бомбина Елизавета",
-      "tg": "",
-      "earned": 70,
-      "spent": 0,
-      "balance": 70
     },
     {
       "group": "АУП",
       "name": "Пономарева Анастасия",
+      "tg": "@SantanaKotya",
+      "earned": 351,
+      "spent": 275,
+      "balance": 76
+    },
+    {
+      "group": "АУП",
+      "name": "Гашокина Е.",
+      "tg": "",
+      "earned": 162,
+      "spent": 0,
+      "balance": 162
+    },
+    {
+      "group": "АУП",
+      "name": "Михеев Иван",
+      "tg": "",
+      "earned": 130,
+      "spent": 0,
+      "balance": 130
+    },
+    {
+      "group": "АУП",
+      "name": "Татьяна Шкред",
+      "tg": "",
+      "earned": 86,
+      "spent": 0,
+      "balance": 86
+    },
+    {
+      "group": "АУП",
+      "name": "Лапина Александра",
       "tg": "",
       "earned": 70,
       "spent": 0,
@@ -829,15 +821,31 @@
     },
     {
       "group": "АУП",
-      "name": "Смирнова Екатерина",
-      "tg": "@SantanaKotya",
-      "earned": 100,
+      "name": "Бритвак Александра",
+      "tg": "",
+      "earned": 70,
       "spent": 0,
-      "balance": 100
+      "balance": 70
     },
     {
       "group": "АУП",
-      "name": "Богданова Елена",
+      "name": "Мамедова Мадина",
+      "tg": "",
+      "earned": 70,
+      "spent": 0,
+      "balance": 70
+    },
+    {
+      "group": "АУП",
+      "name": "Миронова Татьяна",
+      "tg": "",
+      "earned": 90,
+      "spent": 0,
+      "balance": 90
+    },
+    {
+      "group": "АУП",
+      "name": "Семенов Никита",
       "tg": "",
       "earned": 65,
       "spent": 0,
@@ -845,7 +853,7 @@
     },
     {
       "group": "АУП",
-      "name": "Романова Залидара",
+      "name": "Семенова Ольга",
       "tg": "",
       "earned": 45,
       "spent": 0,
@@ -853,7 +861,7 @@
     },
     {
       "group": "АУП",
-      "name": "Милашина Марина",
+      "name": "Шонин Валерий",
       "tg": "",
       "earned": 60,
       "spent": 0,
@@ -861,15 +869,15 @@
     },
     {
       "group": "АУП",
-      "name": "Артюх Алина",
-      "tg": "@mrs_artyukh",
+      "name": "Михайловский Антон",
+      "tg": "",
       "earned": 80,
       "spent": 0,
       "balance": 80
     },
     {
       "group": "АУП",
-      "name": "Василенко Анастасия",
+      "name": "Шуршалева Дарья",
       "tg": "",
       "earned": 55,
       "spent": 0,
@@ -877,147 +885,11 @@
     },
     {
       "group": "АУП",
-      "name": "Давыдова Евгения",
+      "name": "Синицына Ирина",
       "tg": "",
       "earned": 70,
       "spent": 0,
       "balance": 70
-    },
-    {
-      "group": "АУП",
-      "name": "Гашокина Е.",
-      "tg": "",
-      "earned": 105,
-      "spent": 0,
-      "balance": 105
-    },
-    {
-      "group": "АУП",
-      "name": "Федькина Александра",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Рябкова Екатерина",
-      "tg": "",
-      "earned": 30,
-      "spent": 0,
-      "balance": 30
-    },
-    {
-      "group": "АУП",
-      "name": "Филоненко Александра",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Михеев Иван",
-      "tg": "",
-      "earned": 100,
-      "spent": 0,
-      "balance": 100
-    },
-    {
-      "group": "АУП",
-      "name": "Татьяна Шкред",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Лапина Александра",
-      "tg": "",
-      "earned": 80,
-      "spent": 0,
-      "balance": 80
-    },
-    {
-      "group": "АУП",
-      "name": "Костылева Полина",
-      "tg": "",
-      "earned": 30,
-      "spent": 0,
-      "balance": 30
-    },
-    {
-      "group": "АУП",
-      "name": "Бритвак Александра",
-      "tg": "",
-      "earned": 95,
-      "spent": 0,
-      "balance": 95
-    },
-    {
-      "group": "АУП",
-      "name": "Хамидуллина Альбина",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Седых Анастасия",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Мурзатаев Акмаль",
-      "tg": "@Amilla25",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Мамедова Мадина",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Миронова Татьяна",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Семенов Никита",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Семенова Ольга",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Шонин Валерий",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
     }
   ],
   "all": [
@@ -1681,85 +1553,93 @@
       "group": "АУП",
       "name": "Ковальчук Анжелика",
       "tg": "@angelika_ultra",
-      "earned": 1124,
-      "spent": 698,
-      "balance": 426
-    },
-    {
-      "group": "АУП",
-      "name": "Никитина Валерия",
-      "tg": "@valerianikitina11",
-      "earned": 509,
-      "spent": 469,
-      "balance": 40
-    },
-    {
-      "group": "АУП",
-      "name": "Рыбакова Виктория",
-      "tg": "@Vikki_Rybakova",
-      "earned": 433,
-      "spent": 408,
-      "balance": 25
+      "earned": 1188,
+      "spent": 998,
+      "balance": 190
     },
     {
       "group": "АУП",
       "name": "Меркулова Анна",
       "tg": "@anwssg",
-      "earned": 853,
-      "spent": 352,
-      "balance": 501
+      "earned": 469,
+      "spent": 469,
+      "balance": 0
     },
     {
       "group": "АУП",
       "name": "Жэпэлэу Инна",
       "tg": "@chai5130",
-      "earned": 530,
-      "spent": 234,
-      "balance": 296
+      "earned": 408,
+      "spent": 408,
+      "balance": 0
     },
     {
       "group": "АУП",
       "name": "Андреева Мария",
       "tg": "@mary_and1",
-      "earned": 325,
-      "spent": 210,
-      "balance": 115
+      "earned": 697,
+      "spent": 652,
+      "balance": 45
     },
     {
       "group": "АУП",
       "name": "Эртман Юлия",
       "tg": "",
-      "earned": 290,
-      "spent": 190,
-      "balance": 100
+      "earned": 522,
+      "spent": 434,
+      "balance": 88
     },
     {
       "group": "АУП",
       "name": "Курбатова Валерия",
       "tg": "",
-      "earned": 412,
-      "spent": 157,
-      "balance": 255
+      "earned": 225,
+      "spent": 210,
+      "balance": 15
     },
     {
       "group": "АУП",
       "name": "Ластовская Анастасия",
       "tg": "",
-      "earned": 302,
-      "spent": 0,
-      "balance": 302
+      "earned": 280,
+      "spent": 190,
+      "balance": 90
     },
     {
       "group": "АУП",
       "name": "Телышева Елена",
       "tg": "",
-      "earned": 241,
-      "spent": 0,
-      "balance": 241
+      "earned": 216,
+      "spent": 176,
+      "balance": 40
     },
     {
       "group": "АУП",
-      "name": "Иневатова Светлана",
+      "name": "Петецкая Валерия",
+      "tg": "@Stazeks",
+      "earned": 433,
+      "spent": 357,
+      "balance": 76
+    },
+    {
+      "group": "АУП",
+      "name": "Грибов Александр",
+      "tg": "",
+      "earned": 244,
+      "spent": 200,
+      "balance": 44
+    },
+    {
+      "group": "АУП",
+      "name": "Гаврюшина Елена",
+      "tg": "",
+      "earned": 298,
+      "spent": 200,
+      "balance": 98
+    },
+    {
+      "group": "АУП",
+      "name": "Горчакова Кристина",
       "tg": "",
       "earned": 150,
       "spent": 0,
@@ -1767,7 +1647,7 @@
     },
     {
       "group": "АУП",
-      "name": "Петецкая Валерия",
+      "name": "Дюдюкин Александр",
       "tg": "",
       "earned": 145,
       "spent": 0,
@@ -1775,71 +1655,55 @@
     },
     {
       "group": "АУП",
-      "name": "Грибов Александр",
-      "tg": "@Stazeks",
-      "earned": 160,
-      "spent": 80,
-      "balance": 80
-    },
-    {
-      "group": "АУП",
-      "name": "Гаврюшина Елена",
-      "tg": "",
-      "earned": 160,
-      "spent": 0,
-      "balance": 160
-    },
-    {
-      "group": "АУП",
-      "name": "Горчакова Кристина",
-      "tg": "",
-      "earned": 285,
-      "spent": 75,
-      "balance": 210
-    },
-    {
-      "group": "АУП",
-      "name": "Дюдюкин Александр",
-      "tg": "",
-      "earned": 172,
-      "spent": 0,
-      "balance": 172
-    },
-    {
-      "group": "АУП",
       "name": "Болотова Екатерина",
       "tg": "",
+      "earned": 210,
+      "spent": 80,
+      "balance": 130
+    },
+    {
+      "group": "АУП",
+      "name": "Никишева Елизавета",
+      "tg": "",
       "earned": 160,
       "spent": 0,
       "balance": 160
-    },
-    {
-      "group": "АУП",
-      "name": "Иванюк Елизавета",
-      "tg": "",
-      "earned": 91,
-      "spent": 0,
-      "balance": 91
-    },
-    {
-      "group": "АУП",
-      "name": "Шиманова Ольга",
-      "tg": "",
-      "earned": 70,
-      "spent": 0,
-      "balance": 70
-    },
-    {
-      "group": "АУП",
-      "name": "Бомбина Елизавета",
-      "tg": "",
-      "earned": 70,
-      "spent": 0,
-      "balance": 70
     },
     {
       "group": "АУП",
       "name": "Пономарева Анастасия",
+      "tg": "@SantanaKotya",
+      "earned": 351,
+      "spent": 275,
+      "balance": 76
+    },
+    {
+      "group": "АУП",
+      "name": "Гашокина Е.",
+      "tg": "",
+      "earned": 162,
+      "spent": 0,
+      "balance": 162
+    },
+    {
+      "group": "АУП",
+      "name": "Михеев Иван",
+      "tg": "",
+      "earned": 130,
+      "spent": 0,
+      "balance": 130
+    },
+    {
+      "group": "АУП",
+      "name": "Татьяна Шкред",
+      "tg": "",
+      "earned": 86,
+      "spent": 0,
+      "balance": 86
+    },
+    {
+      "group": "АУП",
+      "name": "Лапина Александра",
       "tg": "",
       "earned": 70,
       "spent": 0,
@@ -1847,15 +1711,31 @@
     },
     {
       "group": "АУП",
-      "name": "Смирнова Екатерина",
-      "tg": "@SantanaKotya",
-      "earned": 100,
+      "name": "Бритвак Александра",
+      "tg": "",
+      "earned": 70,
       "spent": 0,
-      "balance": 100
+      "balance": 70
     },
     {
       "group": "АУП",
-      "name": "Богданова Елена",
+      "name": "Мамедова Мадина",
+      "tg": "",
+      "earned": 70,
+      "spent": 0,
+      "balance": 70
+    },
+    {
+      "group": "АУП",
+      "name": "Миронова Татьяна",
+      "tg": "",
+      "earned": 90,
+      "spent": 0,
+      "balance": 90
+    },
+    {
+      "group": "АУП",
+      "name": "Семенов Никита",
       "tg": "",
       "earned": 65,
       "spent": 0,
@@ -1863,7 +1743,7 @@
     },
     {
       "group": "АУП",
-      "name": "Романова Залидара",
+      "name": "Семенова Ольга",
       "tg": "",
       "earned": 45,
       "spent": 0,
@@ -1871,7 +1751,7 @@
     },
     {
       "group": "АУП",
-      "name": "Милашина Марина",
+      "name": "Шонин Валерий",
       "tg": "",
       "earned": 60,
       "spent": 0,
@@ -1879,15 +1759,15 @@
     },
     {
       "group": "АУП",
-      "name": "Артюх Алина",
-      "tg": "@mrs_artyukh",
+      "name": "Михайловский Антон",
+      "tg": "",
       "earned": 80,
       "spent": 0,
       "balance": 80
     },
     {
       "group": "АУП",
-      "name": "Василенко Анастасия",
+      "name": "Шуршалева Дарья",
       "tg": "",
       "earned": 55,
       "spent": 0,
@@ -1895,147 +1775,11 @@
     },
     {
       "group": "АУП",
-      "name": "Давыдова Евгения",
+      "name": "Синицына Ирина",
       "tg": "",
       "earned": 70,
       "spent": 0,
       "balance": 70
-    },
-    {
-      "group": "АУП",
-      "name": "Гашокина Е.",
-      "tg": "",
-      "earned": 105,
-      "spent": 0,
-      "balance": 105
-    },
-    {
-      "group": "АУП",
-      "name": "Федькина Александра",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Рябкова Екатерина",
-      "tg": "",
-      "earned": 30,
-      "spent": 0,
-      "balance": 30
-    },
-    {
-      "group": "АУП",
-      "name": "Филоненко Александра",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Михеев Иван",
-      "tg": "",
-      "earned": 100,
-      "spent": 0,
-      "balance": 100
-    },
-    {
-      "group": "АУП",
-      "name": "Татьяна Шкред",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Лапина Александра",
-      "tg": "",
-      "earned": 80,
-      "spent": 0,
-      "balance": 80
-    },
-    {
-      "group": "АУП",
-      "name": "Костылева Полина",
-      "tg": "",
-      "earned": 30,
-      "spent": 0,
-      "balance": 30
-    },
-    {
-      "group": "АУП",
-      "name": "Бритвак Александра",
-      "tg": "",
-      "earned": 95,
-      "spent": 0,
-      "balance": 95
-    },
-    {
-      "group": "АУП",
-      "name": "Хамидуллина Альбина",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Седых Анастасия",
-      "tg": "",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Мурзатаев Акмаль",
-      "tg": "@Amilla25",
-      "earned": 20,
-      "spent": 0,
-      "balance": 20
-    },
-    {
-      "group": "АУП",
-      "name": "Мамедова Мадина",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Миронова Татьяна",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Семенов Никита",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Семенова Ольга",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
-    },
-    {
-      "group": "АУП",
-      "name": "Шонин Валерий",
-      "tg": "",
-      "earned": 0,
-      "spent": 0,
-      "balance": 0
     }
   ]
 }
