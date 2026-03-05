@@ -538,3 +538,14 @@ th.desc::after{
 .nav__link:hover{
   background: rgba(255,255,255,.10);
 }
+
+/* ===== FIX: иконки кубок / лампа / люди без блюра ===== */
+
+.card--img::before{
+  opacity: 1 !important;      /* убираем прозрачность */
+  filter: none !important;    /* убираем блюр */
+}
+
+.card--img{
+  --card-op: 1 !important;    /* полная яркость */
+}
