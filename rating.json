@@ -1,21 +1,21 @@
 {
-  "updatedAt": "2026-04-09T12:48:30.036Z",
+  "updatedAt": "2026-04-09T14:32:04.990Z",
   "operators": [
     {
       "group": "Операторы",
       "name": "Адюкова Ольга",
       "tg": "@olgaalbertowna",
-      "earned": 513,
+      "earned": 543,
       "spent": 100,
-      "balance": 413
+      "balance": 443
     },
     {
       "group": "Операторы",
       "name": "Фандеева Лариса",
       "tg": "@FLALISA",
-      "earned": 757,
+      "earned": 787,
       "spent": 600,
-      "balance": 157
+      "balance": 187
     },
     {
       "group": "Операторы",
@@ -45,9 +45,9 @@
       "group": "Операторы",
       "name": "Касиян Ольга",
       "tg": "@Ольга",
-      "earned": 771,
+      "earned": 774,
       "spent": 550,
-      "balance": 221
+      "balance": 224
     },
     {
       "group": "Операторы",
@@ -61,9 +61,9 @@
       "group": "Операторы",
       "name": "Врабие Ирина",
       "tg": "37400000000",
-      "earned": 715,
+      "earned": 718,
       "spent": 500,
-      "balance": 215
+      "balance": 218
     },
     {
       "group": "Операторы",
@@ -109,17 +109,17 @@
       "group": "Операторы",
       "name": "Чайкова Ольга",
       "tg": "@ChaikovaOlga",
-      "earned": 1843,
+      "earned": 1908,
       "spent": 1700,
-      "balance": 143
+      "balance": 208
     },
     {
       "group": "Операторы",
       "name": "Палехина Оксана",
       "tg": "@OksPALEKHINA",
-      "earned": 1240,
+      "earned": 1285,
       "spent": 1050,
-      "balance": 190
+      "balance": 235
     },
     {
       "group": "Операторы",
@@ -140,263 +140,295 @@
     {
       "group": "Операторы",
       "name": "Дарнопых Светлана",
-      "tg": "@sa_z01",
-      "earned": 851,
+      "tg": "@LanaOrell",
+      "earned": 881,
       "spent": 450,
-      "balance": 401
+      "balance": 431
     },
     {
       "group": "Операторы",
       "name": "Ashish Kanti",
-      "tg": "@LanaOrell",
-      "earned": 630,
+      "tg": "cid.d0a1a372d62427d0",
+      "earned": 660,
       "spent": 0,
-      "balance": 630
+      "balance": 660
     },
     {
       "group": "Операторы",
       "name": "Алиярова Наталья",
-      "tg": "cid.d0a1a372d62427d0",
-      "earned": 687,
+      "tg": "@Kven55",
+      "earned": 717,
       "spent": 500,
-      "balance": 187
+      "balance": 217
     },
     {
       "group": "Операторы",
       "name": "Шерматова Екатерина",
-      "tg": "@Kven55",
-      "earned": 772,
+      "tg": "@kataysh",
+      "earned": 802,
       "spent": 573,
-      "balance": 199
+      "balance": 229
     },
     {
       "group": "Операторы",
       "name": "Waleed Asif",
-      "tg": "@kataysh",
-      "earned": 570,
+      "tg": "-",
+      "earned": 600,
       "spent": 0,
-      "balance": 570
+      "balance": 600
     },
     {
       "group": "Операторы",
       "name": "Алиев Ахмет",
-      "tg": "-",
-      "earned": 602,
+      "tg": "@Ahmettt1998",
+      "earned": 632,
       "spent": 400,
-      "balance": 202
+      "balance": 232
     },
     {
       "group": "Операторы",
       "name": "Юрова Ольга",
-      "tg": "@aaarinkaaa22",
-      "earned": 467,
+      "tg": "@Olyushka71",
+      "earned": 497,
       "spent": 350,
-      "balance": 117
+      "balance": 147
     },
     {
       "group": "Операторы",
       "name": "Гарина Наталья",
-      "tg": "Умаркулова номер тг +7 993 583 1984",
-      "earned": 1032,
+      "tg": "@g_natalya23",
+      "earned": 1092,
       "spent": 900,
-      "balance": 132
-    },
-    {
-      "group": "Операторы",
-      "name": "Насертдинова Регина",
-      "tg": "@marinka_krylova",
-      "earned": 792,
-      "spent": 600,
       "balance": 192
     },
     {
       "group": "Операторы",
+      "name": "Насертдинова Регина",
+      "tg": "@hinochkaR",
+      "earned": 852,
+      "spent": 600,
+      "balance": 252
+    },
+    {
+      "group": "Операторы",
       "name": "Файрадов Аслан",
-      "tg": "@g_natalya23",
-      "earned": 490,
+      "tg": "По телефону",
+      "earned": 520,
       "spent": 0,
-      "balance": 490
+      "balance": 520
     },
     {
       "group": "Операторы",
       "name": "Aarti Sharma",
-      "tg": "@hinochkaR",
-      "earned": 355,
+      "tg": "########",
+      "earned": 385,
       "spent": 0,
-      "balance": 355
+      "balance": 385
     },
     {
       "group": "Операторы",
       "name": "Мелкозёрова Екатерина",
-      "tg": "########",
-      "earned": 1428,
+      "tg": "@ozero33",
+      "earned": 1458,
       "spent": 1200,
-      "balance": 228
-    },
-    {
-      "group": "Операторы",
-      "name": "Аввакумова Вероника",
-      "tg": "79000000000",
-      "earned": 40,
-      "spent": 0,
-      "balance": 0
+      "balance": 258
     },
     {
       "group": "Операторы",
       "name": "Яндалеева Анастасия",
-      "tg": "@Yul&apos;ka",
-      "earned": 290,
+      "tg": "@makarnasty",
+      "earned": 315,
       "spent": 0,
-      "balance": 290
+      "balance": 315
     },
     {
       "group": "Операторы",
       "name": "Филиппова Анна",
-      "tg": "@veronika_avvakumova",
-      "earned": 259,
+      "tg": "@annushka271291",
+      "earned": 284,
       "spent": 0,
-      "balance": 259
+      "balance": 284
     },
     {
       "group": "Операторы",
       "name": "Ткаченко Сусана",
-      "tg": "@makarnasty",
-      "earned": 260,
+      "tg": "@susikhaz",
+      "earned": 285,
       "spent": 0,
-      "balance": 260
+      "balance": 285
     },
     {
       "group": "Операторы",
       "name": "Шевченко Марина",
-      "tg": "@annushka271291",
-      "earned": 382,
+      "tg": "@marishka_0325",
+      "earned": 407,
       "spent": 300,
-      "balance": 82
+      "balance": 107
     },
     {
       "group": "Операторы",
       "name": "Бакунова Наталия",
-      "tg": "@LevaMatveev",
-      "earned": 250,
+      "tg": "@bakunovanata",
+      "earned": 275,
       "spent": 0,
-      "balance": 250
+      "balance": 275
     },
     {
       "group": "Операторы",
       "name": "Широкова Валерия",
-      "tg": "@marishka_0325",
-      "earned": 130,
+      "tg": "@vi_vi_vo_v",
+      "earned": 155,
       "spent": 0,
-      "balance": 130
+      "balance": 155
     },
     {
       "group": "Операторы",
       "name": "Фатхутдинова Лилия",
-      "tg": "@bakunovanata",
-      "earned": 140,
+      "tg": "@lilysecret777",
+      "earned": 165,
       "spent": 0,
-      "balance": 140
+      "balance": 165
     },
     {
       "group": "Операторы",
       "name": "Смирнова Наталия",
-      "tg": "@lilysecret777",
-      "earned": 161,
+      "tg": "@Narspy",
+      "earned": 186,
       "spent": 0,
-      "balance": 161
+      "balance": 186
     },
     {
       "group": "Операторы",
       "name": "Колесников Александр",
-      "tg": "",
-      "earned": 130,
+      "tg": "@Talisman2371",
+      "earned": 155,
       "spent": 0,
-      "balance": 130
+      "balance": 155
     },
     {
       "group": "Операторы",
       "name": "Петров Александр",
-      "tg": "@Ketrin8523",
-      "earned": 95,
+      "tg": "########",
+      "earned": 120,
       "spent": 0,
-      "balance": 95
+      "balance": 120
     },
     {
       "group": "Операторы",
       "name": "Смирнова Екатерина",
-      "tg": "@Narspy",
-      "earned": 216,
+      "tg": "live:.cid.d52a1018fe3b0ae9",
+      "earned": 246,
       "spent": 0,
-      "balance": 216
+      "balance": 246
     },
     {
       "group": "Операторы",
       "name": "Мурзатаев Акмаль",
-      "tg": "@Talisman2371",
-      "earned": 292.5,
+      "tg": "https://t.me/aammurr",
+      "earned": 322.5,
       "spent": 250,
-      "balance": 42.5
+      "balance": 72.5
     },
     {
       "group": "Операторы",
       "name": "Никитин Александр",
-      "tg": "########",
-      "earned": 480,
+      "tg": "@nas200304",
+      "earned": 510,
       "spent": 100,
-      "balance": 380
+      "balance": 410
     },
     {
       "group": "Операторы",
       "name": "Лаврушкина Екатерина",
-      "tg": "live:.cid.d52a1018fe3b0ae9",
-      "earned": 200,
+      "tg": "@Ekaterinalavrushkina",
+      "earned": 225,
       "spent": 0,
-      "balance": 200
+      "balance": 225
     },
     {
       "group": "Операторы",
       "name": "Пенкина Виктория",
-      "tg": "https://t.me/aammurr",
-      "earned": 256,
+      "tg": "@viktoriia2354",
+      "earned": 321,
       "spent": 100,
-      "balance": 156
+      "balance": 221
     },
     {
       "group": "Операторы",
       "name": "Юшков Денис",
-      "tg": "@nas200304",
-      "earned": 75,
+      "tg": "@YaShOsHI",
+      "earned": 100,
       "spent": 0,
-      "balance": 75
+      "balance": 100
     },
     {
       "group": "Операторы",
       "name": "Горячева Татьяна",
-      "tg": "@Angelos05",
-      "earned": 261,
+      "tg": "@Nfyz19",
+      "earned": 162,
       "spent": 0,
-      "balance": 261
+      "balance": 162
     },
     {
       "group": "Операторы",
       "name": "Демидов Дмитрий",
       "tg": "@kama1ost",
-      "earned": 20,
+      "earned": 35,
       "spent": 0,
-      "balance": 20
+      "balance": 35
     },
     {
       "group": "Операторы",
       "name": "Мурзина Любовь",
       "tg": "@Murzilkevsegda18",
-      "earned": 15,
+      "earned": 30,
       "spent": 0,
-      "balance": 15
+      "balance": 30
     },
     {
       "group": "Операторы",
       "name": "Кузнецова Анастасия",
       "tg": "@natomilk",
+      "earned": 45,
+      "spent": 0,
+      "balance": 45
+    },
+    {
+      "group": "Операторы",
+      "name": "Скопинова Анастасия",
+      "tg": "",
+      "earned": 60,
+      "spent": 0,
+      "balance": 60
+    },
+    {
+      "group": "Операторы",
+      "name": "Михеева Иван",
+      "tg": "",
+      "earned": 175,
+      "spent": 0,
+      "balance": 175
+    },
+    {
+      "group": "Операторы",
+      "name": "Эртман Юлия",
+      "tg": "",
+      "earned": 184,
+      "spent": 0,
+      "balance": 184
+    },
+    {
+      "group": "Операторы",
+      "name": "Телышева Елена",
+      "tg": "",
+      "earned": 185,
+      "spent": 0,
+      "balance": 185
+    },
+    {
+      "group": "Операторы",
+      "name": "Анастасия Ермохина",
+      "tg": "",
       "earned": 15,
       "spent": 0,
       "balance": 15
@@ -641,17 +673,17 @@
       "group": "Операторы",
       "name": "Адюкова Ольга",
       "tg": "@olgaalbertowna",
-      "earned": 513,
+      "earned": 543,
       "spent": 100,
-      "balance": 413
+      "balance": 443
     },
     {
       "group": "Операторы",
       "name": "Фандеева Лариса",
       "tg": "@FLALISA",
-      "earned": 757,
+      "earned": 787,
       "spent": 600,
-      "balance": 157
+      "balance": 187
     },
     {
       "group": "Операторы",
@@ -681,9 +713,9 @@
       "group": "Операторы",
       "name": "Касиян Ольга",
       "tg": "@Ольга",
-      "earned": 771,
+      "earned": 774,
       "spent": 550,
-      "balance": 221
+      "balance": 224
     },
     {
       "group": "Операторы",
@@ -697,9 +729,9 @@
       "group": "Операторы",
       "name": "Врабие Ирина",
       "tg": "37400000000",
-      "earned": 715,
+      "earned": 718,
       "spent": 500,
-      "balance": 215
+      "balance": 218
     },
     {
       "group": "Операторы",
@@ -745,17 +777,17 @@
       "group": "Операторы",
       "name": "Чайкова Ольга",
       "tg": "@ChaikovaOlga",
-      "earned": 1843,
+      "earned": 1908,
       "spent": 1700,
-      "balance": 143
+      "balance": 208
     },
     {
       "group": "Операторы",
       "name": "Палехина Оксана",
       "tg": "@OksPALEKHINA",
-      "earned": 1240,
+      "earned": 1285,
       "spent": 1050,
-      "balance": 190
+      "balance": 235
     },
     {
       "group": "Операторы",
@@ -776,263 +808,295 @@
     {
       "group": "Операторы",
       "name": "Дарнопых Светлана",
-      "tg": "@sa_z01",
-      "earned": 851,
+      "tg": "@LanaOrell",
+      "earned": 881,
       "spent": 450,
-      "balance": 401
+      "balance": 431
     },
     {
       "group": "Операторы",
       "name": "Ashish Kanti",
-      "tg": "@LanaOrell",
-      "earned": 630,
+      "tg": "cid.d0a1a372d62427d0",
+      "earned": 660,
       "spent": 0,
-      "balance": 630
+      "balance": 660
     },
     {
       "group": "Операторы",
       "name": "Алиярова Наталья",
-      "tg": "cid.d0a1a372d62427d0",
-      "earned": 687,
+      "tg": "@Kven55",
+      "earned": 717,
       "spent": 500,
-      "balance": 187
+      "balance": 217
     },
     {
       "group": "Операторы",
       "name": "Шерматова Екатерина",
-      "tg": "@Kven55",
-      "earned": 772,
+      "tg": "@kataysh",
+      "earned": 802,
       "spent": 573,
-      "balance": 199
+      "balance": 229
     },
     {
       "group": "Операторы",
       "name": "Waleed Asif",
-      "tg": "@kataysh",
-      "earned": 570,
+      "tg": "-",
+      "earned": 600,
       "spent": 0,
-      "balance": 570
+      "balance": 600
     },
     {
       "group": "Операторы",
       "name": "Алиев Ахмет",
-      "tg": "-",
-      "earned": 602,
+      "tg": "@Ahmettt1998",
+      "earned": 632,
       "spent": 400,
-      "balance": 202
+      "balance": 232
     },
     {
       "group": "Операторы",
       "name": "Юрова Ольга",
-      "tg": "@aaarinkaaa22",
-      "earned": 467,
+      "tg": "@Olyushka71",
+      "earned": 497,
       "spent": 350,
-      "balance": 117
+      "balance": 147
     },
     {
       "group": "Операторы",
       "name": "Гарина Наталья",
-      "tg": "Умаркулова номер тг +7 993 583 1984",
-      "earned": 1032,
+      "tg": "@g_natalya23",
+      "earned": 1092,
       "spent": 900,
-      "balance": 132
-    },
-    {
-      "group": "Операторы",
-      "name": "Насертдинова Регина",
-      "tg": "@marinka_krylova",
-      "earned": 792,
-      "spent": 600,
       "balance": 192
     },
     {
       "group": "Операторы",
+      "name": "Насертдинова Регина",
+      "tg": "@hinochkaR",
+      "earned": 852,
+      "spent": 600,
+      "balance": 252
+    },
+    {
+      "group": "Операторы",
       "name": "Файрадов Аслан",
-      "tg": "@g_natalya23",
-      "earned": 490,
+      "tg": "По телефону",
+      "earned": 520,
       "spent": 0,
-      "balance": 490
+      "balance": 520
     },
     {
       "group": "Операторы",
       "name": "Aarti Sharma",
-      "tg": "@hinochkaR",
-      "earned": 355,
+      "tg": "########",
+      "earned": 385,
       "spent": 0,
-      "balance": 355
+      "balance": 385
     },
     {
       "group": "Операторы",
       "name": "Мелкозёрова Екатерина",
-      "tg": "########",
-      "earned": 1428,
+      "tg": "@ozero33",
+      "earned": 1458,
       "spent": 1200,
-      "balance": 228
-    },
-    {
-      "group": "Операторы",
-      "name": "Аввакумова Вероника",
-      "tg": "79000000000",
-      "earned": 40,
-      "spent": 0,
-      "balance": 0
+      "balance": 258
     },
     {
       "group": "Операторы",
       "name": "Яндалеева Анастасия",
-      "tg": "@Yul&apos;ka",
-      "earned": 290,
+      "tg": "@makarnasty",
+      "earned": 315,
       "spent": 0,
-      "balance": 290
+      "balance": 315
     },
     {
       "group": "Операторы",
       "name": "Филиппова Анна",
-      "tg": "@veronika_avvakumova",
-      "earned": 259,
+      "tg": "@annushka271291",
+      "earned": 284,
       "spent": 0,
-      "balance": 259
+      "balance": 284
     },
     {
       "group": "Операторы",
       "name": "Ткаченко Сусана",
-      "tg": "@makarnasty",
-      "earned": 260,
+      "tg": "@susikhaz",
+      "earned": 285,
       "spent": 0,
-      "balance": 260
+      "balance": 285
     },
     {
       "group": "Операторы",
       "name": "Шевченко Марина",
-      "tg": "@annushka271291",
-      "earned": 382,
+      "tg": "@marishka_0325",
+      "earned": 407,
       "spent": 300,
-      "balance": 82
+      "balance": 107
     },
     {
       "group": "Операторы",
       "name": "Бакунова Наталия",
-      "tg": "@LevaMatveev",
-      "earned": 250,
+      "tg": "@bakunovanata",
+      "earned": 275,
       "spent": 0,
-      "balance": 250
+      "balance": 275
     },
     {
       "group": "Операторы",
       "name": "Широкова Валерия",
-      "tg": "@marishka_0325",
-      "earned": 130,
+      "tg": "@vi_vi_vo_v",
+      "earned": 155,
       "spent": 0,
-      "balance": 130
+      "balance": 155
     },
     {
       "group": "Операторы",
       "name": "Фатхутдинова Лилия",
-      "tg": "@bakunovanata",
-      "earned": 140,
+      "tg": "@lilysecret777",
+      "earned": 165,
       "spent": 0,
-      "balance": 140
+      "balance": 165
     },
     {
       "group": "Операторы",
       "name": "Смирнова Наталия",
-      "tg": "@lilysecret777",
-      "earned": 161,
+      "tg": "@Narspy",
+      "earned": 186,
       "spent": 0,
-      "balance": 161
+      "balance": 186
     },
     {
       "group": "Операторы",
       "name": "Колесников Александр",
-      "tg": "",
-      "earned": 130,
+      "tg": "@Talisman2371",
+      "earned": 155,
       "spent": 0,
-      "balance": 130
+      "balance": 155
     },
     {
       "group": "Операторы",
       "name": "Петров Александр",
-      "tg": "@Ketrin8523",
-      "earned": 95,
+      "tg": "########",
+      "earned": 120,
       "spent": 0,
-      "balance": 95
+      "balance": 120
     },
     {
       "group": "Операторы",
       "name": "Смирнова Екатерина",
-      "tg": "@Narspy",
-      "earned": 216,
+      "tg": "live:.cid.d52a1018fe3b0ae9",
+      "earned": 246,
       "spent": 0,
-      "balance": 216
+      "balance": 246
     },
     {
       "group": "Операторы",
       "name": "Мурзатаев Акмаль",
-      "tg": "@Talisman2371",
-      "earned": 292.5,
+      "tg": "https://t.me/aammurr",
+      "earned": 322.5,
       "spent": 250,
-      "balance": 42.5
+      "balance": 72.5
     },
     {
       "group": "Операторы",
       "name": "Никитин Александр",
-      "tg": "########",
-      "earned": 480,
+      "tg": "@nas200304",
+      "earned": 510,
       "spent": 100,
-      "balance": 380
+      "balance": 410
     },
     {
       "group": "Операторы",
       "name": "Лаврушкина Екатерина",
-      "tg": "live:.cid.d52a1018fe3b0ae9",
-      "earned": 200,
+      "tg": "@Ekaterinalavrushkina",
+      "earned": 225,
       "spent": 0,
-      "balance": 200
+      "balance": 225
     },
     {
       "group": "Операторы",
       "name": "Пенкина Виктория",
-      "tg": "https://t.me/aammurr",
-      "earned": 256,
+      "tg": "@viktoriia2354",
+      "earned": 321,
       "spent": 100,
-      "balance": 156
+      "balance": 221
     },
     {
       "group": "Операторы",
       "name": "Юшков Денис",
-      "tg": "@nas200304",
-      "earned": 75,
+      "tg": "@YaShOsHI",
+      "earned": 100,
       "spent": 0,
-      "balance": 75
+      "balance": 100
     },
     {
       "group": "Операторы",
       "name": "Горячева Татьяна",
-      "tg": "@Angelos05",
-      "earned": 261,
+      "tg": "@Nfyz19",
+      "earned": 162,
       "spent": 0,
-      "balance": 261
+      "balance": 162
     },
     {
       "group": "Операторы",
       "name": "Демидов Дмитрий",
       "tg": "@kama1ost",
-      "earned": 20,
+      "earned": 35,
       "spent": 0,
-      "balance": 20
+      "balance": 35
     },
     {
       "group": "Операторы",
       "name": "Мурзина Любовь",
       "tg": "@Murzilkevsegda18",
-      "earned": 15,
+      "earned": 30,
       "spent": 0,
-      "balance": 15
+      "balance": 30
     },
     {
       "group": "Операторы",
       "name": "Кузнецова Анастасия",
       "tg": "@natomilk",
+      "earned": 45,
+      "spent": 0,
+      "balance": 45
+    },
+    {
+      "group": "Операторы",
+      "name": "Скопинова Анастасия",
+      "tg": "",
+      "earned": 60,
+      "spent": 0,
+      "balance": 60
+    },
+    {
+      "group": "Операторы",
+      "name": "Михеева Иван",
+      "tg": "",
+      "earned": 175,
+      "spent": 0,
+      "balance": 175
+    },
+    {
+      "group": "Операторы",
+      "name": "Эртман Юлия",
+      "tg": "",
+      "earned": 184,
+      "spent": 0,
+      "balance": 184
+    },
+    {
+      "group": "Операторы",
+      "name": "Телышева Елена",
+      "tg": "",
+      "earned": 185,
+      "spent": 0,
+      "balance": 185
+    },
+    {
+      "group": "Операторы",
+      "name": "Анастасия Ермохина",
+      "tg": "",
       "earned": 15,
       "spent": 0,
       "balance": 15
