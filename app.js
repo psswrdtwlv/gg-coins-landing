@@ -277,12 +277,11 @@ async function load() {
           return g === "ауп" || g === "aup";
         }).length;
 
-    const updatedAt = data?.updatedAt ? ` · обновлено: ${data.updatedAt}` : "";
     setStatus(
-      RAW.length
-        ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})${updatedAt}`
-        : "Данные не загружены"
-    );
+  RAW.length
+    ? `Загружено: ${RAW.length} (Операторы: ${opsCount}, АУП: ${aupCount})`
+    : "Данные не загружены"
+);
 
     prevRankByName = loadPrevRanksFromSession();
     render();
