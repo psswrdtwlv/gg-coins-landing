@@ -1,4 +1,4 @@
-name: Update rating.json from Bitrix (REST)
+name: Update rating.json from Google Sheets
 
 on:
   workflow_dispatch:
@@ -31,9 +31,6 @@ jobs:
         run: npm install
 
       - name: Build rating.json
-        env:
-          BITRIX_WEBHOOK_BASE: ${{ secrets.BITRIX_WEBHOOK_BASE }}
-          BITRIX_FILE_ID: ${{ secrets.BITRIX_FILE_ID }}
         run: npm run build:rating
 
       - name: Commit & push if changed
